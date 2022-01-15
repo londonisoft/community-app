@@ -36,6 +36,8 @@ const packageList = () =>
     import ('@/views/package/List')
 const purchasePackageList = () =>
     import ('@/views/purchase-package/List')
+const addMoney = () =>
+    import ('@/views/add-money/List')
 const update = () =>
     import ('@/views/update/Form')
 const paymentMethod = () =>
@@ -210,6 +212,14 @@ const routes = [{
                         }
                     },
                     {
+                        path: 'add-money',
+                        name: 'Popovers',
+                        component: addMoney,
+                        meta: {
+                            requiresAuth: true
+                        }
+                    },
+                    {
                         path: 'update',
                         name: 'Popovers',
                         component: update,
@@ -221,14 +231,6 @@ const routes = [{
                         path: 'payment-method',
                         name: 'PaymentMethod',
                         component: paymentMethod,
-                        meta: {
-                            requiresAuth: true
-                        }
-                    },
-                    {
-                        path: 'post-list',
-                        name: 'PaymentMethod',
-                        component: postList,
                         meta: {
                             requiresAuth: true
                         }

@@ -69,6 +69,13 @@ export default [{
         },
         {
             _name: 'CSidebarNavItem',
+            name: 'Add Money',
+            to: '/other/add-money',
+            icon: 'cil-list',
+            items: []
+        },
+        {
+            _name: 'CSidebarNavItem',
             name: 'Settings',
             to: '/other/setting',
             icon: 'cil-settings',
@@ -99,13 +106,6 @@ export default [{
             _name: 'CSidebarNavItem',
             name: 'Add Wallet',
             to: '/withdraw/add-wallet',
-            icon: 'cil-ban',
-            items: []
-        },
-        {
-            _name: 'CSidebarNavItem',
-            name: 'Posts',
-            to: '/other/post-list',
             icon: 'cil-ban',
             items: []
         }
