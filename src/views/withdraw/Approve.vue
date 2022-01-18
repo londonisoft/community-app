@@ -55,6 +55,47 @@
                                         ></b-form-input>
                                     </b-form-group>
                                 </div>
+                                <div class="col-md-4">
+                                    <b-form-group
+                                    label-cols-md="12"
+                                    >
+                                    <template v-slot:label>
+                                    Country
+                                    </template>
+                                    <b-form-input
+                                        id="country"
+                                        v-model="search.country"
+                                        ></b-form-input>
+                                    </b-form-group>
+                                </div>
+                                <div class="col-md-4">
+                                    <b-form-group
+                                    label-cols-md="12"
+                                    >
+                                    <template v-slot:label>
+                                    Form Date
+                                    </template>
+                                    <b-form-input
+                                        id="form_date"
+                                        type="date"
+                                        v-model="search.form_date"
+                                        ></b-form-input>
+                                    </b-form-group>
+                                </div>
+                                <div class="col-md-4">
+                                    <b-form-group
+                                    label-cols-md="12"
+                                    >
+                                    <template v-slot:label>
+                                    To Date
+                                    </template>
+                                    <b-form-input
+                                        id="to_date"
+                                        type="date"
+                                        v-model="search.to_date"
+                                        ></b-form-input>
+                                    </b-form-group>
+                                </div>
                                 <div class="col-md-4 mt-2">
                                     <div style="height:40px">
                                         <b-button style='position:absolute;bottom:15px' type="submit" variant="primary">Search</b-button>
@@ -122,7 +163,10 @@ export default {
         search: {
             method_name: '',
             email: '',
-            account_info: ''
+            account_info: '',
+            form_date: '',
+            to_date: '',
+            country: ''
         },
         pagination: {
             perPage: 10,
@@ -139,7 +183,8 @@ export default {
         fields () {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
-                { label: 'User Id', class: 'text-center' },
+                { label: 'Email', class: 'text-center' },
+                { label: 'Country', class: 'text-center' },
                 { label: 'Amount', class: 'text-center' },
                 { label: 'Paying Account', class: 'text-center' },
                 { label: 'Payment Method', class: 'text-center' },
@@ -152,6 +197,7 @@ export default {
             keys = [
             { key: 'id' },
             { key: 'email' },
+            { key: 'country' },
             { key: 'amount' },
             { key: 'account_info' },
             { key: 'method_name' },

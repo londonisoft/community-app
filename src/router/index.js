@@ -46,6 +46,8 @@ const addWallet = () =>
     import ('@/views/wallet/List')
 const postList = () =>
     import ('@/views/post/List')
+const changePass = () =>
+    import ('@/views/change-pass/Form')
 
 // Views - Pages
 const Page404 = () =>
@@ -229,6 +231,14 @@ const routes = [{
                         path: 'post-list',
                         name: 'PaymentMethod',
                         component: postList,
+                        meta: {
+                            requiresAuth: true
+                        }
+                    },
+                    {
+                        path: 'change-password',
+                        name: 'PaymentMethod',
+                        component: changePass,
                         meta: {
                             requiresAuth: true
                         }

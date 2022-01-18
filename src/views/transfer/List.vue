@@ -47,6 +47,19 @@
                                     label-cols-md="12"
                                     >
                                     <template v-slot:label>
+                                    Country
+                                    </template>
+                                    <b-form-input
+                                        id="country"
+                                        v-model="search.country"
+                                        ></b-form-input>
+                                    </b-form-group>
+                                </div>
+                                <div class="col-md-4">
+                                    <b-form-group
+                                    label-cols-md="12"
+                                    >
+                                    <template v-slot:label>
                                     Form Date
                                     </template>
                                     <b-form-input
@@ -132,7 +145,8 @@ export default {
         search: {
             form_date: '',
             to_date: '',
-            email: ''
+            email: '',
+            country: ''
         },
         pagination: {
             perPage: 10,
@@ -149,7 +163,8 @@ export default {
         fields () {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
-                { label: 'User Id', class: 'text-center' },
+                { label: 'Email', class: 'text-center' },
+                { label: 'Country', class: 'text-center' },
                 { label: 'Amount', class: 'text-center' },
                 { label: 'Transfer To', class: 'text-center' },
                 { label: 'Date', class: 'text-center' }
@@ -159,6 +174,7 @@ export default {
             keys = [
             { key: 'id' },
             { key: 'user_email' },
+            { key: 'country' },
             { key: 'amount' },
             { key: 'email' },
             { key: 'created_at' }

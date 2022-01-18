@@ -9,7 +9,7 @@
                             <CCardHeader>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <strong>Main Setting</strong>
+                                        <strong>Change Password</strong>
                                     </div>
                                 </div>
                             </CCardHeader>
@@ -21,7 +21,7 @@
                                                 <b-form  @submit.prevent="handleSubmit(register)" @reset.prevent="reset" >
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Refer Bonus (Tk)" vid="refer_bonus" rules="required">
+                                                            <ValidationProvider name="Password" vid="password" rules="required">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
@@ -29,12 +29,12 @@
                                                                 slot-scope="{ valid, errors }"
                                                                 >
                                                                 <template v-slot:label>
-                                                                Refer Bonus (Tk) <span class="text-danger">*</span>
+                                                                Password <span class="text-danger">*</span>
                                                                 </template>
                                                                 <b-form-input
-                                                                    type="text"
-                                                                    id="refer_bonus"
-                                                                    v-model="formData.refer_bonus"
+                                                                    type="password"
+                                                                    id="password"
+                                                                    v-model="formData.password"
                                                                     :state="errors[0] ? false : (valid ? true : null)"
                                                                     ></b-form-input>
                                                                 <div class="invalid-feedback">
@@ -44,20 +44,20 @@
                                                             </ValidationProvider>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Add Code" vid="add_code" rules="required">
+                                                            <ValidationProvider name="Password Confirmation" vid="password_confirmation" rules="required">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
-                                                                label-for="add_code"
+                                                                label-for="formData"
                                                                 slot-scope="{ valid, errors }"
                                                                 >
                                                                 <template v-slot:label>
-                                                                Add Code <span class="text-danger">*</span>
+                                                                Password Confirmation <span class="text-danger">*</span>
                                                                 </template>
                                                                 <b-form-input
-                                                                    type="text"
-                                                                    id="add_code"
-                                                                    v-model="formData.add_code"
+                                                                    type="password"
+                                                                    id="password_confirmation"
+                                                                    v-model="formData.password_confirmation"
                                                                     :state="errors[0] ? false : (valid ? true : null)"
                                                                     ></b-form-input>
                                                                 <div class="invalid-feedback">
@@ -102,8 +102,8 @@ export default {
     return {
       saveBtnName: "Update",
       formData: {
-        refer_bonus: '',
-        add_code: ''
+        password: '',
+        password_confirmation: ''
       },
       editId: ''
     }
@@ -126,7 +126,7 @@ export default {
     async register () {
         this.$store.dispatch('mutedLoad', { loading: true })
         let result = null
-        result = await RestApi.postData(baseUrl, `api/setting/update`, this.formData)
+        result = await RestApi.postData(baseUrl, `api/setting/update-pass`, this.formData)
         this.$store.dispatch('mutedLoad', { loading: false })
         if (result.success) {
 			iziToast.success({

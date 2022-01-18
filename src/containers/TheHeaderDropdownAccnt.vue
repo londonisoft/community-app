@@ -19,7 +19,7 @@
       <CIcon name="cil-user" /> Profile
     </CDropdownItem>
     <CDropdownItem>
-      <CIcon name="cil-settings" /> Settings
+      <CIcon name="cil-settings" /> <router-link to="/other/change-password"> Settings </router-link>
     </CDropdownItem>
     <CDropdownItem @click="logout" >
       <CIcon name="cil-lock-locked"/> Logout
