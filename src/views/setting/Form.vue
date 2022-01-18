@@ -194,6 +194,29 @@
                                                                 </b-form-group>
                                                             </ValidationProvider>
                                                         </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Add Notice" vid="add_notice" rules="required">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="messages"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Add Notice <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-textarea
+                                                                    type="text"
+                                                                    id="add_notice"
+                                                                    v-model="messages.add_notice"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-textarea>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
                                                         <div class="col-md-12 text-right">
                                                             <b-button type="submit" variant="primary" style="margin-top:40px" class="mr-2">{{ saveBtnName }}</b-button>
                                                         </div>
@@ -221,6 +244,7 @@
                                                                 <b-form-file
                                                                     type="text"
                                                                     id="image_one"
+                                                                    @change="handleimgone"
                                                                     v-model="images.image_one"
                                                                     :state="errors[0] ? false : (valid ? true : null)"
                                                                     ></b-form-file>
@@ -244,6 +268,7 @@
                                                                 <b-form-file
                                                                     type="text"
                                                                     id="image_two"
+                                                                    @change="handleimgtwo"
                                                                     v-model="images.image_two"
                                                                     :state="errors[0] ? false : (valid ? true : null)"
                                                                     ></b-form-file>
@@ -267,6 +292,7 @@
                                                                 <b-form-file
                                                                     type="text"
                                                                     id="image_three"
+                                                                    @change="handleimgthree"
                                                                     v-model="images.image_three"
                                                                     :state="errors[0] ? false : (valid ? true : null)"
                                                                     ></b-form-file>
@@ -290,6 +316,7 @@
                                                                 <b-form-file
                                                                     type="text"
                                                                     id="refer_image"
+                                                                    @change="handleimgrefer"
                                                                     v-model="images.refer_image"
                                                                     :state="errors[0] ? false : (valid ? true : null)"
                                                                     ></b-form-file>
@@ -341,6 +368,10 @@ export default {
         add_money_message: ''
       },
       images: {
+          image_one: [],
+          image_two: [],
+          image_three: [],
+          refer_image: []
       },
       editId: ''
     }
@@ -398,7 +429,12 @@ export default {
     async image () {
         this.$store.dispatch('mutedLoad', { loading: true })
         let result = null
-        result = await RestApi.postData(baseUrl, `api/image/update`, this.messages)
+        let formData = new FormData()
+        formData.append('image_one', this.formData.image_one)
+        formData.append('image_two', this.formData.image_two)
+        formData.append('image_three', this.formData.image_three)
+        formData.append('refer_image', this.formData.refer_image)
+        result = await RestApi.postData(baseUrl, `api/image/update`, formData)
         this.$store.dispatch('mutedLoad', { loading: false })
         if (result.success) {
 			iziToast.success({
@@ -409,9 +445,18 @@ export default {
             this.$refs.form1.setErrors(result.errors)
         }
     },
-    handleFileUpload( event ){
-        this.file = event.target.files[0];
+    handleimgone( event ){
+        this.formData.image_one = event.target.files[0];
     },
+    handleimgtwo( event ){
+        this.formData.image_two = event.target.files[0];
+    },
+    handleimgthree( event ){
+        this.formData.image_three = event.target.files[0];
+    },
+    handleimgrefer( event ){
+        this.formData.refer_image = event.target.files[0];
+    }
   }
 }
 </script>
