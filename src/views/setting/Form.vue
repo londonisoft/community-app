@@ -21,7 +21,7 @@
                                                 <b-form  @submit.prevent="handleSubmit(register)" @reset.prevent="reset" >
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Refer Bonus (Tk)" vid="refer_bonus" rules="required">
+                                                            <ValidationProvider name="Refer Bonus (Tk)" vid="refer_bonus" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
@@ -35,6 +35,29 @@
                                                                     type="text"
                                                                     id="refer_bonus"
                                                                     v-model="formData.refer_bonus"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Add Code" vid="add_code" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="formData"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Add Code <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="add_code"
+                                                                    v-model="formData.add_code"
                                                                     :state="errors[0] ? false : (valid ? true : null)"
                                                                     ></b-form-input>
                                                                 <div class="invalid-feedback">
@@ -57,7 +80,7 @@
                                                 <b-form  @submit.prevent="handleSubmit(message)" @reset.prevent="reset" >
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Admin Notice" vid="admin_notice" rules="required">
+                                                            <ValidationProvider name="Admin Notice" vid="admin_notice" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
@@ -80,7 +103,7 @@
                                                             </ValidationProvider>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Pakage Message" vid="pakage_message" rules="required">
+                                                            <ValidationProvider name="Pakage Message" vid="pakage_message" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
@@ -103,7 +126,7 @@
                                                             </ValidationProvider>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Recharge Message" vid="recharge_message" rules="required">
+                                                            <ValidationProvider name="Recharge Message" vid="recharge_message" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
@@ -126,7 +149,7 @@
                                                             </ValidationProvider>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Cash Out Message" vid="cash_out_message" rules="required">
+                                                            <ValidationProvider name="Cash Out Message" vid="cash_out_message" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
@@ -149,7 +172,7 @@
                                                             </ValidationProvider>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Add Money Message" vid="add_money_message" rules="required">
+                                                            <ValidationProvider name="Add Money Message" vid="add_money_message" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
@@ -172,7 +195,7 @@
                                                             </ValidationProvider>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Payment Number Message" vid="payment_number_message" rules="required">
+                                                            <ValidationProvider name="Payment Number Message" vid="payment_number_message" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
@@ -195,7 +218,7 @@
                                                             </ValidationProvider>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Add Notice" vid="add_notice" rules="required">
+                                                            <ValidationProvider name="Add Notice" vid="add_notice" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
@@ -231,7 +254,7 @@
                                                 <b-form  @submit.prevent="handleSubmit(image)" @reset.prevent="reset" >
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Image One" vid="image_one" rules="required">
+                                                            <ValidationProvider name="Image One" vid="image_one" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
@@ -255,7 +278,7 @@
                                                             </ValidationProvider>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Image Two" vid="image_two" rules="required">
+                                                            <ValidationProvider name="Image Two" vid="image_two" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
@@ -279,7 +302,7 @@
                                                             </ValidationProvider>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Image Three" vid="image_three" rules="required">
+                                                            <ValidationProvider name="Image Three" vid="image_three" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
@@ -303,7 +326,7 @@
                                                             </ValidationProvider>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Refer Image" vid="refer_image" rules="required">
+                                                            <ValidationProvider name="Refer Image" vid="refer_image" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
