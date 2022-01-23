@@ -136,6 +136,7 @@ export default {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
                 { label: 'Name', class: 'text-center' },
+                { label: 'Country', class: 'text-center' },
                 { label: 'Email', class: 'text-center' },
                 { label: 'Amount', class: 'text-center' },
                 { label: 'Join', class: 'text-center' },
@@ -147,6 +148,7 @@ export default {
             keys = [
             { key: 'id' },
             { key: 'name' },
+            { key: 'country' },
             { key: 'email' },
             { key: 'amount' },
             { key: 'total_refer' },
