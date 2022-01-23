@@ -326,6 +326,54 @@
                                                             </ValidationProvider>
                                                         </div>
                                                         <div class="col-md-6">
+                                                            <ValidationProvider name="Image Four" vid="image_four" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="images"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Image Four <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-file
+                                                                    type="text"
+                                                                    id="image_four"
+                                                                    @change="handleimgfour"
+                                                                    v-model="images.image_four"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-file>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Image Five" vid="image_five" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="images"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Image Five <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-file
+                                                                    type="text"
+                                                                    id="image_five"
+                                                                    @change="handleimgfive"
+                                                                    v-model="images.image_five"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-file>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
                                                             <ValidationProvider name="Refer Image" vid="refer_image" rules="">
                                                                 <b-form-group
                                                                 class="row"
@@ -394,6 +442,8 @@ export default {
           image_one: [],
           image_two: [],
           image_three: [],
+          image_four: [],
+          image_five: [],
           refer_image: []
       },
       editId: ''
@@ -456,6 +506,8 @@ export default {
         formData.append('image_one', this.formData.image_one)
         formData.append('image_two', this.formData.image_two)
         formData.append('image_three', this.formData.image_three)
+        formData.append('image_four', this.formData.image_four)
+        formData.append('image_five', this.formData.image_five)
         formData.append('refer_image', this.formData.refer_image)
         result = await RestApi.postData(baseUrl, `api/image/update`, formData)
         this.$store.dispatch('mutedLoad', { loading: false })
@@ -476,6 +528,12 @@ export default {
     },
     handleimgthree( event ){
         this.formData.image_three = event.target.files[0];
+    },
+    handleimgfour( event ){
+        this.formData.image_four = event.target.files[0];
+    },
+    handleimgfive( event ){
+        this.formData.image_five = event.target.files[0];
     },
     handleimgrefer( event ){
         this.formData.refer_image = event.target.files[0];
