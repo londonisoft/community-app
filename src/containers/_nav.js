@@ -81,13 +81,13 @@ export default [{
             icon: 'cil-settings',
             items: []
         },
-        {
-            _name: 'CSidebarNavItem',
-            name: 'App Update',
-            to: '/other/update',
-            icon: 'cil-ban',
-            items: []
-        },
+        // {
+        //     _name: 'CSidebarNavItem',
+        //     name: 'App Update',
+        //     to: '/other/update',
+        //     icon: 'cil-ban',
+        //     items: []
+        // },
         {
             _name: 'CSidebarNavItem',
             name: 'Payment Method',
