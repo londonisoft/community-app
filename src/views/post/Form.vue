@@ -6,7 +6,7 @@
             <b-col lg="10" offset-lg="1" sm="12">
                 <table class="table table-bordered">
                     <tr>
-                        <td>Image</td>
+                        <td width="30%">Image</td>
                         <td>
                             <img :src="baseUrl+'/posts/'+formData.photo" width="200px">
                         </td>

@@ -184,8 +184,8 @@ export default {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
                 { label: 'Email', class: 'text-center' },
-                { label: 'Amount', class: 'text-center' },
                 { label: 'Country', class: 'text-center' },
+                { label: 'Amount', class: 'text-center' },
                 { label: 'Paying Account', class: 'text-center' },
                 { label: 'Payment Method', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },

@@ -112,22 +112,6 @@ const routes = [{
                         meta: {
                             requiresAuth: true
                         }
-                    },
-                    {
-                        path: 'transfer-list',
-                        name: 'transferList',
-                        component: transferList,
-                        meta: {
-                            requiresAuth: true
-                        }
-                    },
-                    {
-                        path: 'add-wallet',
-                        name: 'addWallet',
-                        component: addWallet,
-                        meta: {
-                            requiresAuth: true
-                        }
                     }
                 ]
             },
@@ -239,6 +223,22 @@ const routes = [{
                         path: 'change-password',
                         name: 'PaymentMethod',
                         component: changePass,
+                        meta: {
+                            requiresAuth: true
+                        }
+                    },
+                    {
+                        path: 'transfer-list',
+                        name: 'transferList',
+                        component: transferList,
+                        meta: {
+                            requiresAuth: true
+                        }
+                    },
+                    {
+                        path: 'add-wallet',
+                        name: 'addWallet',
+                        component: addWallet,
                         meta: {
                             requiresAuth: true
                         }

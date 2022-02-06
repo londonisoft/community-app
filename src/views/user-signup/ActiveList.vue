@@ -12,7 +12,7 @@
         </CCardHeader>
         <CCardBody>
             <b-row>
-                <b-col  class="ml-3">
+                 <b-col  class="ml-3">
                     <ValidationObserver ref="form"  v-slot="{ handleSubmit, reset }">
                         <b-form  @submit.prevent="handleSubmit(searchData)" @reset.prevent="reset" >
                             <div class="row">
@@ -41,6 +41,20 @@
                                     <b-form-input
                                         id="email"
                                         v-model="search.email"
+                                        ></b-form-input>
+                                    </b-form-group>
+                                </div>
+                                <div class="col-md-4">
+                                    <b-form-group
+                                    class="row"
+                                    label-cols-md="12"
+                                    >
+                                    <template v-slot:label>
+                                    Country
+                                    </template>
+                                    <b-form-input
+                                        id="country"
+                                        v-model="search.country"
                                         ></b-form-input>
                                     </b-form-group>
                                 </div>
@@ -118,7 +132,8 @@ export default {
       return {
         search: {
             name: '',
-            email: ''
+            email: '',
+            country: ''
         },
         pagination: {
             perPage: 10,

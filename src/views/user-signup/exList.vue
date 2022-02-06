@@ -44,13 +44,27 @@
                                         ></b-form-input>
                                     </b-form-group>
                                 </div>
+                                <div class="col-md-4">
+                                    <b-form-group
+                                    class="row"
+                                    label-cols-md="12"
+                                    >
+                                    <template v-slot:label>
+                                    Country
+                                    </template>
+                                    <b-form-input
+                                        id="country"
+                                        v-model="search.country"
+                                        ></b-form-input>
+                                    </b-form-group>
+                                </div>
                                 <div class="col-md-2">
-                                    <div class="text-left mt-3">
+                                    <div class="text-left">
                                         <button type="submit" class="btn btn-primary mt-4">Search</button>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <div class="text-right mt-3">
+                                <div class="col-md-10">
+                                    <div class="text-right">
                                         <button type="button" class="btn btn-primary mt-4" @click="editId = ''" v-b-modal.modal-1>Add New</button>
                                     </div>
                                 </div>
@@ -60,7 +74,7 @@
                 </b-col>
             </b-row>
             <b-overlay :show='loading'>
-                <div class="overflow-auto">
+                <div class="overflow-auto mt-2">
                     <b-table thead-class="bg-light text-dark" emptyText="Data Not Found" small show-empty bordered hover :items="itemList" :fields="fields">
                         <template v-slot:cell(index)="data">
                             {{ $n(data.index + pagination.slOffset) }}
@@ -120,7 +134,8 @@ export default {
       return {
         search: {
             name: '',
-            email: ''
+            email: '',
+            country: ''
         },
         pagination: {
             perPage: 10,

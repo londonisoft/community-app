@@ -13,8 +13,65 @@
             </div>
         </CCardHeader>
         <CCardBody>
+            <b-row>
+                <b-col  class="ml-3">
+                    <ValidationObserver ref="form"  v-slot="{ handleSubmit, reset }">
+                        <b-form  @submit.prevent="handleSubmit(searchData)" @reset.prevent="reset" >
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <b-form-group
+                                    class="row"
+                                    label-cols-md="12"
+                                    >
+                                    <template v-slot:label>
+                                    Name
+                                    </template>
+                                    <b-form-input
+                                        id="name"
+                                        v-model="search.name"
+                                        ></b-form-input>
+                                    </b-form-group>
+                                </div>
+                                <div class="col-md-4">
+                                    <b-form-group
+                                    class="row"
+                                    label-cols-md="12"
+                                    >
+                                    <template v-slot:label>
+                                    Email
+                                    </template>
+                                    <b-form-input
+                                        id="email"
+                                        v-model="search.email"
+                                        ></b-form-input>
+                                    </b-form-group>
+                                </div>
+                                <div class="col-md-4">
+                                    <b-form-group
+                                    class="row"
+                                    label-cols-md="12"
+                                    >
+                                    <template v-slot:label>
+                                    Country
+                                    </template>
+                                    <b-form-input
+                                        id="country"
+                                        v-model="search.country"
+                                        ></b-form-input>
+                                    </b-form-group>
+                                </div>
+                                <div class="col-md-4">
+                                    <div>
+                                        <b-button type="submit" variant="primary">Search</b-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </b-form>
+                    </ValidationObserver>
+                </b-col>
+            </b-row>
             <b-overlay :show='loading'>
-                <div class="overflow-auto">
+                <div class="overflow-auto mt-2">
                     <b-table thead-class="bg-light text-dark" emptyText="Data Not Found" show-empty bordered hover :items="itemList" :fields="fields">
                         <template v-slot:cell(index)="data">
                             {{ $n(data.index + pagination.slOffset) }}
@@ -55,7 +112,9 @@ export default {
     data() {
       return {
         search: {
-            name: ''
+            name: '',
+            email: '',
+            country: '',
         },
         pagination: {
             perPage: 10,
@@ -74,6 +133,7 @@ export default {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
                 { label: 'User Name', class: 'text-center' },
+                { label: 'Country', class: 'text-center' },
                 { label: 'Package Name', class: 'text-center' },
                 { label: 'Fees', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
@@ -84,6 +144,7 @@ export default {
             keys = [
             { key: 'index' },
             { key: 'user_name' },
+            { key: 'country' },
             { key: 'name' },
             { key: 'fees' },
             { key: 'status' },

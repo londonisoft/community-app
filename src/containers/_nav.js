@@ -91,14 +91,14 @@ export default [{
         {
             _name: 'CSidebarNavItem',
             name: 'Transfer List',
-            to: '/withdraw/transfer-list',
+            to: '/other/transfer-list',
             icon: 'cil-ban',
             items: []
         },
         {
             _name: 'CSidebarNavItem',
             name: 'Add Wallet',
-            to: '/withdraw/add-wallet',
+            to: '/other/add-wallet',
             icon: 'cil-ban',
             items: []
         },

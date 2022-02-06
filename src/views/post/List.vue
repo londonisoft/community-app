@@ -20,6 +20,9 @@
                         <template v-slot:cell(description)="data">
                             <span>{{ data.item.description | subStr }}</span>
                         </template>
+                        <template v-slot:cell(photo)="data">
+                            <img :src="baseUrl+'/posts/'+data.item.photo" width="70px">
+                        </template>
                         <template v-slot:cell(status)="data">
                             <span class="badge badge-warning" v-if="data.item.status == 1">Pending</span>
                             <span class="badge badge-success" v-if="data.item.status == 2">Approve</span>
@@ -78,7 +81,8 @@ export default {
             currentPage: 1,
             total: 0
         },
-        editId: ''
+        editId: '',
+        baseUrl: baseUrl
       }
     },
     computed: {
@@ -88,6 +92,7 @@ export default {
         fields () {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
+                { label: 'Image', class: 'text-center' },
                 { label: 'Description', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center' }
@@ -96,6 +101,7 @@ export default {
             let keys = []
             keys = [
             { key: 'id' },
+            { key: 'photo' },
             { key: 'description' },
             { key: 'status' },
             { key: 'action' }

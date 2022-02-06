@@ -45,6 +45,20 @@
                                     </b-form-group>
                                 </div>
                                 <div class="col-md-4">
+                                    <b-form-group
+                                    class="row"
+                                    label-cols-md="12"
+                                    >
+                                    <template v-slot:label>
+                                    Country
+                                    </template>
+                                    <b-form-input
+                                        id="country"
+                                        v-model="search.country"
+                                        ></b-form-input>
+                                    </b-form-group>
+                                </div>
+                                <div class="col-md-4">
                                     <div style="height:40px">
                                         <b-button style='position:absolute;bottom:15px' type="submit" variant="primary">Search</b-button>
                                     </div>
@@ -118,7 +132,8 @@ export default {
       return {
         search: {
             name: '',
-            email: ''
+            email: '',
+            country: ''
         },
         pagination: {
             perPage: 10,
