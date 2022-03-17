@@ -374,6 +374,126 @@
                                                             </ValidationProvider>
                                                         </div>
                                                         <div class="col-md-6">
+                                                            <ValidationProvider name="Image six" vid="image_six" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="images"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Image six <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-file
+                                                                    type="text"
+                                                                    id="image_six"
+                                                                    @change="handleimgsix"
+                                                                    v-model="images.image_six"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-file>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Image seven" vid="image_seven" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="images"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Image seven <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-file
+                                                                    type="text"
+                                                                    id="image_seven"
+                                                                    @change="handleimgseven"
+                                                                    v-model="images.image_seven"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-file>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Image eight" vid="image_eight" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="images"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Image eight <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-file
+                                                                    type="text"
+                                                                    id="image_eight"
+                                                                    @change="handleimgeight"
+                                                                    v-model="images.image_eight"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-file>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Image nine" vid="image_nine" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="images"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Image nine <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-file
+                                                                    type="text"
+                                                                    id="image_nine"
+                                                                    @change="handleimgnine"
+                                                                    v-model="images.image_nine"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-file>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Image ten" vid="image_ten" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="images"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Image ten <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-file
+                                                                    type="text"
+                                                                    id="image_ten"
+                                                                    @change="handleimgten"
+                                                                    v-model="images.image_ten"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-file>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
                                                             <ValidationProvider name="Refer Image" vid="refer_image" rules="">
                                                                 <b-form-group
                                                                 class="row"
@@ -391,6 +511,236 @@
                                                                     v-model="images.refer_image"
                                                                     :state="errors[0] ? false : (valid ? true : null)"
                                                                     ></b-form-file>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Image one url" vid="image_one_url" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="image_one_url"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Image one url <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="image_one_url"
+                                                                    v-model="images.image_one_url"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Image two url" vid="image_two_url" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="image_two_url"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Image two url <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="image_two_url"
+                                                                    v-model="images.image_two_url"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Image three url" vid="image_three_url" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="image_three_url"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Image three url <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="image_three_url"
+                                                                    v-model="images.image_three_url"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Image four url" vid="image_four_url" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="image_four_url"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Image four url <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="image_four_url"
+                                                                    v-model="images.image_four_url"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Image five url" vid="image_five_url" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="image_five_url"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Image five url <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="image_five_url"
+                                                                    v-model="images.image_five_url"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Image six url" vid="image_six_url" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="image_six_url"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Image six url <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="image_six_url"
+                                                                    v-model="images.image_six_url"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Image seven url" vid="image_seven_url" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="image_seven_url"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Image seven url <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="image_seven_url"
+                                                                    v-model="images.image_seven_url"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Image eight url" vid="image_eight_url" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="image_eight_url"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Image eight url <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="image_eight_url"
+                                                                    v-model="images.image_eight_url"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Image nine url" vid="image_nine_url" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="image_nine_url"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Image nine url <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="image_nine_url"
+                                                                    v-model="images.image_nine_url"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Image ten url" vid="image_ten_url" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="image_ten_url"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Image ten url <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="image_ten_url"
+                                                                    v-model="images.image_ten_url"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
                                                                 <div class="invalid-feedback">
                                                                     {{ errors[0] }}
                                                                 </div>
@@ -444,7 +794,22 @@ export default {
           image_three: [],
           image_four: [],
           image_five: [],
-          refer_image: []
+          image_six: [],
+          image_seven: [],
+          image_eight: [],
+          image_nine: [],
+          image_ten: [],
+          refer_image: [],
+          image_one_url : '',
+          image_two_url : '',
+          image_three_url : '',
+          image_four_url : '',
+          image_five_url : '',
+          image_six_url : '',
+          image_seven_url : '',
+          image_eight_url : '',
+          image_nine_url : '',
+          image_ten_url : ''
       },
       editId: ''
     }
@@ -467,6 +832,22 @@ export default {
         RestApi.getData(baseUrl, 'api/message/show').then(response => {
             if (response.success) {
                 this.messages = response.data
+            }
+            this.$store.dispatch('mutedLoad', { loading: false })
+        })
+        this.$store.dispatch('mutedLoad', { loading: true})
+        RestApi.getData(baseUrl, 'api/image/show').then(response => {
+            if (response.success) {
+                    this.images.image_one_url = response.data.image_one_url
+                    this.images.image_two_url = response.data.image_two_url
+                    this.images.image_three_url = response.data.image_three_url
+                    this.images.image_four_url = response.data.image_four_url
+                    this.images.image_five_url = response.data.image_five_url
+                    this.images.image_six_url = response.data.image_six_url
+                    this.images.image_seven_url = response.data.image_seven_url
+                    this.images.image_eight_url = response.data.image_eight_url
+                    this.images.image_nine_url = response.data.image_nine_url
+                    this.images.image_ten_url = response.data.image_ten_url
             }
             this.$store.dispatch('mutedLoad', { loading: false })
         })
@@ -508,7 +889,22 @@ export default {
         formData.append('image_three', this.formData.image_three)
         formData.append('image_four', this.formData.image_four)
         formData.append('image_five', this.formData.image_five)
+        formData.append('image_six', this.formData.image_six)
+        formData.append('image_seven', this.formData.image_seven)
+        formData.append('image_eight', this.formData.image_eight)
+        formData.append('image_nine', this.formData.image_nine)
+        formData.append('image_ten', this.formData.image_ten)
         formData.append('refer_image', this.formData.refer_image)
+        formData.append('image_one_url', this.images.image_one_url)
+        formData.append('image_two_url', this.images.image_two_url)
+        formData.append('image_three_url', this.images.image_three_url)
+        formData.append('image_four_url', this.images.image_four_url)
+        formData.append('image_five_url', this.images.image_five_url)
+        formData.append('image_six_url', this.images.image_six_url)
+        formData.append('image_seven_url', this.images.image_seven_url)
+        formData.append('image_eight_url', this.images.image_eight_url)
+        formData.append('image_nine_url', this.images.image_nine_url)
+        formData.append('image_ten_url', this.images.image_ten_url)
         result = await RestApi.postData(baseUrl, `api/image/update`, formData)
         this.$store.dispatch('mutedLoad', { loading: false })
         if (result.success) {
@@ -534,6 +930,21 @@ export default {
     },
     handleimgfive( event ){
         this.formData.image_five = event.target.files[0];
+    },
+    handleimgsix( event ){
+        this.formData.image_six = event.target.files[0];
+    },
+    handleimgseven( event ){
+        this.formData.image_seven = event.target.files[0];
+    },
+    handleimgeight( event ){
+        this.formData.image_eight = event.target.files[0];
+    },
+    handleimgnine( event ){
+        this.formData.image_nine = event.target.files[0];
+    },
+    handleimgten( event ){
+        this.formData.image_ten = event.target.files[0];
     },
     handleimgrefer( event ){
         this.formData.refer_image = event.target.files[0];
