@@ -90,6 +90,7 @@ export default {
                 { label: 'Sl No', class: 'text-left' },
                 { label: 'Name', class: 'text-center' },
                 { label: 'Min Amount', class: 'text-center' },
+                { label: 'Max Amount', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center' }
             ]
@@ -99,6 +100,7 @@ export default {
             { key: 'id' },
             { key: 'name' },
             { key: 'min_amount' },
+            { key: 'max_amount' },
             { key: 'status' },
             { key: 'action' }
             ]

@@ -66,6 +66,78 @@
                                                                 </b-form-group>
                                                             </ValidationProvider>
                                                         </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Notice" vid="notice" rules="required">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="notice"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Notice <span class="text-danger">*</span>
+                                                                </template>
+                                                                <VueEditor
+                                                                    type="text"
+                                                                    id="notice"
+                                                                    rows="6"
+                                                                    v-model="formData.notice"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></VueEditor>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="About" vid="about" rules="required">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="about"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                About <span class="text-danger">*</span>
+                                                                </template>
+                                                                <VueEditor
+                                                                    type="text"
+                                                                    id="about"
+                                                                    rows="6"
+                                                                    v-model="formData.about"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></VueEditor>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Policy" vid="policy" rules="required">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="policy"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Policy <span class="text-danger">*</span>
+                                                                </template>
+                                                                <VueEditor
+                                                                    type="text"
+                                                                    id="policy"
+                                                                    v-model="formData.policy"
+                                                                    rows="6"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></VueEditor>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
                                                         <div class="col-md-12 text-right">
                                                             <b-button type="submit" variant="primary" style="margin-top:40px" class="mr-2">{{ saveBtnName }}</b-button>
                                                         </div>
@@ -88,12 +160,13 @@
 import RestApi, { baseUrl } from '../../config/api_config'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import iziToast from 'izitoast';
-
+import { VueEditor } from "vue2-editor";
 export default {
   props: ['id'],
   components: {
     ValidationObserver,
-    ValidationProvider
+    ValidationProvider,
+    VueEditor
   },
   created () {
       this.getData()
@@ -103,7 +176,10 @@ export default {
       saveBtnName: "Update",
       formData: {
         refer_bonus: '',
-        add_code: ''
+        add_code: '',
+        notice: '',
+        about: '',
+        policy: ''
       },
       editId: ''
     }

@@ -164,7 +164,8 @@ export default {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
                 { label: 'Email', class: 'text-center' },
-                { label: 'Country', class: 'text-center' },
+                { label: 'Country Sender', class: 'text-center' },
+                { label: 'Country Receiver', class: 'text-center' },
                 { label: 'Amount', class: 'text-center' },
                 { label: 'Transfer To', class: 'text-center' },
                 { label: 'Date', class: 'text-center' }
@@ -174,7 +175,8 @@ export default {
             keys = [
             { key: 'id' },
             { key: 'user_email' },
-            { key: 'country' },
+            { key: 'country_sender' },
+            { key: 'country_receiver' },
             { key: 'amount' },
             { key: 'email' },
             { key: 'created_at' }

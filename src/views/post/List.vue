@@ -21,7 +21,7 @@
                             <span>{{ data.item.description | subStr }}</span>
                         </template>
                         <template v-slot:cell(photo)="data">
-                            <img :src="baseUrl+'/posts/'+data.item.photo" width="70px">
+                            <img v-if="data.item.photo" :src="baseUrl+'/posts/'+data.item.photo" width="70px">
                         </template>
                         <template v-slot:cell(status)="data">
                             <span class="badge badge-warning" v-if="data.item.status == 1">Pending</span>

@@ -49,6 +49,28 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
+                        <ValidationProvider name="Amount" vid="amount" rules="required">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="formData"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                            Amount <span class="text-danger">*</span>
+                            </template>
+                            <b-form-radio-group
+                                id="operator"
+                                :options="options"
+                                name="radio-options"
+                                v-model="formData.operator"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                            ></b-form-radio-group>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
                         <div class="row">
                             <div class="col-sm-3"></div>
                             <div class="col text-right">
@@ -86,8 +108,19 @@ export default {
       saveBtnName: this.id ? 'Update' : 'Save',
       formData: {
         email: '',
-        amount: ''
-      }
+        amount: '',
+        operator: 'add'
+      },
+      options: [
+          {
+              text: 'Addition',
+              value: 'add'
+          },
+          {
+              text: 'Subtraction',
+              value: 'sub'
+          }
+      ]
     }
   },
   computed: {

@@ -49,6 +49,27 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
+                        <ValidationProvider name="Max Amount" vid="max_amount" rules="required">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="formData"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                            Max Amount <span class="text-danger">*</span>
+                            </template>
+                            <b-form-input
+                                id="max_amount"
+                                rows="6"
+                                v-model="formData.max_amount"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                                ></b-form-input>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
                         <div class="row">
                             <div class="col-sm-3"></div>
                             <div class="col text-right">

@@ -80,6 +80,10 @@
                             <span class="badge badge-success" v-if="data.item.status == 1">Approve</span>
                             <span class="badge badge-danger" v-else>Pending</span>
                         </template>
+                        <template v-slot:cell(amount)="data">
+                            <span class="badge badge-success" v-if="data.item.amount">Wallet Pay</span>
+                            <span class="badge badge-danger" v-else>Other Pay</span>
+                        </template>
                         <template v-slot:cell(action)="data">
                             <b-button v-if="parseInt(data.item.status) === 0" title="Active" class="btn btn-success mr-2 btn-sm" @click="changeStatus(data.item)"> <i class="ri-check-line"></i></b-button>
                             <!-- <b-button v-else title="Block" class="mr-2 btn btn-danger btn-sm" @click="changeStatus(data.item)"><i class="ri-close-line"></i></b-button> -->
@@ -136,6 +140,7 @@ export default {
                 { label: 'Country', class: 'text-center' },
                 { label: 'Package Name', class: 'text-center' },
                 { label: 'Fees', class: 'text-center' },
+                { label: 'Pay From', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center' }
             ]
@@ -147,6 +152,7 @@ export default {
             { key: 'country' },
             { key: 'name' },
             { key: 'fees' },
+            { key: 'amount' },
             { key: 'status' },
             { key: 'action' }
             ]

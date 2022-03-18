@@ -15,7 +15,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'remixicon/fonts/remixicon.css'
 import { ValidationObserver, ValidationProvider, extend } from 'vee-validate'
 import * as rules from 'vee-validate/dist/rules'
-import Permissions from './mixins/Permissions';
+// import Permissions from './mixins/Permissions';
 // import VueSocketIO from 'vue-socket.io'
 
 import iziToast from 'izitoast';
@@ -23,10 +23,12 @@ import 'izitoast/dist/css/iziToast.css';
 import 'izitoast/dist/css/iziToast.min.css';
 Vue.use(iziToast);
 
-Vue.mixin(Permissions);
+// Vue.mixin(Permissions);
+import Vue2Editor from "vue2-editor";
+Vue.use(Vue2Editor);
 
 Object.keys(rules).forEach(rule => {
-  extend(rule, rules[rule])
+    extend(rule, rules[rule])
 })
 
 Vue.component('ValidationObserver', ValidationObserver)
@@ -42,8 +44,8 @@ Vue.prototype.$log = console.log.bind(console)
 import VueSweetalert2 from 'vue-sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
 const options = {
-  confirmButtonColor: '#41b882',
-  cancelButtonColor: '#ff7674'
+    confirmButtonColor: '#41b882',
+    cancelButtonColor: '#ff7674'
 }
 Vue.use(VueSweetalert2, options)
 
@@ -60,15 +62,13 @@ Vue.use(VueSweetalert2, options)
 
 
 new Vue({
-  el: '#app',
-  router,
-  store,
-  icons,
-  template: '<App/>',
-  i18n,
-  components: {
-    App
-  }
+    el: '#app',
+    router,
+    store,
+    icons,
+    template: '<App/>',
+    i18n,
+    components: {
+        App
+    }
 })
-
-

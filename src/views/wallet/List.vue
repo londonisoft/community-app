@@ -61,7 +61,7 @@
                             <span class="badge badge-danger" v-else>Inactive</span>
                         </template>
                         <template v-slot:cell(action)="data">
-                            <b-button class="btn btn-success btn-sm" v-b-modal.modal-1 @click="edit(data.item)"><i class="ri-ball-pen-fill m-0"></i></b-button>
+                            <!-- <b-button class="btn btn-success btn-sm" v-b-modal.modal-1 @click="edit(data.item)"><i class="ri-ball-pen-fill m-0"></i></b-button> -->
                         </template>
                     </b-table>
                 </div>
@@ -120,6 +120,7 @@ export default {
                 { label: 'Sl No', class: 'text-left' },
                 { label: 'Email', class: 'text-center' },
                 { label: 'Amount', class: 'text-center' },
+                { label: 'Operator', class: 'text-center' },
                 { label: 'Action', class: 'text-center' }
             ]
 
@@ -128,6 +129,7 @@ export default {
             { key: 'id' },
             { key: 'user_email' },
             { key: 'amount' },
+            { key: 'operator' },
             { key: 'action' }
             ]
             return labels.map((item, index) => {

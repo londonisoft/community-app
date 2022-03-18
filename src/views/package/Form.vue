@@ -112,6 +112,27 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
+                        <ValidationProvider name="Expire Day" vid="expire_day" rules="required">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="formData"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                            Expire Day <span class="text-danger">*</span>
+                            </template>
+                            <b-form-input
+                                id="expire_day"
+                                rows="6"
+                                v-model="formData.expire_day"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                                ></b-form-input>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
                         <div class="row">
                             <div class="col-sm-3"></div>
                             <div class="col text-right">

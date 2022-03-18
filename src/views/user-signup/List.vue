@@ -86,8 +86,6 @@
                         <template v-slot:cell(action)="data">
                             <b-button v-if="data.item.status == 2" title="Active" class="btn btn-success ml-2 btn-sm" @click="changeStatus(data.item)"> <i class="ri-check-line"></i></b-button>
                             <b-button v-else title="Block" class="ml-2 btn btn-danger btn-sm" @click="changeStatus(data.item)"><i class="ri-close-line"></i></b-button>
-                            <!--                             <!-- <b-button v-b-modal.modal-1 title="Block" class="ml-2 btn btn-warning btn-sm" @click="edit(data.item)"> <i class="ri-notification-line"></i></b-button> -->
- -->
                         </template>
                     </b-table>
                 </div>
@@ -153,6 +151,7 @@ export default {
                 { label: 'Name', class: 'text-center' },
                 { label: 'Country', class: 'text-center' },
                 { label: 'Email', class: 'text-center' },
+                { label: 'Phone', class: 'text-center' },
                 { label: 'Amount', class: 'text-center' },
                 { label: 'Join', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
@@ -165,6 +164,7 @@ export default {
             { key: 'name' },
             { key: 'country' },
             { key: 'email' },
+            { key: 'phone_no' },
             { key: 'amount' },
             { key: 'total_refer' },
             { key: 'status' },
