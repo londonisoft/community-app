@@ -118,8 +118,8 @@ import RestApi, { baseUrl } from '../../config/api_config'
 import iziToast from 'izitoast';
 import Notification from './Notification'
 import UserInfoChange from './UserInfoChange'
-import Withdraw from './../../componests/user/withdraw'
-import ReferUser from './../../componests/user/refer-user'
+import Withdraw from './../../components/user/withdraw'
+import ReferUser from './../../components/user/refer-user'
 
 export default {
   props: ['id'],

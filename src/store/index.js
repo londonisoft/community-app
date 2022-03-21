@@ -1,10 +1,9 @@
 const state = {
 	commonObj: {
 		hasDropdownLoaded: true,
-		categoryList: [],
-		subCategoryList: [],
-		contentList: [],
-		subContentList: []
+		permissions: [],
+		permissionList: [],
+		roleList: []
 	},
 	token: localStorage.getItem('access_token') || '',
 	user: '',
@@ -17,7 +16,8 @@ const state = {
         dateFormat: 'DD/MM/YYYY',
         fiscaleYear: 'YYYY-YYYY',
         timeFormat: 'h:m',
-        unitOfTime: 'day'
+        unitOfTime: 'day',
+        perPage: 10
 	},
 	list: []
 } 

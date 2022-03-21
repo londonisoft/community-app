@@ -21,8 +21,10 @@
 import TheSidebar from './TheSidebar'
 import TheHeader from './TheHeader'
 import TheFooter from './TheFooter'
+import dropdown from '@/mixins/dropdown'
 
 export default {
+  mixins: [dropdown],
   name: 'TheContainer',
   components: {
     TheSidebar,

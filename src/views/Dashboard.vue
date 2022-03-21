@@ -117,7 +117,7 @@
 </template>
 
 <script>
-import topTen from '../componests/dashboard/top-ten.vue'
+import topTen from '../components/dashboard/top-ten.vue'
 import RestApi, { baseUrl } from '../config/api_config'
 export default {
   name: 'Dashboard',

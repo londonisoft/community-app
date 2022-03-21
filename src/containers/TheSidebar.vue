@@ -18,8 +18,10 @@
 
 <script>
 import nav from './_nav'
+import Permissions from '@/mixins/Permissions'
 
 export default {
+  mixins: [Permissions],
   name: 'TheSidebar',
   nav,
   computed: {
@@ -30,38 +32,45 @@ export default {
       return this.$store.state.sidebarMinimize 
     },
     navData () {
-      const tempData = this.$options.nav[0]._children.map(item => {
-
-      const itemsData = item.items.map(childItem => {
+        let filterList = []
+        this.$options.nav[0]._children.forEach(item => {
+        const itemsData = item.items.map(childItem => {
           return{
             name: this.$t(childItem.name),
             to: childItem.to
           }
         })
 
+        let tmpItem = {}
         if (itemsData.length <1) {
-          return {
+           tmpItem = {
             _name: item._name,
             name: this.$t(item.name),
             to: item.to,
             icon: item.icon,
             items: itemsData,
+            permission: item.permission,
             }
         }else{
-          return {
+           tmpItem = {
             _name: item._name,
             name: this.$t(item.name),
             route: item.route,
             icon: item.icon,
             items: itemsData,
+            permission: itemsData.permission,
             }
+        }
+        console.log(tmpItem, 'jj')
+        if (tmpItem.permission) {
+          filterList.push(tmpItem)
         }
        
       })
       return  [
           {
             _name: 'CSidebarNav',
-            _children: tempData
+            _children: filterList
           }
         ]
       }

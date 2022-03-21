@@ -23,7 +23,9 @@ import 'izitoast/dist/css/iziToast.css';
 import 'izitoast/dist/css/iziToast.min.css';
 Vue.use(iziToast);
 
-// Vue.mixin(Permissions);
+// set permisssion
+import Permissions from './mixins/Permissions';
+Vue.mixin(Permissions);
 import Vue2Editor from "vue2-editor";
 Vue.use(Vue2Editor);
 

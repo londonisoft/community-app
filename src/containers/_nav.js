@@ -54,6 +54,39 @@ export default [{
             ]
         },
         {
+            _name: 'CSidebarNavDropdown',
+            name: 'User Management',
+            route: '/users',
+            icon: 'cil-user',
+            permission: 'user-list',
+            items: [
+                {
+                    _name: 'CSidebarNavItem',
+                    name: 'Users',
+                    to: '/app-management/admin-users',
+                    icon: 'cil-people',
+                    items: [],
+                    permission: 'user-list'
+                  },
+                  {
+                    _name: 'CSidebarNavItem',
+                    name: 'Roles',
+                    to: '/app-management/roles',
+                    icon: 'cil-list',
+                    items: [],
+                    permission: 'role-list'
+                  },
+                  {
+                    _name: 'CSidebarNavItem',
+                    name: 'Permissions',
+                    to: '/app-management/permissions',
+                    icon: 'cil-list',
+                    items: [],
+                    permission: 'permission-list'
+                  }
+            ]
+        },
+        {
             _name: 'CSidebarNavItem',
             name: 'Package',
             to: '/other/package',

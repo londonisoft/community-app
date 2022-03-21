@@ -22,14 +22,13 @@ export default {
   },
   methods: {
     loadCommonDropdown () {
-      RestApi.getData(baseUrl, 'common-dropdowns', null).then(response => {
+      RestApi.getData(baseUrl, 'api/common-dropdowns', null).then(response => {
         if (response.success) {
           this.$store.commit('mutateDropdown', {
             hasDropdownLoaded: true,
-            categoryList: response.data.categoryList,
-            subCategoryList: response.data.subCategoryList,
-            contentList: response.data.contentList,
-            subContentList: response.data.subContentList
+            permissions: response.data.permissions,
+            permissionList: response.data.permissionList,
+            roleList: response.data.roleList
           })
         }
       })
