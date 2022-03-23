@@ -34,11 +34,14 @@ export default {
     navData () {
         let filterList = []
         this.$options.nav[0]._children.forEach(item => {
-        const itemsData = item.items.map(childItem => {
-          return{
-            name: this.$t(childItem.name),
-            to: childItem.to
-          }
+        const itemsData = []
+        item.items.forEach(childItem => {
+            if (this.$can(childItem.permission)) {
+                itemsData.push({
+                    name: this.$t(childItem.name),
+                    to: childItem.to
+                })
+            }
         })
 
         let tmpItem = {}
@@ -61,8 +64,7 @@ export default {
             permission: itemsData.permission,
             }
         }
-        console.log(tmpItem, 'jj')
-        if (tmpItem.permission) {
+        if (this.$can(item.permission)) {
           filterList.push(tmpItem)
         }
        

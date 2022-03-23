@@ -55,7 +55,7 @@
                 <b-pagination
                 class="text-right"
                 v-model="pagination.currentPage"
-                :total-rows="pagination.total"
+                :total-rows="pagination.totalRows"
                 :per-page="pagination.perPage"
                 @input="searchData"
                 ></b-pagination>

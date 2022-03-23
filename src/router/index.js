@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store/store'
+import Permissions from '@/mixins/Permissions'
 
 // Containers
 const TheContainer = () =>
@@ -117,7 +118,6 @@ const routes = [{
             },
             {
                 path: 'users',
-                redirect: '/base/cards',
                 name: 'Users',
                 component: {
                     render(c) { return c('router-view') }
@@ -166,7 +166,6 @@ const routes = [{
             },
             {
                 path: 'app-management',
-                redirect: '/base/cards',
                 name: 'appUsers',
                 component: {
                     render(c) { return c('router-view') }
