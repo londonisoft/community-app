@@ -3,7 +3,6 @@
     <CRow>
       <CCol sm="12" md="12">
         <CCard accent-color="success">
-          <CCardHeader><b> Users Register</b></CCardHeader>
             <CCardBody>
                 <div class="row">
                     <div class="col-12 col-sm-6 col-lg-3">
@@ -16,7 +15,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                <div class="text-muted text-uppercase font-weight-bold"> Today </div>
+                                <div class="text-muted text-uppercase font-weight-bold"> Total Category </div>
                                 <div class="text-value text-gradient-primary">{{ parseFloat(formData.today_user).toFixed(2) }}</div>
                                 </div>
                             </div>
@@ -32,7 +31,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                <div class="text-muted text-uppercase font-weight-bold"> Previous Day </div>
+                                <div class="text-muted text-uppercase font-weight-bold"> Total Channel </div>
                                 <div class="text-value text-gradient-primary">{{ parseFloat(formData.previous_day_user).toFixed(2) }}</div>
                                 </div>
                             </div>
@@ -48,8 +47,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                <div class="text-muted text-uppercase font-weight-bold"> Last 7 Day </div>
-                                <div class="text-value text-gradient-primary">{{ parseFloat(formData.last_seven_day_user).toFixed(2) }}</div>
+                                <div class="text-muted text-uppercase font-weight-bold"> Demo One </div>
+                                <div class="text-value text-gradient-primary">{{ 0 }}</div>
                                 </div>
                             </div>
                         </div>
@@ -64,49 +63,11 @@
                                     </svg>
                                 </div>
                                 <div>
-                                <div class="text-muted text-uppercase font-weight-bold"> This Month </div>
-                                <div class="text-value text-gradient-primary">{{ parseFloat(formData.this_month_user).toFixed(2) }}</div>
+                                <div class="text-muted text-uppercase font-weight-bold"> Demo Two </div>
+                                <div class="text-value text-gradient-primary">0</div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow>
-    <CRow>
-      <CCol sm="12" md="8">
-        <topTen></topTen>
-      </CCol>
-      <CCol sm="12" md="4">
-        <CCard accent-color="success">
-          <CCardHeader><b> Payment Details</b></CCardHeader>
-            <CCardBody>
-                <div class="row">
-                    <div class="col-12 col-sm-12 col-lg-12">
-                        <table class="table table-sm table table-bordered">
-                            <tr>
-                                <td widtd="60%">Last 7 Day Paid</td>
-                                <td class="text-right"> {{ parseFloat(formData.last_seven_day_paid).toFixed(2) }} $</td>
-                            </tr>
-                            <tr>
-                                <td>Last 7 Day Pending</td>
-                                <td class="text-right"> {{ parseFloat(formData.last_seven_day_pending).toFixed(2) }} $</td>
-                            </tr>
-                            <tr>
-                                <td>This Month</td>
-                                <td class="text-right"> {{ parseFloat(formData.this_month_paid).toFixed(2) }} $</td>
-                            </tr>
-                            <tr>
-                                <td>Total Paid</td>
-                                <td class="text-right"> {{ parseFloat(formData.total_paid).toFixed(2) }} $</td>
-                            </tr>
-                            <tr>
-                                <td>Total Pending</td>
-                                <td class="text-right"> {{ parseFloat(formData.total_pending).toFixed(2) }} $</td>
-                            </tr>
-                        </table>
                     </div>
                 </div>
             </CCardBody>
@@ -117,12 +78,10 @@
 </template>
 
 <script>
-import topTen from '../components/dashboard/top-ten.vue'
 import RestApi, { baseUrl } from '../config/api_config'
 export default {
   name: 'Dashboard',
   components: {
-    topTen
   },
   data () {
     return {

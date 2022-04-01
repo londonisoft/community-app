@@ -20,194 +20,26 @@
                                             <ValidationObserver ref="form"  v-slot="{ handleSubmit, reset }">
                                                 <b-form  @submit.prevent="handleSubmit(register)" @reset.prevent="reset" >
                                                     <div class="row">
-                                                        <div class="col-md-6">
-                                                            <ValidationProvider name="Refer Bonus (Tk)" vid="refer_bonus" rules="required">
-                                                                <b-form-group
-                                                                class="row"
-                                                                label-cols-sm="12"
-                                                                label-for="formData"
-                                                                slot-scope="{ valid, errors }"
-                                                                >
-                                                                <template v-slot:label>
-                                                                Refer Bonus (Tk) <span class="text-danger">*</span>
-                                                                </template>
-                                                                <b-form-input
-                                                                    type="text"
-                                                                    id="refer_bonus"
-                                                                    v-model="formData.refer_bonus"
-                                                                    :state="errors[0] ? false : (valid ? true : null)"
-                                                                    ></b-form-input>
-                                                                <div class="invalid-feedback">
-                                                                    {{ errors[0] }}
-                                                                </div>
-                                                                </b-form-group>
-                                                            </ValidationProvider>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <ValidationProvider name="Add Code" vid="add_code" rules="required">
-                                                                <b-form-group
-                                                                class="row"
-                                                                label-cols-sm="12"
-                                                                label-for="add_code"
-                                                                slot-scope="{ valid, errors }"
-                                                                >
-                                                                <template v-slot:label>
-                                                                Add Code <span class="text-danger">*</span>
-                                                                </template>
-                                                                <b-form-input
-                                                                    type="text"
-                                                                    id="add_code"
-                                                                    v-model="formData.add_code"
-                                                                    :state="errors[0] ? false : (valid ? true : null)"
-                                                                    ></b-form-input>
-                                                                <div class="invalid-feedback">
-                                                                    {{ errors[0] }}
-                                                                </div>
-                                                                </b-form-group>
-                                                            </ValidationProvider>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <ValidationProvider name="Mycash message" vid="mycash_message" rules="required">
-                                                                <b-form-group
-                                                                class="row"
-                                                                label-cols-sm="12"
-                                                                label-for="mycash_message"
-                                                                slot-scope="{ valid, errors }"
-                                                                >
-                                                                <template v-slot:label>
-                                                                Mycash message <span class="text-danger">*</span>
-                                                                </template>
-                                                                <VueEditor
-                                                                    type="text"
-                                                                    id="mycash_message"
-                                                                    rows="6"
-                                                                    v-model="formData.mycash_message"
-                                                                    :state="errors[0] ? false : (valid ? true : null)"
-                                                                    ></VueEditor>
-                                                                <div class="invalid-feedback">
-                                                                    {{ errors[0] }}
-                                                                </div>
-                                                                </b-form-group>
-                                                            </ValidationProvider>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <ValidationProvider name="Online pay message" vid="online_pay_message" rules="required">
-                                                                <b-form-group
-                                                                class="row"
-                                                                label-cols-sm="12"
-                                                                label-for="online_pay_message"
-                                                                slot-scope="{ valid, errors }"
-                                                                >
-                                                                <template v-slot:label>
-                                                                online_pay_message <span class="text-danger">*</span>
-                                                                </template>
-                                                                <VueEditor
-                                                                    type="text"
-                                                                    id="online_pay_message"
-                                                                    rows="6"
-                                                                    v-model="formData.online_pay_message"
-                                                                    :state="errors[0] ? false : (valid ? true : null)"
-                                                                    ></VueEditor>
-                                                                <div class="invalid-feedback">
-                                                                    {{ errors[0] }}
-                                                                </div>
-                                                                </b-form-group>
-                                                            </ValidationProvider>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <ValidationProvider name="Notice" vid="notice" rules="required">
-                                                                <b-form-group
-                                                                class="row"
-                                                                label-cols-sm="12"
-                                                                label-for="notice"
-                                                                slot-scope="{ valid, errors }"
-                                                                >
-                                                                <template v-slot:label>
-                                                                Notice <span class="text-danger">*</span>
-                                                                </template>
-                                                                <VueEditor
-                                                                    type="text"
-                                                                    id="notice"
-                                                                    rows="6"
-                                                                    v-model="formData.notice"
-                                                                    :state="errors[0] ? false : (valid ? true : null)"
-                                                                    ></VueEditor>
-                                                                <div class="invalid-feedback">
-                                                                    {{ errors[0] }}
-                                                                </div>
-                                                                </b-form-group>
-                                                            </ValidationProvider>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <ValidationProvider name="About" vid="about" rules="required">
-                                                                <b-form-group
-                                                                class="row"
-                                                                label-cols-sm="12"
-                                                                label-for="about"
-                                                                slot-scope="{ valid, errors }"
-                                                                >
-                                                                <template v-slot:label>
-                                                                About <span class="text-danger">*</span>
-                                                                </template>
-                                                                <VueEditor
-                                                                    type="text"
-                                                                    id="about"
-                                                                    rows="6"
-                                                                    v-model="formData.about"
-                                                                    :state="errors[0] ? false : (valid ? true : null)"
-                                                                    ></VueEditor>
-                                                                <div class="invalid-feedback">
-                                                                    {{ errors[0] }}
-                                                                </div>
-                                                                </b-form-group>
-                                                            </ValidationProvider>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <ValidationProvider name="Policy" vid="policy" rules="required">
-                                                                <b-form-group
-                                                                class="row"
-                                                                label-cols-sm="12"
-                                                                label-for="policy"
-                                                                slot-scope="{ valid, errors }"
-                                                                >
-                                                                <template v-slot:label>
-                                                                Policy <span class="text-danger">*</span>
-                                                                </template>
-                                                                <VueEditor
-                                                                    type="text"
-                                                                    id="policy"
-                                                                    v-model="formData.policy"
-                                                                    rows="6"
-                                                                    :state="errors[0] ? false : (valid ? true : null)"
-                                                                    ></VueEditor>
-                                                                <div class="invalid-feedback">
-                                                                    {{ errors[0] }}
-                                                                </div>
-                                                                </b-form-group>
-                                                            </ValidationProvider>
-                                                        </div>
                                                         <div class="col-md-12">
-                                                            <h4><u>Social App Setting</u></h4>
-                                                            <hr>
+                                                            <h5>Ads Setting</h5><hr>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Notice social" vid="notice_social" rules="required">
+                                                            <ValidationProvider name="Add Banner" vid="admob_banner" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
-                                                                label-for="notice_social"
+                                                                label-for="admob_banner"
                                                                 slot-scope="{ valid, errors }"
                                                                 >
                                                                 <template v-slot:label>
-                                                                Notice social <span class="text-danger">*</span>
+                                                                Add Banner
                                                                 </template>
-                                                                <VueEditor
+                                                                <b-form-input
                                                                     type="text"
-                                                                    id="notice_social"
-                                                                    rows="6"
-                                                                    v-model="formData.notice_social"
+                                                                    id="admob_banner"
+                                                                    v-model="formData.admob_banner"
                                                                     :state="errors[0] ? false : (valid ? true : null)"
-                                                                    ></VueEditor>
+                                                                    ></b-form-input>
                                                                 <div class="invalid-feedback">
                                                                     {{ errors[0] }}
                                                                 </div>
@@ -215,23 +47,22 @@
                                                             </ValidationProvider>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="About social" vid="about_social" rules="required">
+                                                            <ValidationProvider name="Add Inter" vid="admob_inter" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
-                                                                label-for="about_social"
+                                                                label-for="admob_inter"
                                                                 slot-scope="{ valid, errors }"
                                                                 >
                                                                 <template v-slot:label>
-                                                                About social <span class="text-danger">*</span>
+                                                                Add Inter
                                                                 </template>
-                                                                <VueEditor
+                                                                <b-form-input
                                                                     type="text"
-                                                                    id="about_social"
-                                                                    rows="6"
-                                                                    v-model="formData.about_social"
+                                                                    id="admob_inter"
+                                                                    v-model="formData.admob_inter"
                                                                     :state="errors[0] ? false : (valid ? true : null)"
-                                                                    ></VueEditor>
+                                                                    ></b-form-input>
                                                                 <div class="invalid-feedback">
                                                                     {{ errors[0] }}
                                                                 </div>
@@ -239,23 +70,316 @@
                                                             </ValidationProvider>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Policy social" vid="policy_social" rules="required">
+                                                            <ValidationProvider name="Add Native" vid="admob_native" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
-                                                                label-for="policy_social"
+                                                                label-for="admob_native"
                                                                 slot-scope="{ valid, errors }"
                                                                 >
                                                                 <template v-slot:label>
-                                                                Policy social <span class="text-danger">*</span>
+                                                                Add Native
                                                                 </template>
-                                                                <VueEditor
+                                                                <b-form-input
                                                                     type="text"
-                                                                    id="policy_social"
-                                                                    v-model="formData.policy_social"
-                                                                    rows="6"
+                                                                    id="admob_native"
+                                                                    v-model="formData.admob_native"
                                                                     :state="errors[0] ? false : (valid ? true : null)"
-                                                                    ></VueEditor>
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="App ID" vid="app_id" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="app_id"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                App ID
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="app_id"
+                                                                    v-model="formData.app_id"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                             <ValidationProvider name="Show Ads" vid="show_ads" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="show_ads"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Show Ads
+                                                                </template>
+                                                                <b-form-checkbox v-model="formData.show_ads" size="md" name="check-button" switch>
+                                                                    <span v-if="formData.show_ads">ON</span>
+                                                                    <span v-else>OF</span>
+                                                                </b-form-checkbox>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-12 text-right">
+                                                            <b-button type="submit" variant="primary" style="margin-top:40px" class="mr-2">{{ saveBtnName }}</b-button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <h5>Custom Ads Setting</h5><hr>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Add Text (Video Play)" vid="ad_text_video_play" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="ad_text_video_play"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Add Text (Video Play)
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="ad_text_video_play"
+                                                                    v-model="formData.ad_text_video_play"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="As Text Video Play URL" vid="ad_text_video_play_url" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="ad_text_video_play_url"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                As Text Video Play URL
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="ad_text_video_play_url"
+                                                                    v-model="formData.ad_text_video_play_url"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                             <ValidationProvider name="Show Ads" vid="show_ads_custom" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="show_ads_custom"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Show Ads
+                                                                </template>
+                                                                <b-form-checkbox v-model="formData.show_ads_custom" size="md" name="check-button" switch>
+                                                                    <span v-if="formData.show_ads_custom">ON</span>
+                                                                    <span v-else>OF</span>
+                                                                </b-form-checkbox>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-12 text-right">
+                                                            <b-button type="submit" variant="primary" style="margin-top:40px" class="mr-2">{{ saveBtnName }}</b-button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <h5>Tab Links Setting</h5><hr>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Home Score Link" vid="home_score_link" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="home_score_link"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Home Score Link
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="home_score_link"
+                                                                    v-model="formData.home_score_link"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Live Score Link" vid="live_score_link" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="live_score_link"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Live Score Link
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="live_score_link"
+                                                                    v-model="formData.live_score_link"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Schedule Link" vid="schedule_link" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="schedule_link"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Schedule Link
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="schedule_link"
+                                                                    v-model="formData.schedule_link"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Update Link" vid="update_link" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="update_link"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Update Link
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="update_link"
+                                                                    v-model="formData.update_link"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-12 text-right">
+                                                            <b-button type="submit" variant="primary" style="margin-top:40px" class="mr-2">{{ saveBtnName }}</b-button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <h5>Update And Notice Setting</h5><hr>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Update App Link" vid="update_app_link" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="update_app_link"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Update App Link
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="update_app_link"
+                                                                    v-model="formData.update_app_link"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Video PLay Notice" vid="video_play_notice" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="video_play_notice"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Video PLay Notice
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="video_play_notice"
+                                                                    v-model="formData.video_play_notice"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                         <div class="col-md-6">
+                                                        <ValidationProvider name="Show TV" vid="show_tv" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="show_tv"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Show TV
+                                                                </template>
+                                                                <b-form-checkbox v-model="formData.show_tv" size="md" name="check-button" switch>
+                                                                    <span v-if="formData.show_tv">ON</span>
+                                                                    <span v-else>OF</span>
+                                                                </b-form-checkbox>
                                                                 <div class="invalid-feedback">
                                                                     {{ errors[0] }}
                                                                 </div>
@@ -323,6 +447,12 @@ export default {
         this.$store.dispatch('mutedLoad', { loading: true})
         RestApi.getData(baseUrl, 'api/setting/show').then(response => {
             if (response.success) {
+                const tmp = Object.assign(response.data,
+                { 
+                    show_ads: response.data.show_ads === 1 ? true : false,
+                    show_ads_custom: response.data.show_ads_custom === 1 ? true : false,
+                    show_tv: response.data.show_tv === 1 ? true : false
+                })
                 this.formData = response.data
             }
             this.$store.dispatch('mutedLoad', { loading: false })

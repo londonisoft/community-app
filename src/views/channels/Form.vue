@@ -7,20 +7,42 @@
                 <b-overlay :show="loading">
                     <ValidationObserver ref="form"  v-slot="{ handleSubmit, reset }">
                         <b-form  @submit.prevent="handleSubmit(register)" @reset.prevent="reset" >
-                        <ValidationProvider name="Name" vid="name" rules="required">
+                        <ValidationProvider name="Category" vid="category_id" rules="required">
                             <b-form-group
                             class="row"
                             label-cols-sm="12"
-                            label-for="formData"
+                            label-for="category_id"
                             slot-scope="{ valid, errors }"
                             >
                             <template v-slot:label>
-                            Name <span class="text-danger">*</span>
+                            Category <span class="text-danger">*</span>
+                            </template>
+                            <b-form-select
+                                id="category_id"
+                                rows="6"
+                                v-model="formData.category_id"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                                :options="categoryList"
+                                ></b-form-select>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
+                        <ValidationProvider name="Channel Name" vid="channel_name" rules="required">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="channel_name"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                            Channel Name <span class="text-danger">*</span>
                             </template>
                             <b-form-input
-                                id="name"
+                                id="channel_name"
                                 rows="6"
-                                v-model="formData.name"
+                                v-model="formData.channel_name"
                                 :state="errors[0] ? false : (valid ? true : null)"
                                 ></b-form-input>
                             <div class="invalid-feedback">
@@ -28,20 +50,20 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
-                        <ValidationProvider name="Name" vid="min_amount" rules="required">
+                        <ValidationProvider name="Channel Link" vid="channel_link" rules="required">
                             <b-form-group
                             class="row"
                             label-cols-sm="12"
-                            label-for="formData"
+                            label-for="channel_link"
                             slot-scope="{ valid, errors }"
                             >
                             <template v-slot:label>
-                            Min Amount <span class="text-danger">*</span>
+                            Channel Link <span class="text-danger">*</span>
                             </template>
                             <b-form-input
-                                id="min_amount"
+                                id="channel_link"
                                 rows="6"
-                                v-model="formData.min_amount"
+                                v-model="formData.channel_link"
                                 :state="errors[0] ? false : (valid ? true : null)"
                                 ></b-form-input>
                             <div class="invalid-feedback">
@@ -49,20 +71,20 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
-                        <ValidationProvider name="Max Amount" vid="max_amount" rules="required">
+                        <ValidationProvider name="Channel Logo" vid="channel_logo" rules="required">
                             <b-form-group
                             class="row"
                             label-cols-sm="12"
-                            label-for="formData"
+                            label-for="channel_logo"
                             slot-scope="{ valid, errors }"
                             >
                             <template v-slot:label>
-                            Max Amount <span class="text-danger">*</span>
+                            Channel Logo <span class="text-danger">*</span>
                             </template>
                             <b-form-input
-                                id="max_amount"
+                                id="channel_logo"
                                 rows="6"
-                                v-model="formData.max_amount"
+                                v-model="formData.channel_logo"
                                 :state="errors[0] ? false : (valid ? true : null)"
                                 ></b-form-input>
                             <div class="invalid-feedback">
@@ -106,8 +128,10 @@ export default {
     return {
       saveBtnName: this.id ? 'Update' : 'Save',
       formData: {
-        name: '',
-        min_amount: ''
+        category_id: 0,
+        channel_link: '',
+        channel_logo: '',
+        channel_name: ''
       }
     }
   },
@@ -128,9 +152,9 @@ export default {
           this.$store.dispatch('mutedLoad', { loading: true, listReload: false })
         let result = null
         if (this.id) {
-            result = await RestApi.putData(baseUrl, `${'api/payment-method/update'}/${this.id}`, this.formData)
+            result = await RestApi.putData(baseUrl, `${'api/channel/update'}/${this.id}`, this.formData)
         } else {
-            result = await RestApi.postData(baseUrl,'api/payment-method/store', this.formData)
+            result = await RestApi.postData(baseUrl,'api/channel/store', this.formData)
         }
         this.$store.dispatch('mutedLoad', { loading: false, listReload: true })
         this.$store.dispatch('dropdownLoad', { hasDropdownLoaded: false })

@@ -28,7 +28,8 @@ export default {
             hasDropdownLoaded: true,
             permissions: response.data.permissions,
             permissionList: response.data.permissionList,
-            roleList: response.data.roleList
+            roleList: response.data.roleList,
+            categoryList: response.data.categoryList
           })
         }
       })

@@ -3,7 +3,8 @@ const state = {
 		hasDropdownLoaded: true,
 		permissions: [],
 		permissionList: [],
-		roleList: []
+		roleList: [],
+		categoryList: []
 	},
 	token: localStorage.getItem('access_token') || '',
 	user: '',

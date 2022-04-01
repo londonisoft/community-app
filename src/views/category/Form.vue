@@ -12,15 +12,10 @@
                                   <Input @return-value="setReturnData({ name: $event})" :input="{ cols: 12, type: 'text', name: 'name', rules: 'required', vmodel: formData.name }"/>
                               </b-col>
                             </b-row>
-                            <b-row>
-                              <b-col>
-                                  <Checkbox @return-value="setReturnData({ permission: $event})" :input="{ cols: 12, name: 'permission', rules: 'required', vmodel: formData.permission, options: permissionList }"/>
-                              </b-col>
-                            </b-row>
                             <div class="row mt-4 mb-3">
                                 <div class="col-md-12 text-right">
-                                    <button class="vodal-confirm-btn mr-3" @click="show = false">{{ saveBtnName }}</button>
-                                    <button type="button" class="vodal-cancel-btn" @click="$bvModal.hide('modal-1')">close</button>
+                                    <button class="btn btn-primary mr-3" @click="show = false">{{ saveBtnName }}</button>
+                                    <button type="button" class="btn btn-danger" @click="$bvModal.hide('modal-1')">close</button>
                                 </div>
                             </div>
                         </b-form>
@@ -35,7 +30,6 @@
 <script>
 import { ValidationObserver } from 'vee-validate'
 import Input from '../../components/common/Input'
-import Checkbox from '../../components/common/Checkbox.vue'
 import commonForm from '@/mixins/common-form'
 
 export default {
@@ -43,34 +37,25 @@ export default {
   props: ['id'],
   components: {
     ValidationObserver,
-    Input,
-    Checkbox
+    Input
   },
   created () {
       if (this.id) {
-        const tmp = this.getItem()
-        const permission = tmp.permissions.map(item => {
-          return item.name
-        })
-        this.formData = Object.assign({}, tmp, { permission: permission })
+        this.formData = this.getItem()
       }
   },
   data () {
     return {
       formData: {
-        name: '',
-        permission: []
+        name: ''
       }
     }
   },
   computed: {
-    permissionList () {
-      return this.$store.state.commonObj.permissionList
-    }
   },
   methods: {
     formSubmit () {
-      const result = this.submitHandler('api/role/store', 'api/role/update', this.formData)
+      const result = this.submitHandler('api/category/store', 'api/category/update', this.formData)
       result.then(response => {
         this.resultProcess(response)
       })

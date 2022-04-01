@@ -64,7 +64,8 @@ export default {
             permission: itemsData.permission,
             }
         }
-        if (this.$can(item.permission)) {
+        // if (this.$can(item.permission)) {
+        if (true) {
           filterList.push(tmpItem)
         }
        
