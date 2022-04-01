@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="text-right">
-                          <button class="btn btn-primary" @click="editId = ''" v-b-modal.modal-1>Add New</button>
+                          <button v-if="$can('channel-create')" class="btn btn-primary" @click="editId = ''" v-b-modal.modal-1>Add New</button>
                     </div>
                 </div>
             </div>
@@ -33,9 +33,11 @@
                             <span class="badge badge-danger" v-else>Inactive</span>
                         </template>
                         <template v-slot:cell(action)="data">
-                            <b-button v-if="data.item.status == 2" title="Change Status" class="ml-2 btn btn-success btn-sm" @click="changeStatus(data.item, 1)"><i class="ri-check-line"></i></b-button>
-                            <b-button v-else title="Change Status" class="ml-2 btn btn-danger btn-sm" @click="changeStatus(data.item, 2)"><i class="ri-close-line"></i></b-button>
-                            <b-button class="btn btn-success btn-sm ml-2" v-b-modal.modal-1 @click="edit(data.item)"><i class="ri-ball-pen-fill m-0"></i></b-button>
+                            <div v-if="$can('channel-status')">
+                                <b-button v-if="data.item.status == 2" title="Change Status" class="ml-2 btn btn-success btn-sm" @click="changeStatus(data.item, 1)"><i class="ri-check-line"></i></b-button>
+                                <b-button v-else title="Change Status" class="ml-2 btn btn-danger btn-sm" @click="changeStatus(data.item, 2)"><i class="ri-close-line"></i></b-button>
+                            </div>
+                            <b-button v-if="$can('channel-edit')" class="btn btn-success btn-sm ml-2" v-b-modal.modal-1 @click="edit(data.item)"><i class="ri-ball-pen-fill m-0"></i></b-button>
                         </template>
                     </b-table>
                 </div>

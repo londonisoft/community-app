@@ -28,10 +28,10 @@
             <CCardHeader>
                 <div class="row">
                     <div class="col-md-6">
-                        <strong>Category List</strong>
+                        <strong>Role List</strong>
                     </div>
                     <div class="col-md-6 text-right">
-                        <button v-if="$can('category-create')" class="btn btn-primary btn-font" @click="editId = ''" v-b-modal.modal-1><i class="ri-add-line"></i> Add New</button>
+                        <button class="btn btn-primary btn-font" @click="editId = ''" v-b-modal.modal-1><i class="ri-add-line"></i> Add New</button>
                     </div>
                 </div>
             </CCardHeader>
@@ -42,9 +42,12 @@
                             <template v-slot:cell(index)="data">
                                 {{ parseInt(data.index) + parseInt(pagination.slOffset) }}
                             </template>
+                            <template v-slot:cell(status)="data">
+                                <span class="badge badge-success" v-if="data.item.status">Active</span>
+                                <span class="badge badge-danger" v-else>Inactive</span>
+                            </template>
                             <template v-slot:cell(action)="data">
-                                <b-button v-if="$can('category-edit')" title="Edit" class="pl-1 pt-0 pr-1 pb-0 btn btn-info ml-1 btn-sm" @click="edit(data.item)"><i class="ri-edit-line"></i></b-button>
-                                <!-- <b-button title="Active/Inactive" class="pl-1 pt-0 pr-1 pb-0 btn btn-danger ml-1 btn-sm" @click="changeStatus(data.item)"> <i class="ri-close-circle-line"></i> </b-button> -->
+                                <b-button title="Edit" class="pl-1 pt-0 pr-1 pb-0 btn btn-info ml-1 btn-sm" @click="edit(data.item)"><i class="ri-edit-line"></i></b-button>
                             </template>
                         </b-table>
                     </div>
@@ -61,15 +64,18 @@
     </CCol>
   </CRow>
   <transition name="bounce">
-     <b-modal id="modal-1"
-      size="lg"
-    header-bg-variant="primary"
-    header-text-variant="light"
-      title="Category Entry" hide-footer>
-    <div>
-        <Form :id='editId'/>
-  </div>
-  </b-modal>
+    <b-modal id="modal-1"
+        size="md"
+        hide-footer hide-header
+        >
+        <div class="text-right">
+            <i class="ri-close-line v-close" @click="$bvModal.hide('modal-1')" aria-hidden="true"></i>
+        </div>
+        <p class="vheader">Role Entry</p>
+            <div>
+                <Form :id='editId'/>
+            </div>
+    </b-modal>
   </transition>
 </div>
 </template>
@@ -120,7 +126,7 @@ export default {
 		loadData () {
 			const params = Object.assign({}, this.search, { page: this.pagination.currentPage, per_page: this.pagination.perPage })
 			this.$store.dispatch('mutedLoad', { loading: true})
-			RestApi.getData(baseUrl, 'api/category/list', params).then(response => {
+			RestApi.getData(baseUrl, 'api/role/list', params).then(response => {
 				if (response.success) {
 					this.$store.dispatch('setList', response.data.data)
 					this.paginationData(response.data)
@@ -129,7 +135,7 @@ export default {
 			})
 		},
         changeStatus (item) {
-            this.toggleStatus('category/delete', item)
+            this.toggleStatus('role/delete', item)
         }
 	}
 }

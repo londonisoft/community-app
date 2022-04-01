@@ -28,10 +28,10 @@
             <CCardHeader>
                 <div class="row">
                     <div class="col-md-6">
-                        <strong>Category List</strong>
+                        <strong>Permission List</strong>
                     </div>
                     <div class="col-md-6 text-right">
-                        <button v-if="$can('category-create')" class="btn btn-primary btn-font" @click="editId = ''" v-b-modal.modal-1><i class="ri-add-line"></i> Add New</button>
+                        <button class="btn btn-primary btn-font" @click="editId = ''" v-b-modal.modal-1><i class="ri-add-line"></i> Add New</button>
                     </div>
                 </div>
             </CCardHeader>
@@ -43,7 +43,7 @@
                                 {{ parseInt(data.index) + parseInt(pagination.slOffset) }}
                             </template>
                             <template v-slot:cell(action)="data">
-                                <b-button v-if="$can('category-edit')" title="Edit" class="pl-1 pt-0 pr-1 pb-0 btn btn-info ml-1 btn-sm" @click="edit(data.item)"><i class="ri-edit-line"></i></b-button>
+                                <b-button title="Edit" class="pl-1 pt-0 pr-1 pb-0 btn btn-info ml-1 btn-sm" @click="edit(data.item)"><i class="ri-edit-line"></i></b-button>
                                 <!-- <b-button title="Active/Inactive" class="pl-1 pt-0 pr-1 pb-0 btn btn-danger ml-1 btn-sm" @click="changeStatus(data.item)"> <i class="ri-close-circle-line"></i> </b-button> -->
                             </template>
                         </b-table>
@@ -65,7 +65,7 @@
       size="lg"
     header-bg-variant="primary"
     header-text-variant="light"
-      title="Category Entry" hide-footer>
+      title="Permission Entry" hide-footer>
     <div>
         <Form :id='editId'/>
   </div>
@@ -120,7 +120,7 @@ export default {
 		loadData () {
 			const params = Object.assign({}, this.search, { page: this.pagination.currentPage, per_page: this.pagination.perPage })
 			this.$store.dispatch('mutedLoad', { loading: true})
-			RestApi.getData(baseUrl, 'api/category/list', params).then(response => {
+			RestApi.getData(baseUrl, 'api/permission/list', params).then(response => {
 				if (response.success) {
 					this.$store.dispatch('setList', response.data.data)
 					this.paginationData(response.data)
@@ -129,7 +129,7 @@ export default {
 			})
 		},
         changeStatus (item) {
-            this.toggleStatus('category/delete', item)
+            this.toggleStatus('permission/delete', item)
         }
 	}
 }

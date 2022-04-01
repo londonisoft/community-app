@@ -45,6 +45,41 @@ const routes = [{
                 }
             },
             {
+                path: 'app-management',
+                name: 'appUsers',
+                component: {
+                    render(c) { return c('router-view') }
+                },
+                children: [  {
+                    path: 'admin-users',
+                    name: 'user-list',
+                    component: () => import('../views/user/List'),
+                    meta: {
+                      requiresAuth: true,
+                      name: 'user-list'
+                    }
+                  },
+                  {
+                    path: 'roles',
+                    name: 'role-list',
+                    component: () => import('../views/role/List'),
+                    meta: {
+                      requiresAuth: true,
+                      name: 'role-list'
+                    }
+                  },
+                  {
+                    path: 'permissions',
+                    name: 'permission-list',
+                    component: () => import('../views/permission/List'),
+                    meta: {
+                      requiresAuth: true,
+                      name: 'permission-list'
+                    }
+                  }
+                ]
+            },
+            {
                 path: 'other',
                 redirect: '/base/cards',
                 name: 'Other',

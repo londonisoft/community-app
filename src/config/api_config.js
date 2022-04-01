@@ -1,6 +1,5 @@
 import axios from 'axios'
-export const baseUrl = 'http://community-job.local/'
-
+export const baseUrl = 'https://blog.imageclippingexpert.com/public/'
 export default {
     async execute(baseUrl, method, uri, data, params = {}) {
         const accessToken = localStorage.getItem('access_token')
