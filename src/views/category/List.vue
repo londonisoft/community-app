@@ -42,9 +42,13 @@
                             <template v-slot:cell(index)="data">
                                 {{ parseInt(data.index) + parseInt(pagination.slOffset) }}
                             </template>
+                            <template v-slot:cell(status)="data">
+                                <span class="badge badge-success" v-if="data.item.status == 1">Active</span>
+                                <span class="badge badge-danger" v-else>Inactive</span>
+                            </template>
                             <template v-slot:cell(action)="data">
                                 <b-button v-if="$can('category-edit')" title="Edit" class="pl-1 pt-0 pr-1 pb-0 btn btn-info ml-1 btn-sm" @click="edit(data.item)"><i class="ri-edit-line"></i></b-button>
-                                <!-- <b-button title="Active/Inactive" class="pl-1 pt-0 pr-1 pb-0 btn btn-danger ml-1 btn-sm" @click="changeStatus(data.item)"> <i class="ri-close-circle-line"></i> </b-button> -->
+                                <b-button title="Active/Inactive" class="pl-1 pt-0 pr-1 pb-0 btn btn-danger ml-1 btn-sm" @click="changeStatus(data.item)"> <i class="ri-close-circle-line"></i> </b-button>
                             </template>
                         </b-table>
                     </div>
@@ -102,6 +106,7 @@ export default {
             const labels = [
                 { label: 'Sl No', class: 'text-center grid-sl' },
                 { label: 'Name', class: 'text-center' },
+                { label: 'Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center grid-action' }
             ]
 
@@ -109,6 +114,7 @@ export default {
             keys = [
             { key: 'index' },
             { key: 'name' },
+            { key: 'status' },
             { key: 'action' }
             ]
             return labels.map((item, index) => {
@@ -129,7 +135,7 @@ export default {
 			})
 		},
         changeStatus (item) {
-            this.toggleStatus('category/delete', item)
+            this.toggleStatus('api/category/delete', item)
         }
 	}
 }

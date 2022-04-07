@@ -1,5 +1,5 @@
 import axios from 'axios'
-export const baseUrl = 'https://blog.imageclippingexpert.com/public/'
+export const baseUrl = 'https://appmakerit.com/cricketlivebk/public/'
 export default {
     async execute(baseUrl, method, uri, data, params = {}) {
         const accessToken = localStorage.getItem('access_token')

@@ -21,6 +21,127 @@
                                                 <b-form  @submit.prevent="handleSubmit(register)" @reset.prevent="reset" >
                                                     <div class="row">
                                                         <div class="col-md-12">
+                                                            <h5>Ads Setting (Facebook)</h5><hr>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Facebook Interestitial Id" vid="facebook_interestitial_id" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="facebook_interestitial_id"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Facebook Interestitial Id
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="facebook_interestitial_id"
+                                                                    v-model="formData.facebook_interestitial_id"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Facebook Banner" vid="facebook_banner_id" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="facebook_banner_id"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Facebook Banner
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="facebook_banner_id"
+                                                                    v-model="formData.facebook_banner_id"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Facebook Reward Video Ads" vid="facebook_reward_video_ad" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="facebook_reward_video_ad"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Facebook Reward Video Ads
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="facebook_reward_video_ad"
+                                                                    v-model="formData.facebook_reward_video_ad"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Facebook Notice Id" vid="facebook_notice_id" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="facebook_notice_id"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Facebook Notice Id
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="facebook_notice_id"
+                                                                    v-model="formData.facebook_notice_id"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                             <ValidationProvider name="Active Facebook Ads" vid="is_facebook_ad" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="is_facebook_ad"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Active Facebook Ads
+                                                                </template>
+                                                                <b-form-checkbox v-model="formData.is_facebook_ad" size="md" name="check-button" switch>
+                                                                    <span v-if="formData.is_facebook_ad">ON</span>
+                                                                    <span v-else>OF</span>
+                                                                </b-form-checkbox>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-12 text-right">
+                                                            <b-button type="submit" variant="primary" style="margin-top:40px" class="mr-2">{{ saveBtnName }}</b-button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
                                                             <h5>Ads Setting</h5><hr>
                                                         </div>
                                                         <div class="col-md-6">
@@ -423,16 +544,6 @@ export default {
     return {
       saveBtnName: "Update",
       formData: {
-        refer_bonus: '',
-        add_code: '',
-        notice: '',
-        about: '',
-        policy: '',
-        policy_social: '',
-        notice_social: '',
-        about_social: '',
-        mycash_message: '',
-        online_pay_message: ''
       },
       editId: ''
     }
@@ -450,6 +561,7 @@ export default {
                 const tmp = Object.assign(response.data,
                 { 
                     show_ads: response.data.show_ads === 1 ? true : false,
+                    is_facebook_ad: response.data.is_facebook_ad === 1 ? true : false,
                     show_ads_custom: response.data.show_ads_custom === 1 ? true : false,
                     show_tv: response.data.show_tv === 1 ? true : false
                 })
