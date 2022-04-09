@@ -1,5 +1,5 @@
 import axios from 'axios'
-export const baseUrl = 'https://appmakerit.com/accounts/public/'
+export const baseUrl = 'http://community-job.local/'
 export default {
     async execute(baseUrl, method, uri, data, params = {}) {
         const accessToken = localStorage.getItem('access_token')

@@ -29,7 +29,10 @@ export default {
             permissions: response.data.permissions,
             permissionList: response.data.permissionList,
             roleList: response.data.roleList,
-            customerList: response.data.customerList
+            customerList: response.data.customerList,
+            divisionList: response.data.divisionList,
+            districtList: response.data.districtList,
+            upazillaList: response.data.upazillaList
           })
         }
       })

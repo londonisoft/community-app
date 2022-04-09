@@ -16,24 +16,22 @@
                               </b-col>
                             </b-row>
                             <b-row>
-                              <b-col>
-                                  <Input @return-value="setReturnData({ email: $event})" :input="{ cols: 12, type: 'text', name: 'email', rules: '', vmodel: formData.email }"/>
-                              </b-col>
-                              <b-col>
-                                  <Input @return-value="setReturnData({ nid: $event})" :input="{ cols: 12, type: 'text', name: 'nid', rules: '', vmodel: formData.nid }"/>
-                              </b-col>
-                            </b-row>
-                            <b-row>
-                              <b-col>
-                                  <Input @return-value="setReturnData({ loan_amount: $event})" :input="{ cols: 12, type: 'text', name: 'loan_amount', rules: '', vmodel: formData.loan_amount }"/>
-                              </b-col>
-                              <b-col>
-                                  <Radio @return-value="setReturnData({ gender: $event})" :input="{ cols: 12, type: 'text', name: 'gender', rules: 'required', vmodel: formData.gender, options: genderList }"/>
-                              </b-col>
+                                <b-col md =6 lg =6 sm =6>
+                                    <Select @return-value="setReturnData({ division_id: $event})" :input="{ cols: 12, type: 'text', name: 'division_id', rules: 'required', vmodel: formData.division_id, options: divisionList }"/>
+                                </b-col>
+                                <b-col md =6 lg =6 sm =6>
+                                    <Select @return-value="setReturnData({ district_id: $event})" :input="{ cols: 12, type: 'text', name: 'district_id', rules: 'required', vmodel: formData.district_id, options: districtList }"/>
+                                </b-col>
+                                <b-col md =6 lg =6 sm =6>
+                                    <Select @return-value="setReturnData({ upazilla_id: $event})" :input="{ cols: 12, type: 'text', name: 'upazilla_id', rules: 'required', vmodel: formData.upazilla_id, options: upazillaList }"/>
+                                </b-col>
+                                <b-col>
+                                  <Input @return-value="setReturnData({ pay_amount: $event})" :input="{ cols: 12, type: 'text', name: 'pay_amount', rules: '', vmodel: formData.pay_amount }"/>
+                                </b-col>
                             </b-row>
                             <b-row>
                               <b-col sm="6" lg="6" md="6">
-                                  <TextArea @return-value="setReturnData({ address: $event})" :input="{ cols: 12, type: 'text', name: 'address', rules: '', vmodel: formData.address }"/>
+                                  <TextArea @return-value="setReturnData({ bazar_name: $event})" :input="{ cols: 12, type: 'text', name: 'bazar_name', rules: '', vmodel: formData.bazar_name }"/>
                               </b-col>
                             </b-row>
                             <div class="row mt-4 mb-3">
@@ -55,7 +53,7 @@
 import { ValidationObserver } from 'vee-validate'
 import Input from '../../components/common/Input'
 import TextArea from '../../components/common/TextArea'
-import Radio from '../../components/common/Radio'
+import Select from '../../components/common/Select'
 import commonForm from '@/mixins/common-form'
 
 export default {
@@ -65,7 +63,7 @@ export default {
     ValidationObserver,
     Input,
     TextArea,
-    Radio
+    Select
   },
   created () {
       if (this.id) {
@@ -77,19 +75,36 @@ export default {
       formData: {
         name: '',
         mobile: '',
-        email: '',
-        nid: '',
-        gender: 'Male',
-        loan_amount: '',
-        address: ''
+        division_id: '',
+        district_id: '',
+        upazilla_id: '',
+        pay_amount: '',
+        bazar_name: ''
       },
+      districtList: [],
+      upazillaList: [],
       genderList: [
           { value: "Male", text: 'Male' },
           { value: "Female", text: 'Female' }
       ]
     }
   },
+  watch: {
+    'formData.division_id': function (n, o) {
+        if (n !== o) {
+            this.districtList =  this.$store.state.commonObj.districtList.filter(item => item.division_id === n)
+        }
+    },
+    'formData.district_id': function (n, o) {
+        if (n !== o) {
+            this.upazillaList = this.$store.state.commonObj.upazillaList.filter(item => item.district_id === n)
+        }
+    }
+  },
   computed: {
+      divisionList () {
+          return this.$store.state.commonObj.divisionList
+      }
   },
   methods: {
     formSubmit () {

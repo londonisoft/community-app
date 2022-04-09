@@ -7,52 +7,15 @@
                 <b-overlay :show="loading">
                     <ValidationObserver ref="form"  v-slot="{ handleSubmit, reset }">
                         <b-form  @submit.prevent="handleSubmit(register)" @reset.prevent="reset" >
-                        <ValidationProvider name="Category" vid="customer_id" rules="required">
-                            <b-form-group
-                            class="row"
-                            label-cols-sm="12"
-                            label-for="customer_id"
-                            slot-scope="{ valid, errors }"
-                            >
-                            <template v-slot:label>
-                            Category <span class="text-danger">*</span>
-                            </template>
-                            <v-select
-                                id="customer_id"
-                                rows="6"
-                                label="text"
-                                :reduce="text => text.value"
-                                v-model="formData.customer_id"
-                                :state="errors[0] ? false : (valid ? true : null)"
-                                :options="customerList"
-                                >
-                                <b-form-select-option first value="">Select</b-form-select-option>
-                                </v-select>
-                            <div class="invalid-feedback">
-                                {{ errors[0] }}
-                            </div>
-                            </b-form-group>
-                        </ValidationProvider>
                         <b-row>
-                            <b-col md =6 lg =6 sm =6>
-                                <Input @return-value="setReturnData({ account_num: $event})" :input="{ cols: 12, type: 'text', name: 'account_num', rules: 'required', vmodel: formData.account_num }"/>
-                            </b-col>
                             <b-col md =6 lg =6 sm =6>
                                 <Input @return-value="setReturnData({ amount: $event})" :input="{ cols: 12, type: 'text', name: 'amount', rules: 'required', vmodel: formData.amount }"/>
-                            </b-col>
-                        </b-row>
-                        <b-row>
-                            <b-col md =6 lg =6 sm =6>
-                                <Select @return-value="setReturnData({ payment_method: $event})" :input="{ cols: 12, type: 'text', name: 'payment_method', rules: 'required', vmodel: formData.payment_method, options: methodList }"/>
                             </b-col>
                             <b-col md =6 lg =6 sm =6>
                                 <Input @return-value="setReturnData({ pay_date: $event})" :input="{ cols: 12, type: 'date', name: 'pay_date', rules: 'required', vmodel: formData.pay_date }"/>
                             </b-col>
                         </b-row>
                         <b-row>
-                            <b-col md =6 lg =6 sm =6>
-                                <Input @return-value="setReturnData({ transaction_no: $event})" :input="{ cols: 12, type: 'text', name: 'transaction_no', rules: '', vmodel: formData.payment_method }"/>
-                            </b-col>
                         </b-row>
                         <div class="row">
                             <div class="col-sm-3"></div>
@@ -128,6 +91,17 @@ export default {
       }
   },
   methods: {
+    loadUser () {
+        const params = Object.assign({}, this.search, { page: this.pagination.currentPage, per_page: this.pagination.perPage })
+        this.$store.dispatch('mutedLoad', { loading: true})
+        RestApi.getData(baseUrl, 'api/payment/list', params).then(response => {
+            if (response.success) {
+                this.$store.dispatch('setList', response.data.data)
+                this.paginationData(response.data)
+            }
+            this.$store.dispatch('mutedLoad', { loading: false })
+        })
+    },
     getItem () {
         const item = this.$store.state.list.find(item => item.id === parseInt(this.id))
         return JSON.parse(JSON.stringify(item))
