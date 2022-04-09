@@ -21,7 +21,7 @@ module.exports = {
         ],
         testMatch: ['<rootDir>/tests/unit/**/*.spec.js'],
         verbose: true,
-        testURL: 'https://cricketlive.appmakerit.com/',
+        testURL: 'https://cricstream.newsbd48.com/',
         collectCoverage: true,
         collectCoverageFrom: [
             'src/**/*.{js,vue}',
