@@ -29,7 +29,7 @@ export default {
             permissions: response.data.permissions,
             permissionList: response.data.permissionList,
             roleList: response.data.roleList,
-            categoryList: response.data.categoryList
+            customerList: response.data.customerList
           })
         }
       })

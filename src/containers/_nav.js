@@ -10,27 +10,27 @@ export default [{
         },
         {
             _name: 'CSidebarNavItem',
-            name: 'Category',
-            to: '/other/category-list',
+            name: 'Customers',
+            to: '/other/customer-list',
             icon: 'cil-list',
             items: [],
-            permission: 'category-list'
+            permission: 'customer-list'
         },
         {
             _name: 'CSidebarNavItem',
-            name: 'Channel',
-            to: '/other/channel-list',
+            name: 'Payments',
+            to: '/other/payment-list',
             icon: 'cil-ban',
             items: [],
-            permission: 'channel-list'
+            permission: 'payment-list'
         },
         {
             _name: 'CSidebarNavItem',
-            name: 'Settings',
-            to: '/other/setting',
-            icon: 'cil-settings',
+            name: 'Due Report',
+            to: '/other/due-report',
+            icon: 'cil-ban',
             items: [],
-            permission: 'setting'
+            permission: 'due-report'
         },
         {
             _name: 'CSidebarNavDropdown',
@@ -64,6 +64,14 @@ export default [{
                     permission: 'permission-list'
                   }
             ]
-        },
+        }
+        // {
+        //     _name: 'CSidebarNavItem',
+        //     name: 'Settings',
+        //     to: '/other/setting',
+        //     icon: 'cil-settings',
+        //     items: [],
+        //     permission: 'setting'
+        // }
     ]
 }]

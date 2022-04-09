@@ -28,6 +28,10 @@ import Permissions from './mixins/Permissions.js';
 Vue.mixin(Permissions);
 import Vue2Editor from "vue2-editor";
 Vue.use(Vue2Editor);
+// vue select
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css';
+Vue.component('v-select', vSelect)
 
 Object.keys(rules).forEach(rule => {
     extend(rule, rules[rule])

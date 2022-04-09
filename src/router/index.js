@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store/store'
-import Permissions from '@/mixins/Permissions'
 
 // Containers
 const TheContainer = () =>
@@ -14,8 +13,8 @@ const Dashboard = () =>
 const setting = () =>
     import ('@/views/setting/Form')
 
-const channelList = () =>
-    import ('@/views/channels/List')
+const paymentList = () =>
+    import ('@/views/payment/List')
 const changePass = () =>
     import ('@/views/change-pass/Form')
 
@@ -95,18 +94,26 @@ const routes = [{
                         }
                     },
                     {
-                        path: 'category-list',
-                        name: 'category_list',
-                        component: () => import('../views/category/List'),
+                        path: 'customer-list',
+                        name: 'customer_list',
+                        component: () => import('../views/customer/List'),
                         meta: {
                             requiresAuth: true,
-                            name: 'category_list'
+                            name: 'customer_list'
                         }
                     },
                     {
-                        path: 'channel-list',
+                        path: 'payment-list',
                         name: 'PaymentMethod',
-                        component: channelList,
+                        component: paymentList,
+                        meta: {
+                            requiresAuth: true
+                        }
+                    },
+                    {
+                        path: 'due-report',
+                        name: 'PaymentMethod',
+                        component: () => import('../views/report/due-report'),
                         meta: {
                             requiresAuth: true
                         }

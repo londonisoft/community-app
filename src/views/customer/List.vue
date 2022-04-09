@@ -9,8 +9,14 @@
                         <ValidationObserver ref="form"  v-slot="{ handleSubmit, reset }">
                             <b-form  @submit.prevent="handleSubmit(searchData)" @reset.prevent="reset" >
                                 <div class="row">
-                                    <b-col md="4">
-                                        <Input @return-value="setReturnData({ name: $event})" :input="{ cols: 3, type: 'text', name: 'name', rules: 'required', vmodel: search.name }"/>
+                                    <b-col md="6">
+                                        <Input @return-value="setReturnData({ name: $event})" :input="{ cols: 3, type: 'text', name: 'name', rules: '', vmodel: search.name }"/>
+                                    </b-col>
+                                    <b-col md="6">
+                                        <Input @return-value="setReturnData({ mobile: $event})" :input="{ cols: 3, type: 'text', name: 'mobile', rules: '', vmodel: search.mobile }"/>
+                                    </b-col>
+                                    <b-col md="6">
+                                        <Input @return-value="setReturnData({ nid: $event})" :input="{ cols: 3, type: 'text', name: 'nid', rules: '', vmodel: search.nid }"/>
                                     </b-col>
                                     <div class="col-md-12 pt-0 mt-0">
                                         <div class="text-right">
@@ -28,10 +34,10 @@
             <CCardHeader>
                 <div class="row">
                     <div class="col-md-6">
-                        <strong>Category List</strong>
+                        <strong>Customer List</strong>
                     </div>
                     <div class="col-md-6 text-right">
-                        <button v-if="$can('category-create')" class="btn btn-primary btn-font" @click="editId = ''" v-b-modal.modal-1><i class="ri-add-line"></i> Add New</button>
+                        <button v-if="$can('customer-create')" class="btn btn-primary btn-font" @click="editId = ''" v-b-modal.modal-1><i class="ri-add-line"></i> Add New</button>
                     </div>
                 </div>
             </CCardHeader>
@@ -47,7 +53,7 @@
                                 <span class="badge badge-danger" v-else>Inactive</span>
                             </template>
                             <template v-slot:cell(action)="data">
-                                <b-button v-if="$can('category-edit')" title="Edit" class="pl-1 pt-0 pr-1 pb-0 btn btn-info ml-1 btn-sm" @click="edit(data.item)"><i class="ri-edit-line"></i></b-button>
+                                <b-button v-if="$can('customer-edit')" title="Edit" class="pl-1 pt-0 pr-1 pb-0 btn btn-info ml-1 btn-sm" @click="edit(data.item)"><i class="ri-edit-line"></i></b-button>
                                 <b-button title="Active/Inactive" class="pl-1 pt-0 pr-1 pb-0 btn btn-danger ml-1 btn-sm" @click="changeStatus(data.item)"> <i class="ri-close-circle-line"></i> </b-button>
                             </template>
                         </b-table>
@@ -69,7 +75,7 @@
       size="lg"
     header-bg-variant="primary"
     header-text-variant="light"
-      title="Category Entry" hide-footer>
+      title="Customer Entry" hide-footer>
     <div>
         <Form :id='editId'/>
   </div>
@@ -105,7 +111,10 @@ export default {
         fields () {
             const labels = [
                 { label: 'Sl No', class: 'text-center grid-sl' },
+                { label: 'Customer ID', class: 'text-center' },
                 { label: 'Name', class: 'text-center' },
+                { label: 'Mobile', class: 'text-center' },
+                { label: 'National Id', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center grid-action' }
             ]
@@ -113,7 +122,10 @@ export default {
             let keys = []
             keys = [
             { key: 'index' },
+            { key: 'cust_id' },
             { key: 'name' },
+            { key: 'mobile' },
+            { key: 'nid' },
             { key: 'status' },
             { key: 'action' }
             ]
@@ -126,7 +138,7 @@ export default {
 		loadData () {
 			const params = Object.assign({}, this.search, { page: this.pagination.currentPage, per_page: this.pagination.perPage })
 			this.$store.dispatch('mutedLoad', { loading: true})
-			RestApi.getData(baseUrl, 'api/category/list', params).then(response => {
+			RestApi.getData(baseUrl, 'api/customer/list', params).then(response => {
 				if (response.success) {
 					this.$store.dispatch('setList', response.data.data)
 					this.paginationData(response.data)
@@ -135,7 +147,7 @@ export default {
 			})
 		},
         changeStatus (item) {
-            this.toggleStatus('api/category/delete', item)
+            this.toggleStatus('api/customer/delete', item)
         }
 	}
 }

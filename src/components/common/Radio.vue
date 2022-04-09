@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ValidationProvider :name="input.name | convertName" :vid="input.name" :rules="input.rules">
+        <ValidationProvider :name="input.name | snakeToWords" :vid="input.name" :rules="input.rules">
             <b-form-group
             class="row"
             :label-cols-sm="parseInt(input.cols)"
@@ -8,7 +8,7 @@
             slot-scope="{ valid, errors }"
             >
             <template v-slot:label>
-            {{ input.name | convertName }} <span v-if="input.rules" class="text-danger">*</span>
+            {{ input.name | snakeToWords }} <span v-if="input.rules" class="text-danger">*</span>
             </template>
             <b-form-radio-group
                 :id="input.name"
@@ -39,10 +39,6 @@ export default {
     ValidationProvider
   },
   methods: {
-    ucfirst(str) {
-        var firstLetter = str.substr(0, 1);
-        return firstLetter.toUpperCase() + str.substr(1);
-    },
     setData () {
         this.$emit('return-value', this.value)
     }
