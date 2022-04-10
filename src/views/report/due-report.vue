@@ -40,7 +40,10 @@
                                         <Input @return-value="setReturnData({ cust_id: $event})" :input="{ cols: 3, type: 'text', name: 'cust_id', rules: '', vmodel: search.cust_id }"/>
                                     </b-col>
                                     <b-col md="6">
-                                        <Input @return-value="setReturnData({ account_num: $event})" :input="{ cols: 3, type: 'text', name: 'account_num', rules: '', vmodel: search.account_num }"/>
+                                        <Select @return-value="setReturnData({ month: $event})" :input="{ cols: 3, type: 'text', name: 'month', rules: '', vmodel: search.month, options: months }"/>
+                                    </b-col>
+                                    <b-col md="6">
+                                        <Select @return-value="setReturnData({ year: $event})" :input="{ cols: 3, type: 'text', name: 'year', rules: '', vmodel: search.year, options: years }"/>
                                     </b-col>
                                     <div class="col-md-12 pt-0 mt-0">
                                         <div class="text-right">
@@ -67,50 +70,32 @@
                 <div class="overflow-auto">
                     <table class="table table-sm table-bordered">
                         <tr>
-                            <th rowspan="2" class="text-center">SL NO</th>
-                            <th rowspan="2" class="text-center">Customer Name</th>
-                            <th rowspan="2" class="text-center">Customer ID</th>
-                            <th colspan="2" class="text-center">Paid Detail</th>
-                            <th rowspan="2" class="text-center">Total Paid</th>
-                            <th rowspan="2" class="text-center">Loan Amount</th>
-                            <th rowspan="2" class="text-center">Due Amount</th>
-                        </tr>
-                        <tr>
-                            <th class="text-center">Pay Date</th>
-                            <th class="text-center">Amount</th>
+                            <th rowspan="" class="text-center">SL NO</th>
+                            <th rowspan="" class="text-center">Customer Name</th>
+                            <th rowspan="" class="text-center">Customer ID</th>
+                            <th rowspan="" class="text-center">Payable Amount</th>
+                            <th rowspan="" class="text-center">Paid Amount</th>
+                            <th rowspan="" class="text-center">Due Amount</th>
+                            <th rowspan="" class="text-center">Pay Status</th>
                         </tr>
                         <slot v-for="(item, indx) in itemList">
-                            <tr v-if="item.payments.length == 0" :key="indx">
+                            <tr :key="indx">
                                 <td>{{ indx+1 }}</td>
                                 <td>{{ item.name }}</td>
                                 <td>{{ item.cust_id }}</td>
-                                <td></td>
-                                <td>0</td>
+                                <td>{{ item.pay_amount }}</td>
                                 <td>{{ getTotal(item.payments) }}</td>
-                                <td>{{ item.loan_amount }}</td>
-                                <td>{{ item.loan_amount - getTotal(item.payments) }}</td>
+                                <td>{{ item.pay_amount - getTotal(item.payments) }}</td>
+                                <td>
+                                    <span class="badge badge-success" v-if="item.payments.length">Paid</span>
+                                    <span class="badge badge-danger" v-else>Due</span>
+                                </td>
                             </tr>
-                            <slot v-for="(itm, index) in item.payments">
-                                <tr v-if="index == 0" :key="index">
-                                    <td :rowspan="item.payments.length">{{ indx+1 }}</td>
-                                    <td :rowspan="item.payments.length">{{ item.name }}</td>
-                                    <td :rowspan="item.payments.length">{{ item.cust_id }}</td>
-                                    <td>{{ itm.pay_date | dateFormat }}</td>
-                                    <td>{{ itm.amount }}</td>
-                                    <td :rowspan="item.payments.length">{{ getTotal(item.payments) }}</td>
-                                    <td :rowspan="item.payments.length">{{ item.loan_amount }}</td>
-                                    <td :rowspan="item.payments.length">{{ item.loan_amount - getTotal(item.payments) }}</td>
-                                </tr>
-                                <tr v-else :key="index">
-                                    <td>{{ itm.pay_date | dateFormat }}</td>
-                                    <td>{{ itm.amount }}</td>
-                                </tr>
-                            </slot>
                         </slot>
                         <tr>
-                            <th colspan="5" class="text-right">Total : </th>
+                            <th colspan="3" class="text-right">Total : </th>
+                            <th colspan="1" class="">{{ getTotalPayable(itemList) }}</th>
                             <th colspan="1" class="">{{ getTotalPaid(itemList) }}</th>
-                            <th class="">{{ getTotalLoan(itemList) }}</th>
                             <th class="">{{ getTotalDue(itemList) }}</th>
                         </tr>
                     </table>
@@ -125,19 +110,22 @@
 <script>
 import RestApi, { baseUrl } from '../../config/api_config'
 import Input from '../../components/common/Input'
+import Select from '../../components/common/Select'
 import commonList from '@/mixins/common-list'
 
 export default {
     mixins: [commonList],
     components: {
-        Input
+        Input,
+        Select
     },
     created () {
+        this.currntMonth()
         this.loadData ()
     },
     mounted(){
        this.options = this.customerList.map(item => {
-            return Object.assign({}, item, { text: item.text + ' (' + item.cust_id + ')' })
+            return Object.assign({}, item, { text: `${item.text} (${item.cust_id })` })
         })
     },
     data() {
@@ -146,9 +134,98 @@ export default {
         search: {
             customer_id: '',
             cust_id: '',
-            mobile: '',
+            month: '',
+            year: ''
         },
-        options: []
+        options: [],
+        years: [
+            {
+                value: 2022,
+                text: 2022
+            },
+            {
+                value: 2023,
+                text: 2023
+            },
+            {
+                value: 2024,
+                text: 2024
+            },
+            {
+                value: 2025,
+                text: 2025
+            },
+            {
+                value: 2026,
+                text: 2026
+            },
+            {
+                value: 2027,
+                text: 2027
+            },
+            {
+                value: 2028,
+                text: 2028
+            },
+            {
+                value: 2029,
+                text: 2029
+            },
+            {
+                value: 2030,
+                text: 2030
+            },
+        ],
+        months: [
+            {
+                value: 1,
+                text: 'January'
+            },
+            {
+                value: 2,
+                text: 'February'
+            },
+            {
+                value: 3,
+                text: 'March'
+            },
+            {
+                value: 4,
+                text: 'April'
+            },
+            {
+                value: 5,
+                text: 'May'
+            },
+            {
+                value: 6,
+                text: 'June'
+            },
+            {
+                value: 7,
+                text: 'July'
+            },
+            {
+                value: 8,
+                text: 'August'
+            },
+            {
+                value: 9,
+                text: 'September'
+            },
+            {
+                value: 10,
+                text: 'October'
+            },
+            {
+                value: 11,
+                text: 'November'
+            },
+            {
+                value: 12,
+                text: 'December'
+            }
+        ]
       }
     },
     computed: {
@@ -178,6 +255,11 @@ export default {
         }
     },
     methods: {
+        currntMonth () {
+            const d = new Date();
+            this.search.month = d.getMonth() + 1;
+            this.search.year = d.getFullYear();
+        },
         loadData () {
             const params = Object.assign({}, this.search, { page: this.pagination.currentPage, per_page: this.pagination.perPage })
             this.$store.dispatch('mutedLoad', { loading: true})
@@ -193,9 +275,9 @@ export default {
                 return amount + object.amount;
             }, 0)
         },
-        getTotalLoan (arr) {
-            return arr.reduce((loan_amount, object) => {
-                return loan_amount + object.loan_amount;
+        getTotalPayable (arr) {
+            return arr.reduce((pay_amount, object) => {
+                return pay_amount + object.pay_amount;
             }, 0)
         },
         getTotalPaid (arr) {
@@ -214,7 +296,7 @@ export default {
                 const totalPay = item.payments.reduce((amount, object) => {
                     return amount + object.amount;
                 }, 0)
-                return Object.assign(item, { total_due: item.loan_amount - totalPay })
+                return Object.assign(item, { total_due: item.pay_amount - totalPay })
             })
             return tmparray.reduce((total_due, object) => {
                 return total_due + object.total_due;

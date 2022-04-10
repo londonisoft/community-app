@@ -8,14 +8,52 @@
                     <ValidationObserver ref="form"  v-slot="{ handleSubmit, reset }">
                         <b-form  @submit.prevent="handleSubmit(register)" @reset.prevent="reset" >
                         <b-row>
-                            <b-col md =6 lg =6 sm =6>
-                                <Input @return-value="setReturnData({ amount: $event})" :input="{ cols: 12, type: 'text', name: 'amount', rules: 'required', vmodel: formData.amount }"/>
-                            </b-col>
-                            <b-col md =6 lg =6 sm =6>
-                                <Input @return-value="setReturnData({ pay_date: $event})" :input="{ cols: 12, type: 'date', name: 'pay_date', rules: 'required', vmodel: formData.pay_date }"/>
+                            <b-col offset=3 md =6 lg =6 sm =6>
+                                <ValidationProvider name="Customer Id" vid="cust_id" rules="">
+                                    <b-form-group
+                                    class="row"
+                                    label-cols-sm="12"
+                                    label-for="cust_id"
+                                    slot-scope="{ valid, errors }"
+                                    >
+                                    <template v-slot:label>
+                                    Customer Id <span class="text-danger">*</span>
+                                    </template>
+                                    <b-form-input
+                                        id="cust_id"
+                                        @keyup="getCustData()"
+                                        v-model="formData.cust_id"
+                                        :state="errors[0] ? false : (valid ? true : null)"
+                                        >
+                                        </b-form-input>
+                                    <div class="invalid-feedback">
+                                        {{ errors[0] }}
+                                    </div>
+                                </b-form-group>
+                                </ValidationProvider>
                             </b-col>
                         </b-row>
                         <b-row>
+                             <b-col md =12 lg =12 sm =12>
+                                <table class="table table-bordered table-sm">
+                                    <tr>
+                                        <td width="50%">Customer Id</td>
+                                        <td>{{ formData.cust_id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>{{ formData.name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mobile</td>
+                                        <td>{{ formData.mobile }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pay Amount</td>
+                                        <td>{{ formData.amount }}</td>
+                                    </tr>
+                                </table>
+                            </b-col>
                         </b-row>
                         <div class="row">
                             <div class="col-sm-3"></div>
@@ -52,34 +90,23 @@ export default {
     Select
   },
   created () {
-      if (this.id) {
-          this.formData = this.getItem()
-      }
   },
   mounted(){
-    this.customerList.map(function (x){
-      return x.text = x.text + ' (' + x.cust_id + ')';
+    this.options = this.customerList.map(function (x){
+        return Object.assign({}, item, { text: `${item.text} (${item.cust_id })` })
     });
   },
   data () {
     return {
       saveBtnName: this.id ? 'Update' : 'Save',
+      rerender: 1,
       formData: {
         customer_id: '',
-        payment_method: '',
-        account_num: '',
         amount: '',
         pay_date: '',
         transaction_no: ''
       },
-      methodList: [
-          { value: "BKash", text: 'BKash' },
-          { value: "Rocket", text: 'Rocket' },
-          { value: "Nogod", text: 'Nogod' },
-          { value: "Cash", text: 'Cash' },
-          { value: "Bank", text: 'Bank' },
-          { value: "Cheque", text: 'Cheque' }
-      ]
+      options: []
     }
   },
   computed: {
@@ -91,13 +118,17 @@ export default {
       }
   },
   methods: {
-    loadUser () {
-        const params = Object.assign({}, this.search, { page: this.pagination.currentPage, per_page: this.pagination.perPage })
+    getCustData () {
+        if (this.formData.cust_id.length !== 4) {
+            return false
+        }
         this.$store.dispatch('mutedLoad', { loading: true})
-        RestApi.getData(baseUrl, 'api/payment/list', params).then(response => {
+        RestApi.getData(baseUrl, 'api/payment/user-data', { cust_id : this.formData.cust_id }).then(response => {
             if (response.success) {
-                this.$store.dispatch('setList', response.data.data)
-                this.paginationData(response.data)
+                this.formData = Object.assign(response.data, { amount: response.data.pay_amount })
+                this.rerender = this.rerender + 1
+            } else {
+                this.formData = {}
             }
             this.$store.dispatch('mutedLoad', { loading: false })
         })
@@ -126,7 +157,10 @@ export default {
             })
              this.$bvModal.hide('modal-1')
         } else {
-            this.$refs.form.setErrors(result.errors)
+             iziToast.error({
+                title: 'Error',
+                message: result.message
+            })
         }
     }
   }

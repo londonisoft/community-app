@@ -21,7 +21,7 @@ module.exports = {
         ],
         testMatch: ['<rootDir>/tests/unit/**/*.spec.js'],
         verbose: true,
-        testURL: 'https://accounts.appmakerit.com/',
+        testURL: 'https://insurance.appmakerit.com/',
         collectCoverage: true,
         collectCoverageFrom: [
             'src/**/*.{js,vue}',

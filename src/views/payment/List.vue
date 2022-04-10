@@ -40,7 +40,10 @@
                                         <Input @return-value="setReturnData({ cust_id: $event})" :input="{ cols: 3, type: 'text', name: 'cust_id', rules: '', vmodel: search.cust_id }"/>
                                     </b-col>
                                     <b-col md="6">
-                                        <Input @return-value="setReturnData({ account_num: $event})" :input="{ cols: 3, type: 'text', name: 'account_num', rules: '', vmodel: search.account_num }"/>
+                                        <Input @return-value="setReturnData({ start_date: $event})" :input="{ cols: 3, type: 'date', name: 'start_date', rules: '', vmodel: search.start_date }"/>
+                                    </b-col>
+                                    <b-col md="6">
+                                        <Input @return-value="setReturnData({ end_date: $event})" :input="{ cols: 3, type: 'date', name: 'end_date', rules: '', vmodel: search.end_date }"/>
                                     </b-col>
                                     <div class="col-md-12 pt-0 mt-0">
                                         <div class="text-right">
@@ -74,12 +77,12 @@
                         <template v-slot:cell(index)="data">
                             {{ $n(data.index + pagination.slOffset) }}
                         </template>
-                        <template v-slot:cell(pay_date)="data">
-                            {{ data.item.pay_date | dateFormat }}
+                        <template v-slot:cell(created_at)="data">
+                            {{ data.item.created_at | dateFormat }}
                         </template>
                         <template v-slot:cell(status)="data">
-                            <span class="badge badge-success" v-if="data.item.status == 1">Active</span>
-                            <span class="badge badge-danger" v-else>Inactive</span>
+                            <span class="badge badge-success" v-if="data.item.status == 1">Paid</span>
+                            <span class="badge badge-danger" v-else>Due</span>
                         </template>
                         <template v-slot:cell(action)="data">
                             <div v-if="$can('payment-status')">
@@ -131,7 +134,7 @@ export default {
     },
     mounted(){
         this.options = this.customerList.map(item => {
-            return Object.assign({}, item, { text: item.text + ' (' + item.cust_id + ')' })
+            return Object.assign({}, item, { text: `${item.text} (${item.cust_id })` })
         })
     },
     data() {
@@ -141,6 +144,8 @@ export default {
             customer_id: '',
             cust_id: '',
             mobile: '',
+            start_date: '',
+            end_date: ''
         },
         options: []
       }
@@ -154,9 +159,7 @@ export default {
                 { label: 'Sl No', class: 'text-left' },
                 { label: 'Customer', class: 'text-center' },
                 { label: 'Customer ID', class: 'text-center' },
-                { label: 'Account Num', class: 'text-center' },
                 { label: 'amount', class: 'text-center' },
-                { label: 'Payment Method', class: 'text-center' },
                 { label: 'Date', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center' }
@@ -167,10 +170,8 @@ export default {
             { key: 'index' },
             { key: 'customer_name' },
             { key: 'cust_id' },
-            { key: 'account_num' },
             { key: 'amount' },
-            { key: 'payment_method' },
-            { key: 'pay_date' },
+            { key: 'created_at' },
             { key: 'status' },
             { key: 'action' }
             ]
