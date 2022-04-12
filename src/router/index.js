@@ -119,6 +119,14 @@ const routes = [{
                         }
                     },
                     {
+                        path: 'send-sms',
+                        name: 'PaymentMethod',
+                        component: () => import('../views/report/send-sms'),
+                        meta: {
+                            requiresAuth: true
+                        }
+                    },
+                    {
                         path: 'change-password',
                         name: 'PaymentMethod',
                         component: changePass,

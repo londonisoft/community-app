@@ -33,6 +33,14 @@ export default [{
             permission: 'due-report'
         },
         {
+            _name: 'CSidebarNavItem',
+            name: 'Send SMS',
+            to: '/other/send-sms',
+            icon: 'cil-ban',
+            items: [],
+            permission: 'send-sms'
+        },
+        {
             _name: 'CSidebarNavDropdown',
             name: 'User Management',
             route: '/app-users',
