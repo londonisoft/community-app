@@ -29,62 +29,77 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
-                        <ValidationProvider name="Channel Name" vid="channel_name" rules="required">
+                        <ValidationProvider name="Home Interstitial" vid="home_nterstitial" rules="">
                             <b-form-group
                             class="row"
                             label-cols-sm="12"
-                            label-for="channel_name"
+                            label-for="home_nterstitial"
                             slot-scope="{ valid, errors }"
                             >
                             <template v-slot:label>
-                            Channel Name <span class="text-danger">*</span>
+                            Home Interstitial
                             </template>
-                            <b-form-input
-                                id="channel_name"
-                                rows="6"
-                                v-model="formData.channel_name"
-                                :state="errors[0] ? false : (valid ? true : null)"
-                                ></b-form-input>
+                            <b-form-checkbox v-model="formData.home_nterstitial" size="md" name="check-button" switch>
+                                <span v-if="formData.home_nterstitial">ON</span>
+                                <span v-else>OF</span>
+                            </b-form-checkbox>
                             <div class="invalid-feedback">
                                 {{ errors[0] }}
                             </div>
                             </b-form-group>
                         </ValidationProvider>
-                        <ValidationProvider name="Channel Link" vid="channel_link" rules="required">
+                        <ValidationProvider name=" Details Interstitial" vid="details_interstitial" rules="">
                             <b-form-group
                             class="row"
                             label-cols-sm="12"
-                            label-for="channel_link"
+                            label-for="details_interstitial"
                             slot-scope="{ valid, errors }"
                             >
                             <template v-slot:label>
-                            Channel Link <span class="text-danger">*</span>
+                             Details Interstitial
                             </template>
-                            <b-form-input
-                                id="channel_link"
-                                rows="6"
-                                v-model="formData.channel_link"
-                                :state="errors[0] ? false : (valid ? true : null)"
-                                ></b-form-input>
+                            <b-form-checkbox v-model="formData.details_interstitial" size="md" name="check-button" switch>
+                                <span v-if="formData.details_interstitial">ON</span>
+                                <span v-else>OF</span>
+                            </b-form-checkbox>
                             <div class="invalid-feedback">
                                 {{ errors[0] }}
                             </div>
                             </b-form-group>
                         </ValidationProvider>
-                        <ValidationProvider name="Channel Logo" vid="channel_logo" rules="required">
+                        <ValidationProvider name="Ads off full app" vid="ads_off" rules="">
                             <b-form-group
                             class="row"
                             label-cols-sm="12"
-                            label-for="channel_logo"
+                            label-for="ads_off"
                             slot-scope="{ valid, errors }"
                             >
                             <template v-slot:label>
-                            Channel Logo <span class="text-danger">*</span>
+                             Ads off full app
+                            </template>
+                            <b-form-checkbox v-model="formData.ads_off" size="md" name="check-button" switch>
+                                <span v-if="formData.ads_off">ON</span>
+                                <span v-else>OF</span>
+                            </b-form-checkbox>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
+                        <ValidationProvider name="Ads app url" vid="ads_app_url" rules="required">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="ads_app_url"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                            Ads app url <span class="text-danger">*</span>
                             </template>
                             <b-form-input
-                                id="channel_logo"
+                                id="ads_app_url"
                                 rows="6"
-                                v-model="formData.channel_logo"
+                                v-model="formData.ads_app_url"
                                 :state="errors[0] ? false : (valid ? true : null)"
                                 ></b-form-input>
                             <div class="invalid-feedback">
@@ -129,9 +144,10 @@ export default {
       saveBtnName: this.id ? 'Update' : 'Save',
       formData: {
         category_id: 0,
-        channel_link: '',
-        channel_logo: '',
-        channel_name: ''
+        ads_app_url: '',
+        home_nterstitial: false,
+        details_interstitial: false,
+        ads_off: false
       }
     }
   },
@@ -146,7 +162,12 @@ export default {
   methods: {
     getItem () {
         const item = this.$store.state.list.find(item => item.id === parseInt(this.id))
-        return JSON.parse(JSON.stringify(item))
+        const data = JSON.parse(JSON.stringify(item))
+        return Object.assign(data, {
+            home_nterstitial: parseInt(data.home_nterstitial) === 1 ? true : false,
+            details_interstitial: parseInt(data.details_interstitial) === 1 ? true : false,
+            ads_off: parseInt(data.ads_off) === 1 ? true : false
+        })
     },
     async register () {
           this.$store.dispatch('mutedLoad', { loading: true, listReload: false })

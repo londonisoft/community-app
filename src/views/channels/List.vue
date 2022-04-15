@@ -6,11 +6,11 @@
         <CCardHeader>
             <div class="row">
                 <div class="col-md-6">
-                    <CIcon name="cil-justify-center"/><strong> Channel List</strong>
+                    <CIcon name="cil-justify-center"/><strong> APP List</strong>
                 </div>
                 <div class="col-md-6">
                     <div class="text-right">
-                          <button v-if="$can('channel-create')" class="btn btn-primary" @click="editId = ''" v-b-modal.modal-1>Add New</button>
+                          <button class="btn btn-primary" @click="editId = ''" v-b-modal.modal-1>Add New</button>
                     </div>
                 </div>
             </div>
@@ -25,19 +25,19 @@
                         <template v-slot:cell(channel_logo)="data">
                             <img v-if="data.item.channel_logo" :src="data.item.channel_logo" width="80px">
                         </template>
-                        <template v-slot:cell(channel_link)="data">
-                            <a target="_blank" class="btn btn-sm btn-success" :href="data.item.channel_link">Link</a>
+                        <template v-slot:cell(ads_app_url)="data">
+                            <a target="_blank" class="btn btn-sm btn-success" :href="data.item.ads_app_url">Link</a>
                         </template>
                         <template v-slot:cell(status)="data">
                             <span class="badge badge-success" v-if="data.item.status == 1">Active</span>
                             <span class="badge badge-danger" v-else>Inactive</span>
                         </template>
                         <template v-slot:cell(action)="data">
-                            <div v-if="$can('channel-status')">
+                            <div>
                                 <b-button v-if="data.item.status == 2" title="Change Status" class="ml-2 btn btn-success btn-sm" @click="changeStatus(data.item, 1)"><i class="ri-check-line"></i></b-button>
                                 <b-button v-else title="Change Status" class="ml-2 btn btn-danger btn-sm" @click="changeStatus(data.item, 2)"><i class="ri-close-line"></i></b-button>
                             </div>
-                            <b-button v-if="$can('channel-edit')" class="btn btn-success btn-sm ml-2" v-b-modal.modal-1 @click="edit(data.item)"><i class="ri-ball-pen-fill m-0"></i></b-button>
+                            <b-button class="btn btn-success btn-sm ml-2 mt-1" v-b-modal.modal-1 @click="edit(data.item)"><i class="ri-ball-pen-fill m-0"></i></b-button>
                         </template>
                     </b-table>
                 </div>
@@ -57,7 +57,7 @@
       size="lg"
     header-bg-variant="primary"
     header-text-variant="light"
-      title="Channel Entry" hide-footer>
+      title="APP Entry" hide-footer>
     <div>
         <Form :id='editId'/>
   </div>
@@ -98,8 +98,6 @@ export default {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
                 { label: 'Category', class: 'text-center' },
-                { label: 'Channel Name', class: 'text-center' },
-                { label: 'Logo', class: 'text-center' },
                 { label: 'Link', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center' }
@@ -109,9 +107,7 @@ export default {
             keys = [
             { key: 'id' },
             { key: 'category_name' },
-            { key: 'channel_name' },
-            { key: 'channel_logo' },
-            { key: 'channel_link' },
+            { key: 'ads_app_url' },
             { key: 'status' },
             { key: 'action' }
             ]

@@ -1,5 +1,5 @@
 import axios from 'axios'
-export const baseUrl = 'https://cricstreambk.newsbd48.com/public/'
+export const baseUrl = 'https://appmakerit.com/adspanel/public/'
 export default {
     async execute(baseUrl, method, uri, data, params = {}) {
         const accessToken = localStorage.getItem('access_token')
