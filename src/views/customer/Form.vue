@@ -26,7 +26,7 @@
                                     <Select @return-value="setReturnData({ upazilla_id: $event})" :input="{ cols: 12, type: 'text', name: 'upazilla_id', rules: 'required', vmodel: formData.upazilla_id, options: upazillaList }"/>
                                 </b-col>
                                 <b-col>
-                                  <Input @return-value="setReturnData({ pay_amount: $event})" :input="{ cols: 12, type: 'text', name: 'pay_amount', rules: '', vmodel: formData.pay_amount }"/>
+                                  <Input @return-value="setReturnData({ pay_amount: $event})" :input="{ cols: 12, type: 'text', name: 'pay_amount', rules: 'required', vmodel: formData.pay_amount }"/>
                                 </b-col>
                             </b-row>
                             <b-row>
