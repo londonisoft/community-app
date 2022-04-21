@@ -6,7 +6,7 @@
         <CCardHeader>
             <div class="row">
                 <div class="col-md-6">
-                    <CIcon name="cil-justify-center"/><strong> Package List</strong>
+                    <CIcon name="cil-justify-center"/><strong> Video List</strong>
                 </div>
                 <div class="col-md-6">
                     <div class="text-right">
@@ -16,11 +16,49 @@
             </div>
         </CCardHeader>
         <CCardBody>
+            <b-row>
+                <b-col  class="ml-3">
+                    <ValidationObserver ref="form"  v-slot="{ handleSubmit, reset }">
+                        <b-form  @submit.prevent="handleSubmit(searchData)" @reset.prevent="reset" >
+                            <div class="row">
+                                <div class="col-md-4">
+                                     <b-form-group
+                                        class="row"
+                                        label-cols-sm="12"
+                                        label-for="formData"
+                                        >
+                                        <template v-slot:label>
+                                        Select Date <span class="text-danger">*</span>
+                                        </template>
+                                            <b-form-select
+                                            v-model="search.current_date"
+                                            :options="options"
+                                            id="name"
+                                            rows="6"
+                                            ></b-form-select>
+                                    </b-form-group>     
+                                </div>
+                                <div class="col-md-4">
+                                    <div style="height:40px">
+                                        <b-button style='position:absolute;bottom:15px' type="submit" variant="primary">Search</b-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </b-form>
+                    </ValidationObserver>
+                </b-col>
+            </b-row>
             <b-overlay :show='loading'>
                 <div class="overflow-auto">
                     <b-table thead-class="bg-light text-dark" emptyText="Data Not Found" show-empty bordered hover :items="itemList" :fields="fields">
                         <template v-slot:cell(index)="data">
                             {{ $n(data.index + pagination.slOffset) }}
+                        </template>
+                        <template v-slot:cell(current_date)="data">
+                            <span class="badge badge-success">{{ data.item.current_date }}</span>
+                        </template>
+                        <template v-slot:cell(video_url)="data">
+                            <a :href="data.item.video_url" target="_blank">Link</a>
                         </template>
                         <template v-slot:cell(status)="data">
                             <span class="badge badge-success" v-if="data.item.status == 1">Active</span>
@@ -49,7 +87,7 @@
       size="lg"
     header-bg-variant="primary"
     header-text-variant="light"
-      title="Method Entry" hide-footer>
+      title="Video Entry" hide-footer>
     <div>
         <Form :id='editId'/>
   </div>
@@ -71,7 +109,7 @@ export default {
     data() {
       return {
         search: {
-            name: ''
+            current_date: ''
         },
         pagination: {
             perPage: 10,
@@ -79,7 +117,40 @@ export default {
             total: 0,
             slOffset: 1
         },
-        editId: ''
+        editId: '',
+        options: [
+          { value: 1, text: '1 Tarikh'},
+          { value: 2, text: '2 Tarikh'},
+          { value: 3, text: '3 Tarikh'},
+          { value: 4, text: '4 Tarikh'},
+          { value: 5, text: '5 Tarikh'},
+          { value: 6, text: '6 Tarikh'},
+          { value: 7, text: '7 Tarikh'},
+          { value: 8, text: '8 Tarikh'},
+          { value: 9, text: '9 Tarikh'},
+          { value: 10, text: '10 Tarikh'},
+          { value: 11, text: '11 Tarikh'},
+          { value: 12, text: '12 Tarikh'},
+          { value: 13, text: '13 Tarikh'},
+          { value: 14, text: '14 Tarikh'},
+          { value: 15, text: '15 Tarikh'},
+          { value: 16, text: '16 Tarikh'},
+          { value: 17, text: '17 Tarikh'},
+          { value: 18, text: '18 Tarikh'},
+          { value: 19, text: '19 Tarikh'},
+          { value: 20, text: '20 Tarikh'},
+          { value: 21, text: '21 Tarikh'},
+          { value: 22, text: '22 Tarikh'},
+          { value: 23, text: '23 Tarikh'},
+          { value: 24, text: '24 Tarikh'},
+          { value: 25, text: '25 Tarikh'},
+          { value: 26, text: '26 Tarikh'},
+          { value: 27, text: '27 Tarikh'},
+          { value: 28, text: '28 Tarikh'},
+          { value: 29, text: '29 Tarikh'},
+          { value: 30, text: '30 Tarikh'},
+          { value: 31, text: '31 Tarikh'}
+      ]
       }
     },
     computed: {
@@ -89,9 +160,8 @@ export default {
         fields () {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
-                { label: 'Name', class: 'text-center' },
-                { label: 'Fees', class: 'text-center' },
-                { label: 'Total Work', class: 'text-center' },
+                { label: 'Date', class: 'text-center' },
+                { label: 'Link', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center' }
             ]
@@ -99,9 +169,8 @@ export default {
             let keys = []
             keys = [
             { key: 'index' },
-            { key: 'name' },
-            { key: 'fees' },
-            { key: 'total_work' },
+            { key: 'current_date' },
+            { key: 'video_url' },
             { key: 'status' },
             { key: 'action' }
             ]

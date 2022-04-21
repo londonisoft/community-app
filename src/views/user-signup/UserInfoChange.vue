@@ -76,7 +76,7 @@
                                     </ValidationProvider>
                                 </div>
                                 <div class="col-md-6">
-                                    <ValidationProvider name="Amount" vid="amount" rules="required">
+                                    <ValidationProvider name="Point" vid="point" rules="required">
                                         <b-form-group
                                         class="row"
                                         label-cols-sm="12"
@@ -84,11 +84,11 @@
                                         slot-scope="{ valid, errors }"
                                         >
                                         <template v-slot:label>
-                                        User Amount <span class="text-danger">*</span>
+                                        User Point <span class="text-danger">*</span>
                                         </template>
                                         <b-form-input
-                                            id="amount"
-                                            v-model="formData.amount"
+                                            id="point"
+                                            v-model="formData.point"
                                             :state="errors[0] ? false : (valid ? true : null)"
                                             ></b-form-input>
                                         <div class="invalid-feedback">
@@ -164,7 +164,7 @@
                                     </ValidationProvider>
                                 </div>
                                 <div class="col-md-6">
-                                    <ValidationProvider name="Refed ID" vid="refer_id" rules="required">
+                                    <ValidationProvider name="Refed ID" vid="refer_id" rules="">
                                         <b-form-group
                                         class="row"
                                         label-cols-sm="12"
@@ -186,7 +186,7 @@
                                     </ValidationProvider>
                                 </div>
                                 <div class="col-md-6">
-                                    <ValidationProvider name="Own refer Id" vid="own_refer_id" rules="required">
+                                    <ValidationProvider name="User Own Refer ID" vid="own_refer_id" rules="required">
                                         <b-form-group
                                         class="row"
                                         label-cols-sm="12"
@@ -194,33 +194,11 @@
                                         slot-scope="{ valid, errors }"
                                         >
                                         <template v-slot:label>
-                                        User Refed ID  <span class="text-danger">*</span>
+                                        User Own Refer ID  <span class="text-danger">*</span>
                                         </template>
                                         <b-form-input
                                             id="own_refer_id"
                                             v-model="formData.own_refer_id"
-                                            :state="errors[0] ? false : (valid ? true : null)"
-                                            ></b-form-input>
-                                        <div class="invalid-feedback">
-                                            {{ errors[0] }}
-                                        </div>
-                                        </b-form-group>
-                                    </ValidationProvider>
-                                </div>
-                                <div class="col-md-6">
-                                    <ValidationProvider name="Country" vid="country" rules="required">
-                                        <b-form-group
-                                        class="row"
-                                        label-cols-sm="12"
-                                        label-for="formData"
-                                        slot-scope="{ valid, errors }"
-                                        >
-                                        <template v-slot:label>
-                                        Country  <span class="text-danger">*</span>
-                                        </template>
-                                        <b-form-input
-                                            id="country"
-                                            v-model="formData.country"
                                             :state="errors[0] ? false : (valid ? true : null)"
                                             ></b-form-input>
                                         <div class="invalid-feedback">

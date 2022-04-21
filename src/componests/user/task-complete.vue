@@ -15,7 +15,7 @@
                 <div class="overflow-auto">
                     <b-table thead-class="bg-light text-dark" emptyText="Data Not Found" small show-empty bordered hover :items="itemList" :fields="fields">
                         <template v-slot:cell(index)="data">
-                            {{ $n(data.index + pagination.slOffset) }}
+                            {{ data.index + 1 }}
                         </template>
                         <template v-slot:cell(task_type)="data">
                             <span v-if="data.item.task_type === 1" >Spin One</span>
@@ -28,11 +28,11 @@
                             <span v-if="data.item.task_type === 8">Scratch card Two</span>
                         </template>
                         <template v-slot:cell(status)="data">
-                            <span class="badge badge-success" v-if="data.item.status === 1">Active</span>
+                            <span class="badge badge-success" v-if="parseInt(data.item.status) === 1">Completed</span>
                             <span class="badge badge-danger" v-else>Inactive</span>
                         </template>
-                        <template v-slot:cell(action)="data">
-                            <b-button class="btn btn-success btn-sm" v-b-modal.modal-1 @click="edit(data.item)"><i class="ri-ball-pen-fill m-0"></i></b-button>
+                        <template v-slot:cell(created_at)="data">
+                            {{ data.item.created_at | dateFormat }}
                         </template>
                     </b-table>
                 </div>
@@ -87,18 +87,18 @@ export default {
                 { label: 'Sl No', class: 'text-left' },
                 { label: 'Name', class: 'text-center' },
                 { label: 'Email', class: 'text-center' },
-                { label: 'Task Type', class: 'text-center' },
                 { label: 'Point', class: 'text-center' },
+                { label: 'Date', class: 'text-center' },
                 { label: 'Status', class: 'text-center' }
             ]
 
             let keys = []
             keys = [
-            { key: 'id' },
+            { key: 'index' },
             { key: 'name' },
             { key: 'email' },
-            { key: 'task_type' },
             { key: 'point' },
+            { key: 'created_at' },
             { key: 'status' }
             ]
             return labels.map((item, index) => {

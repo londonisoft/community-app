@@ -7,29 +7,29 @@ export default [{
             icon: 'cil-speedometer',
             items: []
         },
-        {
-            _name: 'CSidebarNavDropdown',
-            name: 'Withdraw',
-            route: '/withdraw',
-            icon: 'cil-dollar',
-            items: [{
-                    name: 'Pending List',
-                    to: '/withdraw/pending'
-                },
-                {
-                    name: 'Approve List',
-                    to: '/withdraw/approve'
-                },
-                {
-                    name: 'Reject List',
-                    to: '/withdraw/reject'
-                },
-                {
-                    name: 'All List',
-                    to: '/withdraw/all'
-                }
-            ]
-        },
+        // {
+        //     _name: 'CSidebarNavDropdown',
+        //     name: 'Withdraw',
+        //     route: '/withdraw',
+        //     icon: 'cil-dollar',
+        //     items: [{
+        //             name: 'Pending List',
+        //             to: '/withdraw/pending'
+        //         },
+        //         {
+        //             name: 'Approve List',
+        //             to: '/withdraw/approve'
+        //         },
+        //         {
+        //             name: 'Reject List',
+        //             to: '/withdraw/reject'
+        //         },
+        //         {
+        //             name: 'All List',
+        //             to: '/withdraw/all'
+        //         }
+        //     ]
+        // },
         {
             _name: 'CSidebarNavDropdown',
             name: 'Users',
@@ -55,22 +55,8 @@ export default [{
         },
         {
             _name: 'CSidebarNavItem',
-            name: 'Package',
+            name: 'Add Video',
             to: '/other/package',
-            icon: 'cil-list',
-            items: []
-        },
-        {
-            _name: 'CSidebarNavItem',
-            name: 'Purchase Package',
-            to: '/other/purchase-package',
-            icon: 'cil-list',
-            items: []
-        },
-        {
-            _name: 'CSidebarNavItem',
-            name: 'Add Money',
-            to: '/other/add-money',
             icon: 'cil-list',
             items: []
         },
@@ -79,34 +65,6 @@ export default [{
             name: 'Settings',
             to: '/other/setting',
             icon: 'cil-settings',
-            items: []
-        },
-        // {
-        //     _name: 'CSidebarNavItem',
-        //     name: 'App Update',
-        //     to: '/other/update',
-        //     icon: 'cil-ban',
-        //     items: []
-        // },
-        {
-            _name: 'CSidebarNavItem',
-            name: 'Payment Method',
-            to: '/other/payment-method',
-            icon: 'cil-ban',
-            items: []
-        },
-        {
-            _name: 'CSidebarNavItem',
-            name: 'Transfer List',
-            to: '/withdraw/transfer-list',
-            icon: 'cil-ban',
-            items: []
-        },
-        {
-            _name: 'CSidebarNavItem',
-            name: 'Add Wallet',
-            to: '/withdraw/add-wallet',
-            icon: 'cil-ban',
             items: []
         }
     ]

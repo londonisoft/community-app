@@ -75,7 +75,7 @@
         </CCard>
       </CCol>
     </CRow>
-    <CRow>
+    <!-- <CRow>
       <CCol sm="12" md="8">
         <topTen></topTen>
       </CCol>
@@ -112,7 +112,7 @@
             </CCardBody>
         </CCard>
       </CCol>
-    </CRow>
+    </CRow> -->
   </div>
 </template>
 

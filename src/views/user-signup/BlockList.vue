@@ -58,7 +58,7 @@
                 <div class="overflow-auto">
                     <b-table thead-class="bg-light text-dark" emptyText="Data Not Found" small show-empty bordered hover :items="itemList" :fields="fields">
                         <template v-slot:cell(index)="data">
-                            {{ $n(data.index + pagination.slOffset) }}
+                            {{ data.index + pagination.slOffset }}
                         </template>
                         <template v-slot:cell(name)="data">
                             <router-link :to='`/users/profile?id=` + data.item.id' >
@@ -123,7 +123,8 @@ export default {
         pagination: {
             perPage: 10,
             currentPage: 1,
-            total: 0
+            total: 0,
+            slOffset: 1
         },
         editId: ''
       }
@@ -137,7 +138,7 @@ export default {
                 { label: 'Sl No', class: 'text-left' },
                 { label: 'Name', class: 'text-center' },
                 { label: 'Email', class: 'text-center' },
-                { label: 'Amount', class: 'text-center' },
+                { label: 'Point', class: 'text-center' },
                 { label: 'Join', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center' }
@@ -145,11 +146,10 @@ export default {
 
             let keys = []
             keys = [
-            { key: 'id' },
+            { key: 'index' },
             { key: 'name' },
             { key: 'email' },
-            { key: 'amount' },
-            { key: 'total_refer' },
+            { key: 'point' },
             { key: 'status' },
             { key: 'action' }
             ]
@@ -221,7 +221,8 @@ export default {
         paginationData (data) {
             this.pagination.perPage = parseInt(data.per_page)
             this.pagination.currentPage = parseInt(data.current_page)
-            this.pagination.total = parseInt(data.total)
+            this.pagination.total = parseInt(data.total),
+            this.pagination.slOffset = this.pagination.perPage * this.pagination.currentPage - this.pagination.perPage + 1
         }
     },
     filters: {

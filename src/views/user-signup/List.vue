@@ -58,7 +58,7 @@
                 <div class="overflow-auto">
                     <b-table thead-class="bg-light text-dark" emptyText="Data Not Found" small show-empty bordered hover :items="itemList" :fields="fields">
                         <template v-slot:cell(index)="data">
-                            {{ $n(data.index + pagination.slOffset) }}
+                            {{ data.index + pagination.slOffset }}
                         </template>
                         <template v-slot:cell(name)="data">
                             <router-link :to='`/users/profile?id=` + data.item.id' >
@@ -72,8 +72,7 @@
                         <template v-slot:cell(action)="data">
                             <b-button v-if="data.item.status == 2" title="Active" class="btn btn-success ml-2 btn-sm" @click="changeStatus(data.item)"> <i class="ri-check-line"></i></b-button>
                             <b-button v-else title="Block" class="ml-2 btn btn-danger btn-sm" @click="changeStatus(data.item)"><i class="ri-close-line"></i></b-button>
-                            <!--                             <!-- <b-button v-b-modal.modal-1 title="Block" class="ml-2 btn btn-warning btn-sm" @click="edit(data.item)"> <i class="ri-notification-line"></i></b-button> -->
- -->
+                            <!-- <b-button v-b-modal.modal-1 title="Block" class="ml-2 btn btn-warning btn-sm" @click="edit(data.item)"> <i class="ri-notification-line"></i></b-button> -->
                         </template>
                     </b-table>
                 </div>
@@ -123,7 +122,8 @@ export default {
         pagination: {
             perPage: 10,
             currentPage: 1,
-            total: 0
+            total: 0,
+            slOffset: 1
         },
         editId: ''
       }
@@ -137,7 +137,7 @@ export default {
                 { label: 'Sl No', class: 'text-left' },
                 { label: 'Name', class: 'text-center' },
                 { label: 'Email', class: 'text-center' },
-                { label: 'Amount', class: 'text-center' },
+                { label: 'Point', class: 'text-center' },
                 { label: 'Join', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center' }
@@ -148,7 +148,7 @@ export default {
             { key: 'id' },
             { key: 'name' },
             { key: 'email' },
-            { key: 'amount' },
+            { key: 'point' },
             { key: 'total_refer' },
             { key: 'status' },
             { key: 'action' }
@@ -218,10 +218,11 @@ export default {
                 this.$store.dispatch('mutedLoad', { loading: false })
             })
         },
-        paginationData (data) {
+       paginationData (data) {
             this.pagination.perPage = parseInt(data.per_page)
             this.pagination.currentPage = parseInt(data.current_page)
-            this.pagination.total = parseInt(data.total)
+            this.pagination.total = parseInt(data.total),
+            this.pagination.slOffset = this.pagination.perPage * this.pagination.currentPage - this.pagination.perPage + 1
         }
     },
     filters: {

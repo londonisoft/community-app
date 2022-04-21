@@ -18,7 +18,7 @@
                                         <table class='table table-sm'>
                                             <tr>
                                                 <th>Total Point</th>
-                                                <td>: {{ formData.amount }}</td>
+                                                <td>: {{ formData.point }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Paid</th>
@@ -66,8 +66,8 @@
                                                 <td> : {{ formData.email }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Total Amount</td>
-                                                <td> : {{ formData.amount }}</td>
+                                                <td>Total Point</td>
+                                                <td> : {{ formData.point }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Join</td>
@@ -95,8 +95,8 @@
           </b-overlay>
       </b-col>
       <b-col lg="12" sm="12" class="mb-2">
-          <button @click="setBtn('widthdraw', 'Withdraw')" :class="(btn === 'widthdraw') ? `btn btn-success ml-2` : `btn btn-secondary ml-2`">Widthdraw List</button>
-          <button @click="setBtn('refer', 'ReferUser')" :class="(btn === 'refer') ? `btn btn-success ml-2` : `btn btn-secondary ml-2`">Refer List</button>
+          <button @click="setBtn('task', 'TaskComplete')" :class="(btn === 'task') ? `btn btn-success ml-2` : `btn btn-secondary ml-2`">Task List</button>
+          <!-- <button @click="setBtn('refer', 'ReferUser')" :class="(btn === 'refer') ? `btn btn-success ml-2` : `btn btn-secondary ml-2`">Refer List</button> -->
       </b-col>
       <b-col v-if="formData.id" lg="12" sm="12">
           <component :is="comp" :user_id="formData.id" :own_refer_id="formData.own_refer_id" ></component>
@@ -118,7 +118,7 @@ import RestApi, { baseUrl } from '../../config/api_config'
 import iziToast from 'izitoast';
 import Notification from './Notification'
 import UserInfoChange from './UserInfoChange'
-import Withdraw from './../../componests/user/withdraw'
+import TaskComplete from './../../componests/user/task-complete'
 import ReferUser from './../../componests/user/refer-user'
 
 export default {
@@ -126,7 +126,7 @@ export default {
   components: {
     Notification,
     UserInfoChange,
-    Withdraw,
+    TaskComplete,
     ReferUser
     },
   created () {
@@ -142,7 +142,7 @@ export default {
         name: ''
       },
       editId: '',
-      comp: 'Withdraw',
+      comp: 'TaskComplete',
       btn: 'task',
       loading: false
     }

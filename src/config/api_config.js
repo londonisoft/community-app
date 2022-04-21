@@ -1,5 +1,5 @@
 import axios from 'axios'
-export const baseUrl = 'https://appmakerit.com/earning/public/'
+export const baseUrl = 'https://appmakerit.com/kaiyum/public/'
 
 export default {
     async execute(baseUrl, method, uri, data, params = {}) {
