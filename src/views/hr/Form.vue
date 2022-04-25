@@ -8,9 +8,9 @@
                     <ValidationObserver ref="form"  v-slot="{ handleSubmit, reset }">
                         <b-form  @submit.prevent="handleSubmit(formSubmit)" @reset.prevent="reset" >
                             <b-row>
-                                <b-col md =6 lg =6 sm =6>
-                                    <Select @return-value="setReturnData({ hr_id: $event})" :input="{ cols: 12, type: 'text', name: 'Select HR', rules: 'required', vmodel: formData.hr_id, options: HrList }"/>
-                                </b-col >
+                              <b-col md =6 lg =6 sm =6>
+                                  <Input @return-value="setReturnData({ hr_id: $event})" :input="{ cols: 12, type: 'text', name: 'HR ID', rules: 'required', vmodel: formData.hr_id }"/>
+                              </b-col>
                               <b-col md =6 lg =6 sm =6>
                                   <Input @return-value="setReturnData({ name: $event})" :input="{ cols: 12, type: 'text', name: 'name', rules: 'required', vmodel: formData.name }"/>
                               </b-col>
@@ -25,9 +25,6 @@
                                 </b-col>
                                 <b-col md =6 lg =6 sm =6>
                                     <Select @return-value="setReturnData({ upazilla_id: $event})" :input="{ cols: 12, type: 'text', name: 'upazilla_id', rules: 'required', vmodel: formData.upazilla_id, options: upazillaList }"/>
-                                </b-col>
-                                <b-col md =6 lg =6 sm =6 >
-                                  <Input @return-value="setReturnData({ pay_amount: $event})" :input="{ cols: 12, type: 'text', name: 'pay_amount', rules: 'required', vmodel: formData.pay_amount }"/>
                                 </b-col>
                                 <b-col md =6 lg =6 sm =6 >
                                   <Input @return-value="setReturnData({ nid: $event})" :input="{ cols: 12, type: 'text', name: 'nid', rules: '', vmodel: formData.nid }"/>
@@ -78,13 +75,12 @@ export default {
   data () {
     return {
       formData: {
-        cust_id: '',
+        hr_id: '',
         name: '',
         mobile: '',
         division_id: '',
         district_id: '',
         upazilla_id: '',
-        pay_amount: '',
         bazar_name: ''
       },
       districtList: [],
@@ -110,14 +106,11 @@ export default {
   computed: {
       divisionList () {
           return this.$store.state.commonObj.divisionList
-      },
-      HrList () {
-          return this.$store.state.commonObj.HrList
       }
   },
   methods: {
     formSubmit () {
-      const result = this.submitHandler('api/customer/store', 'api/customer/update', this.formData)
+      const result = this.submitHandler('api/hr/store', 'api/hr/update', this.formData)
       result.then(response => {
         this.resultProcess(response)
       })

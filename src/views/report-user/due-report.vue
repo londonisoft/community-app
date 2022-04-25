@@ -39,15 +39,12 @@
                                     <b-col md="6">
                                         <Input @return-value="setReturnData({ cust_id: $event})" :input="{ cols: 3, type: 'text', name: 'cust_id', rules: '', vmodel: search.cust_id }"/>
                                     </b-col>
-                                    <b-col md="6">
-                                        <Select @return-value="setReturnData({ month: $event})" :input="{ cols: 3, type: 'text', name: 'month', rules: '', vmodel: search.month, options: months }"/>
-                                    </b-col>
-                                    <b-col md="6">
-                                        <Select @return-value="setReturnData({ year: $event})" :input="{ cols: 3, type: 'text', name: 'year', rules: '', vmodel: search.year, options: years }"/>
-                                    </b-col>
                                     <b-col md =6 lg =6 sm =6>
                                         <Select @return-value="setReturnData({ hr_id: $event})" :input="{ cols: 3, type: 'text', name: 'Select HR', rules: '', vmodel: search.hr_id, options: HrList }"/>
                                     </b-col >
+                                    <b-col md="6">
+                                        <Select @return-value="setReturnData({ year: $event})" :input="{ cols: 3, type: 'text', name: 'year', rules: '', vmodel: search.year, options: years }"/>
+                                    </b-col>
                                     <div class="col-md-12 pt-0 mt-0">
                                         <div class="text-right">
                                             <b-button type="submit" class="btn-font" variant="primary"><i class="ri-search-line"></i> Search</b-button>
@@ -64,23 +61,39 @@
         <CCardHeader>
             <div class="row">
                 <div class="col-md-6">
-                    <CIcon name="cil-justify-center"/><strong> Due Report</strong>
+                    <CIcon name="cil-justify-center"/><strong> Customer Report</strong>
+                </div>
+                <div class="col-md-6 text-right">
+                    <b-button type="button" @click="print()" class="btn-font" variant="primary"><i class="ri-printer-line"></i> Print</b-button>
                 </div>
             </div>
         </CCardHeader>
         <CCardBody>
             <b-overlay :show='loading'>
-                <div class="overflow-auto">
+                <div class="overflow-auto" id='print'>
+                    <div class="text-center mt-3">
+                        <h4>Yearly Payment Raport - {{ search.year }}</h4>
+                        <h6>Date : {{ currentDate() }}</h6>
+                    </div>
+                    <hr>
                     <table class="table table-sm table-bordered">
                         <tr>
                             <th rowspan="" class="text-center">SL NO</th>
                             <th rowspan="" class="text-center">HR Name</th>
                             <th rowspan="" class="text-center">Customer Name</th>
                             <th rowspan="" class="text-center">Customer ID</th>
-                            <th rowspan="" class="text-center">Payable Amount</th>
-                            <th rowspan="" class="text-center">Paid Amount</th>
-                            <th rowspan="" class="text-center">Due Amount</th>
-                            <th rowspan="" class="text-center">Pay Status</th>
+                            <th rowspan="" class="text-center">Jan</th>
+                            <th rowspan="" class="text-center">Feb</th>
+                            <th rowspan="" class="text-center">Mar</th>
+                            <th rowspan="" class="text-center">Apr</th>
+                            <th rowspan="" class="text-center">May</th>
+                            <th rowspan="" class="text-center">Jun</th>
+                            <th rowspan="" class="text-center">Jul</th>
+                            <th rowspan="" class="text-center">Aug</th>
+                            <th rowspan="" class="text-center">Sep</th>
+                            <th rowspan="" class="text-center">Oct</th>
+                            <th rowspan="" class="text-center">Nov</th>
+                            <th rowspan="" class="text-center">Dec</th>
                         </tr>
                         <slot v-for="(item, indx) in itemList">
                             <tr :key="indx">
@@ -88,20 +101,23 @@
                                 <td>{{ item.hr_name }}</td>
                                 <td>{{ item.name }}</td>
                                 <td>{{ item.cust_id }}</td>
-                                <td>{{ item.pay_amount }}</td>
-                                <td>{{ getTotal(item.payments) }}</td>
-                                <td>{{ item.pay_amount - getTotal(item.payments) }}</td>
-                                <td>
-                                    <span class="badge badge-success" v-if="item.payments.length">Paid</span>
-                                    <span class="badge badge-danger" v-else>Due</span>
-                                </td>
+                                <td>{{ item.jan }}</td>
+                                <td>{{ item.feb }}</td>
+                                <td>{{ item.mar }}</td>
+                                <td>{{ item.apr }}</td>
+                                <td>{{ item.may }}</td>
+                                <td>{{ item.jun }}</td>
+                                <td>{{ item.jul }}</td>
+                                <td>{{ item.aug }}</td>
+                                <td>{{ item.sep }}</td>
+                                <td>{{ item.oct }}</td>
+                                <td>{{ item.nov }}</td>
+                                <td>{{ item.dec }}</td>
                             </tr>
                         </slot>
                         <tr>
                             <th colspan="4" class="text-right">Total : </th>
-                            <th colspan="1" class="">{{ getTotalPayable(itemList) }}</th>
-                            <th colspan="1" class="">{{ getTotalPaid(itemList) }}</th>
-                            <th class="">{{ getTotalDue(itemList) }}</th>
+                            <th v-for="(month, index) in monthList" colspan="1" :key="index" class="">{{ getTotal(itemList, month.value) }}</th>
                         </tr>
                     </table>
                 </div>
@@ -181,53 +197,53 @@ export default {
                 text: 2030
             },
         ],
-        months: [
+        monthList: [
             {
-                value: 1,
+                value: 'jan',
                 text: 'January'
             },
             {
-                value: 2,
+                value: 'feb',
                 text: 'February'
             },
             {
-                value: 3,
+                value: 'mar',
                 text: 'March'
             },
             {
-                value: 4,
+                value: 'apr',
                 text: 'April'
             },
             {
-                value: 5,
+                value: 'may',
                 text: 'May'
             },
             {
-                value: 6,
+                value: 'jun',
                 text: 'June'
             },
             {
-                value: 7,
+                value:'jul',
                 text: 'July'
             },
             {
-                value: 8,
+                value: 'aug',
                 text: 'August'
             },
             {
-                value: 9,
+                value: 'sep',
                 text: 'September'
             },
             {
-                value: 10,
+                value: 'oct',
                 text: 'October'
             },
             {
-                value: 11,
+                value: 'nov',
                 text: 'November'
             },
             {
-                value: 12,
+                value: 'dec',
                 text: 'December'
             }
         ]
@@ -242,6 +258,32 @@ export default {
         },
     },
     methods: {
+        currentDate () {
+            let today = new Date()
+            return today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear()
+        },
+        print() {
+            const prtHtml = document.getElementById('print').innerHTML
+            let stylesHtml = ''
+            for (const node of [...document.querySelectorAll('link[rel="stylesheet"], style')]) {
+            stylesHtml += node.outerHTML
+            }
+            const WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0')
+            WinPrint.document.write(`<!DOCTYPE html>
+            <html>
+            <head>
+                <title>Customer Reprot</title>
+                ${stylesHtml}
+            </head>
+            <body>
+                ${prtHtml}
+            </body>
+            </html>`);
+            WinPrint.document.close()
+            WinPrint.focus()
+            WinPrint.print()
+            WinPrint.close()
+        },
         currntMonth () {
             const d = new Date();
             this.search.month = d.getMonth() + 1;
@@ -250,43 +292,16 @@ export default {
         loadData () {
             const params = Object.assign({}, this.search, { page: this.pagination.currentPage, per_page: this.pagination.perPage })
             this.$store.dispatch('mutedLoad', { loading: true})
-            RestApi.getData(baseUrl, 'api/due-report/list', params).then(response => {
+            RestApi.getData(baseUrl, 'api/due-report/customer-report', params).then(response => {
                 if (response.success) {
                     this.$store.dispatch('setList', response.data)
                 }
                 this.$store.dispatch('mutedLoad', { loading: false })
             })
         },
-        getTotal (arr) {
+        getTotal (arr, month) {
             return arr.reduce((amount, object) => {
-                return amount + object.amount;
-            }, 0)
-        },
-        getTotalPayable (arr) {
-            return arr.reduce((pay_amount, object) => {
-                return pay_amount + object.pay_amount;
-            }, 0)
-        },
-        getTotalPaid (arr) {
-            const tmparray = arr.map(item => {
-                const totalPay = item.payments.reduce((amount, object) => {
-                    return amount + object.amount;
-                }, 0)
-                return Object.assign(item, { total_payment: totalPay })
-            })
-            return tmparray.reduce((total_payment, object) => {
-                return total_payment + object.total_payment;
-            }, 0)
-        },
-        getTotalDue (arr) {
-            const tmparray = arr.map(item => {
-                const totalPay = item.payments.reduce((amount, object) => {
-                    return amount + object.amount;
-                }, 0)
-                return Object.assign(item, { total_due: item.pay_amount - totalPay })
-            })
-            return tmparray.reduce((total_due, object) => {
-                return total_due + object.total_due;
+                return amount + object[month];
             }, 0)
         }
     }

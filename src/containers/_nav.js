@@ -10,6 +10,14 @@ export default [{
         },
         {
             _name: 'CSidebarNavItem',
+            name: 'Hr',
+            to: '/other/hr-list',
+            icon: 'cil-list',
+            items: [],
+            permission: 'customer-list'
+        },
+        {
+            _name: 'CSidebarNavItem',
             name: 'Customers',
             to: '/other/customer-list',
             icon: 'cil-list',
@@ -28,6 +36,14 @@ export default [{
             _name: 'CSidebarNavItem',
             name: 'Due Report',
             to: '/other/due-report',
+            icon: 'cil-ban',
+            items: [],
+            permission: 'due-report'
+        },
+        {
+            _name: 'CSidebarNavItem',
+            name: 'Customer Report',
+            to: '/other/report-user',
             icon: 'cil-ban',
             items: [],
             permission: 'due-report'

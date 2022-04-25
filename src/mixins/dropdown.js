@@ -30,6 +30,7 @@ export default {
             permissionList: response.data.permissionList,
             roleList: response.data.roleList,
             customerList: response.data.customerList,
+            HrList: response.data.HrList,
             divisionList: response.data.divisionList,
             districtList: response.data.districtList,
             upazillaList: response.data.upazillaList

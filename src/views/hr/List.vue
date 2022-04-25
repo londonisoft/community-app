@@ -15,9 +15,6 @@
                                     <b-col md="6">
                                         <Input @return-value="setReturnData({ mobile: $event})" :input="{ cols: 3, type: 'text', name: 'mobile', rules: '', vmodel: search.mobile }"/>
                                     </b-col>
-                                    <b-col md =6 lg =6 sm =6>
-                                        <Select @return-value="setReturnData({ hr_id: $event})" :input="{ cols: 3, type: 'text', name: 'Select HR', rules: '', vmodel: search.hr_id, options: HrList }"/>
-                                    </b-col >
                                     <div class="col-md-12 pt-0 mt-0">
                                         <div class="text-right">
                                             <b-button type="submit" class="btn-font" variant="primary"><i class="ri-search-line"></i> Search</b-button>
@@ -34,7 +31,7 @@
             <CCardHeader>
                 <div class="row">
                     <div class="col-md-6">
-                        <strong>Customer List</strong>
+                        <strong>HR List</strong>
                     </div>
                     <div class="col-md-6 text-right">
                         <button v-if="$can('customer-create')" class="btn btn-primary btn-font" @click="editId = ''" v-b-modal.modal-1><i class="ri-add-line"></i> Add New</button>
@@ -75,7 +72,7 @@
       size="lg"
     header-bg-variant="primary"
     header-text-variant="light"
-      title="Customer Entry" hide-footer>
+      title="HR Entry" hide-footer>
     <div>
         <Form :id='editId'/>
   </div>
@@ -86,7 +83,6 @@
 <script>
 import RestApi, { baseUrl } from '@/config/api_config'
 import Input from '../../components/common/Input'
-import Select from '../../components/common/Select'
 import { ValidationObserver } from 'vee-validate'
 import Form from './Form'
 import commonList from '@/mixins/common-list'
@@ -96,8 +92,7 @@ export default {
     components: {
         ValidationObserver,
         Input,
-        Form,
-        Select
+        Form
     },
     created () {
         this.loadData()
@@ -105,21 +100,15 @@ export default {
     data() {
       return {
         search: {
-          name: '',
-          mobile: '',
-          hr_id: ''
+          name: ''
         }
       }
     },
     computed: {
-        HrList () {
-          return this.$store.state.commonObj.HrList
-        },
         fields () {
             const labels = [
                 { label: 'Sl No', class: 'text-center grid-sl' },
-                { label: 'Customer ID', class: 'text-center' },
-                { label: 'HR Name', class: 'text-center' },
+                { label: 'HR ID', class: 'text-center' },
                 { label: 'Name', class: 'text-center' },
                 { label: 'Mobile', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
@@ -130,7 +119,6 @@ export default {
             keys = [
             { key: 'index' },
             { key: 'cust_id' },
-            { key: 'hr_name' },
             { key: 'name' },
             { key: 'mobile' },
             { key: 'status' },
@@ -145,7 +133,7 @@ export default {
 		loadData () {
 			const params = Object.assign({}, this.search, { page: this.pagination.currentPage, per_page: this.pagination.perPage })
 			this.$store.dispatch('mutedLoad', { loading: true})
-			RestApi.getData(baseUrl, 'api/customer/list', params).then(response => {
+			RestApi.getData(baseUrl, 'api/hr/list', params).then(response => {
 				if (response.success) {
 					this.$store.dispatch('setList', response.data.data)
 					this.paginationData(response.data)
@@ -154,7 +142,7 @@ export default {
 			})
 		},
         changeStatus (item) {
-            this.toggleStatus('api/customer/delete', item)
+            this.toggleStatus('api/hr/delete', item)
         }
 	}
 }

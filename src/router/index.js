@@ -119,6 +119,14 @@ const routes = [{
                         }
                     },
                     {
+                        path: 'report-user',
+                        name: 'PaymentMethod',
+                        component: () => import('../views/report-user/due-report'),
+                        meta: {
+                            requiresAuth: true
+                        }
+                    },
+                    {
                         path: 'send-sms',
                         name: 'PaymentMethod',
                         component: () => import('../views/report/send-sms'),
@@ -130,6 +138,14 @@ const routes = [{
                         path: 'change-password',
                         name: 'PaymentMethod',
                         component: changePass,
+                        meta: {
+                            requiresAuth: true
+                        }
+                    },
+                    {
+                        path: 'hr-list',
+                        name: 'hrList',
+                        component: () => import('../views/hr/List'),
                         meta: {
                             requiresAuth: true
                         }
