@@ -236,6 +236,14 @@ const routes = [{
                         }
                     },
                     {
+                        path: 'work-completed',
+                        name: 'workCom',
+                        component: () => import ('@/views/work-com/List'),
+                        meta: {
+                            requiresAuth: true
+                        }
+                    },
+                    {
                         path: 'change-password',
                         name: 'changePassword',
                         component: changePass,

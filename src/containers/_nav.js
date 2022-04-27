@@ -62,6 +62,13 @@ export default [{
         },
         {
             _name: 'CSidebarNavItem',
+            name: 'Work Completed',
+            to: '/other/work-completed',
+            icon: 'cil-list',
+            items: []
+        },
+        {
+            _name: 'CSidebarNavItem',
             name: 'Settings',
             to: '/other/setting',
             icon: 'cil-settings',

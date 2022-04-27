@@ -81,6 +81,10 @@
                                                 <td>Refer Code</td>
                                                 <td> : {{ formData.own_refer_id }}</td>
                                             </tr>
+                                            <tr>
+                                                <td>Daliy Limit</td>
+                                                <td> : {{ formData.limit }}</td>
+                                            </tr>
                                         </table>
                                     </b-tab>
                                     <b-tab title="Change Info">
