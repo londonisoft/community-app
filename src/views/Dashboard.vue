@@ -2,6 +2,7 @@
   <div>
     <CRow>
       <CCol sm="12" md="12">
+          <h4 class="text-center">Krishan Unnayan Sangstha (KAS)</h4><hr>
         <CCard accent-color="success">
             <CCardBody>
                 <div class="row">

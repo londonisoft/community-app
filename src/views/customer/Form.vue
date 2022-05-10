@@ -12,6 +12,9 @@
                                     <Select @return-value="setReturnData({ hr_id: $event})" :input="{ cols: 12, type: 'text', name: 'Select HR', rules: 'required', vmodel: formData.hr_id, options: HrList }"/>
                                 </b-col >
                               <b-col md =6 lg =6 sm =6>
+                                  <Input @return-value="setReturnData({ cust_id: $event})" :input="{ cols: 12, type: 'text', name: 'cust_id', rules: 'required', vmodel: formData.cust_id }"/>
+                              </b-col>
+                              <b-col md =6 lg =6 sm =6>
                                   <Input @return-value="setReturnData({ name: $event})" :input="{ cols: 12, type: 'text', name: 'name', rules: 'required', vmodel: formData.name }"/>
                               </b-col>
                               <b-col md =6 lg =6 sm =6>

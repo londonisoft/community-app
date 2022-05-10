@@ -66,11 +66,20 @@
                 <div class="col-md-6">
                     <CIcon name="cil-justify-center"/><strong> Due Report</strong>
                 </div>
+                <div class="col-md-6 text-right">
+                    <b-button type="button" @click="print()" class="btn-font" variant="primary"><i class="ri-printer-line"></i> Print</b-button>
+                </div>
             </div>
         </CCardHeader>
         <CCardBody>
             <b-overlay :show='loading'>
-                <div class="overflow-auto">
+                <div class="overflow-auto" id='print'>
+                    <div class="text-center mt-3">
+                        <h4>Krishan Unnayan Sangstha (KAS)</h4>
+                        <h6>Payment Due Report - {{ search.year }}</h6>
+                        <h6>Date : {{ currentDate() }}</h6>
+                    </div>
+                    <hr>
                     <table class="table table-sm table-bordered">
                         <tr>
                             <th rowspan="" class="text-center">SL NO</th>
@@ -102,6 +111,7 @@
                             <th colspan="1" class="">{{ getTotalPayable(itemList) }}</th>
                             <th colspan="1" class="">{{ getTotalPaid(itemList) }}</th>
                             <th class="">{{ getTotalDue(itemList) }}</th>
+                            <td></td>
                         </tr>
                     </table>
                 </div>
@@ -242,6 +252,32 @@ export default {
         },
     },
     methods: {
+        currentDate () {
+            let today = new Date()
+            return today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear()
+        },
+        print() {
+            const prtHtml = document.getElementById('print').innerHTML
+            let stylesHtml = ''
+            for (const node of [...document.querySelectorAll('link[rel="stylesheet"], style')]) {
+            stylesHtml += node.outerHTML
+            }
+            const WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0')
+            WinPrint.document.write(`<!DOCTYPE html>
+            <html>
+            <head>
+                <title>Customer Reprot</title>
+                ${stylesHtml}
+            </head>
+            <body>
+                ${prtHtml}
+            </body>
+            </html>`);
+            WinPrint.document.close()
+            WinPrint.focus()
+            WinPrint.print()
+            WinPrint.close()
+        },
         currntMonth () {
             const d = new Date();
             this.search.month = d.getMonth() + 1;

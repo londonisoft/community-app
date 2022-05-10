@@ -72,7 +72,8 @@
             <b-overlay :show='loading'>
                 <div class="overflow-auto" id='print'>
                     <div class="text-center mt-3">
-                        <h4>Yearly Payment Raport - {{ search.year }}</h4>
+                        <h4>Krishan Unnayan Sangstha (KAS)</h4>
+                        <h6>Yearly Payment Raport - {{ search.year }}</h6>
                         <h6>Date : {{ currentDate() }}</h6>
                     </div>
                     <hr>
