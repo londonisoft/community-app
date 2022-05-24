@@ -55,6 +55,7 @@
                             <template v-slot:cell(action)="data">
                                 <b-button v-if="$can('customer-edit')" title="Edit" class="pl-1 pt-0 pr-1 pb-0 btn btn-info ml-1 btn-sm" @click="edit(data.item)"><i class="ri-edit-line"></i></b-button>
                                 <b-button title="Active/Inactive" class="pl-1 pt-0 pr-1 pb-0 btn btn-danger ml-1 btn-sm" @click="changeStatus(data.item)"> <i class="ri-close-circle-line"></i> </b-button>
+                                <b-button title="Delete" class="pl-1 pt-0 pr-1 pb-0 btn btn-danger ml-1 btn-sm" @click="removeRecord(data.item)"> <i class="ri-close-circle-line"></i> Delete</b-button>
                             </template>
                         </b-table>
                     </div>
@@ -155,6 +156,9 @@ export default {
 		},
         changeStatus (item) {
             this.toggleStatus('api/customer/delete', item)
+        },
+        removeRecord (item) {
+            this.toggleStatus('api/customer/remove', item)
         }
 	}
 }
