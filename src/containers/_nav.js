@@ -73,6 +73,13 @@ export default [{
             to: '/other/setting',
             icon: 'cil-settings',
             items: []
+        },
+        {
+            _name: 'CSidebarNavItem',
+            name: 'Notice',
+            to: '/other/notice',
+            icon: 'cil-settings',
+            items: []
         }
     ]
 }]

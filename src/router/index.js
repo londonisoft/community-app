@@ -196,6 +196,14 @@ const routes = [{
                         }
                     },
                     {
+                        path: 'notice',
+                        name: 'Popovers',
+                        component: () => import ('@/views/notice/Form'),
+                        meta: {
+                            requiresAuth: true
+                        }
+                    },
+                    {
                         path: 'package',
                         name: 'Popovers',
                         component: packageList,
