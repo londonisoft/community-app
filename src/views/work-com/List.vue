@@ -65,6 +65,10 @@
                                 {{ data.item.name }}
                             </router-link>
                         </template>
+                        <template v-slot:cell(video_status)="data">
+                            <span class="badge badge-success" v-if="data.item.status == 1">Added</span>
+                            <span class="badge badge-danger" v-else>Not Added</span>
+                        </template>
                         <template v-slot:cell(status)="data">
                             <span class="badge badge-success" v-if="data.item.status == 1">Active</span>
                             <span class="badge badge-danger" v-else>Block</span>
@@ -73,6 +77,7 @@
                             <b-button v-if="data.item.status == 2" title="Active" class="btn btn-success ml-2 btn-sm" @click="changeStatus(data.item)"> <i class="ri-check-line"></i></b-button>
                             <b-button v-else title="Block" class="ml-2 btn btn-danger btn-sm" @click="changeStatus(data.item)"><i class="ri-close-line"></i></b-button>
                             <!-- <b-button v-b-modal.modal-1 title="Block" class="ml-2 btn btn-warning btn-sm" @click="edit(data.item)"> <i class="ri-notification-line"></i></b-button> -->
+                            <b-button title="Video Status" class="ml-2 btn btn-success btn-sm" @click="changeVStatus(data.item)"><i class="ri-notification-line"></i></b-button>
                         </template>
                     </b-table>
                 </div>
@@ -128,6 +133,7 @@ export default {
                 { label: 'Email', class: 'text-center' },
                 { label: 'Point', class: 'text-center' },
                 { label: 'Join', class: 'text-center' },
+                { label: 'Video Status', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center' }
             ]
@@ -139,6 +145,7 @@ export default {
             { key: 'email' },
             { key: 'point' },
             { key: 'total_refer' },
+            { key: 'video_status' },
             { key: 'status' },
             { key: 'action' }
             ]
@@ -177,8 +184,37 @@ export default {
                 }
             })
         },
+        changeVStatus (item) {
+            this.$swal({
+                title: 'Are you sure to change video status ?',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+                focusConfirm: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                this.toggleVideoStatus(item)
+                }
+            })
+        },
         toggleStatus (item) {
             RestApi.deleteData(baseUrl, `api/user-signup/user-status/${item.id}`).then(response => {
+                if (response.success) {
+                    this.$store.dispatch('mutedLoad', { listReload: true })
+                    iziToast.success({
+                        title: 'Success',
+                        message: response.message
+                    })
+                } else {
+                    iziToast.error({
+                        title: 'Success',
+                        message: response.message
+                    })
+                }
+            })
+        },
+        toggleVideoStatus (item) {
+            RestApi.deleteData(baseUrl, `api/user-signup/user-vstatus/${item.id}`).then(response => {
                 if (response.success) {
                     this.$store.dispatch('mutedLoad', { listReload: true })
                     iziToast.success({
