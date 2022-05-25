@@ -20,6 +20,7 @@
                                     <b-form-group
                                     class="row"
                                     label-cols-md="12"
+                                    label-for="formData"
                                     >
                                     <template v-slot:label>
                                     Name
@@ -34,6 +35,7 @@
                                     <b-form-group
                                     class="row"
                                     label-cols-md="12"
+                                    label-for="formData"
                                     >
                                     <template v-slot:label>
                                     Email
@@ -43,6 +45,54 @@
                                         v-model="search.email"
                                         ></b-form-input>
                                     </b-form-group>
+                                </div>
+                                <div class="col-md-4">
+                                     <b-form-group
+                                        class="row"
+                                        label-cols-sm="12"
+                                        label-for="formData"
+                                        >
+                                        <template v-slot:label>
+                                        Select Year<span class="text-danger">*</span>
+                                        </template>
+                                            <b-form-select
+                                            v-model="search.year"
+                                            :options="years"
+                                            id="year"
+                                            ></b-form-select>
+                                    </b-form-group>     
+                                </div>
+                                <div class="col-md-4">
+                                     <b-form-group
+                                        class="row"
+                                        label-cols-sm="12"
+                                        label-for="formData"
+                                        >
+                                        <template v-slot:label>
+                                        Select Month <span class="text-danger">*</span>
+                                        </template>
+                                            <b-form-select
+                                            v-model="search.month"
+                                            :options="months"
+                                            id="month"
+                                            ></b-form-select>
+                                    </b-form-group>     
+                                </div>
+                                <div class="col-md-4">
+                                     <b-form-group
+                                        class="row"
+                                        label-cols-sm="12"
+                                        label-for="formData"
+                                        >
+                                        <template v-slot:label>
+                                        Select Date <span class="text-danger">*</span>
+                                        </template>
+                                            <b-form-select
+                                            v-model="search.current_date"
+                                            :options="dateList"
+                                            id="name"
+                                            ></b-form-select>
+                                    </b-form-group>     
                                 </div>
                                 <div class="col-md-4">
                                     <div style="height:40px">
@@ -105,13 +155,17 @@ export default {
         ValidationObserver
     },
     created () {
+        this.getCurrentData()
         this.loadData ()
     },
     data() {
       return {
         search: {
             name: '',
-            email: ''
+            email: '',
+            year: 0,
+            month: 0,
+            current_date: 0
         },
         pagination: {
             perPage: 10,
@@ -119,7 +173,128 @@ export default {
             total: 0,
             slOffset: 1
         },
-        editId: ''
+        editId: '',
+            years: [
+            {
+                value: 2022,
+                text: 2022
+            },
+            {
+                value: 2023,
+                text: 2023
+            },
+            {
+                value: 2024,
+                text: 2024
+            },
+            {
+                value: 2025,
+                text: 2025
+            },
+            {
+                value: 2026,
+                text: 2026
+            },
+            {
+                value: 2027,
+                text: 2027
+            },
+            {
+                value: 2028,
+                text: 2028
+            },
+            {
+                value: 2029,
+                text: 2029
+            },
+            {
+                value: 2030,
+                text: 2030
+            },
+        ],
+        months: [
+            {
+                value: 1,
+                text: 'January'
+            },
+            {
+                value: 2,
+                text: 'February'
+            },
+            {
+                value: 3,
+                text: 'March'
+            },
+            {
+                value: 4,
+                text: 'April'
+            },
+            {
+                value: 5,
+                text: 'May'
+            },
+            {
+                value: 6,
+                text: 'June'
+            },
+            {
+                value: 7,
+                text: 'July'
+            },
+            {
+                value: 8,
+                text: 'August'
+            },
+            {
+                value: 9,
+                text: 'September'
+            },
+            {
+                value: 10,
+                text: 'October'
+            },
+            {
+                value: 11,
+                text: 'November'
+            },
+            {
+                value: 12,
+                text: 'December'
+            }
+        ],
+        dateList: [
+          { value: 1, text: '1 Tarikh'},
+          { value: 2, text: '2 Tarikh'},
+          { value: 3, text: '3 Tarikh'},
+          { value: 4, text: '4 Tarikh'},
+          { value: 5, text: '5 Tarikh'},
+          { value: 6, text: '6 Tarikh'},
+          { value: 7, text: '7 Tarikh'},
+          { value: 8, text: '8 Tarikh'},
+          { value: 9, text: '9 Tarikh'},
+          { value: 10, text: '10 Tarikh'},
+          { value: 11, text: '11 Tarikh'},
+          { value: 12, text: '12 Tarikh'},
+          { value: 13, text: '13 Tarikh'},
+          { value: 14, text: '14 Tarikh'},
+          { value: 15, text: '15 Tarikh'},
+          { value: 16, text: '16 Tarikh'},
+          { value: 17, text: '17 Tarikh'},
+          { value: 18, text: '18 Tarikh'},
+          { value: 19, text: '19 Tarikh'},
+          { value: 20, text: '20 Tarikh'},
+          { value: 21, text: '21 Tarikh'},
+          { value: 22, text: '22 Tarikh'},
+          { value: 23, text: '23 Tarikh'},
+          { value: 24, text: '24 Tarikh'},
+          { value: 25, text: '25 Tarikh'},
+          { value: 26, text: '26 Tarikh'},
+          { value: 27, text: '27 Tarikh'},
+          { value: 28, text: '28 Tarikh'},
+          { value: 29, text: '29 Tarikh'},
+          { value: 30, text: '30 Tarikh'},
+          { value: 31, text: '31 Tarikh'}
+        ]
       }
     },
     computed: {
@@ -168,6 +343,12 @@ export default {
       }
     },
     methods: {
+        getCurrentData () {
+            const d = new Date();
+            this.search.month = d.getMonth() + 1;
+            this.search.year = d.getFullYear();
+            this.search.current_date = d.getDate();
+        },
         edit (item) {
             this.editId = item.id
         },
