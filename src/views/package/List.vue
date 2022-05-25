@@ -47,12 +47,20 @@
                         </b-form>
                     </ValidationObserver>
                 </b-col>
-            </b-row>
+            </b-row><br>
+            <div class="row">
+                <b-col md="2" xl="2" sm="2">
+                    <b-form-checkbox v-model="checkAll">Check All</b-form-checkbox>
+                </b-col>
+                <b-col md="2" xl="2" sm="2">
+                    <b-button style='position:absolute; bottom:5px' class="btn-sm" type="button" @click="deleteAll()" variant="danger">Delete</b-button>
+                </b-col>
+            </div>
             <b-overlay :show='loading'>
                 <div class="overflow-auto">
                     <b-table thead-class="bg-light text-dark" emptyText="Data Not Found" show-empty bordered hover :items="itemList" :fields="fields">
                         <template v-slot:cell(index)="data">
-                            {{ $n(data.index + pagination.slOffset) }}
+                            <b-form-checkbox v-model="data.item.select">{{ $n(data.index + pagination.slOffset) }}</b-form-checkbox>
                         </template>
                         <template v-slot:cell(current_date)="data">
                             <span class="badge badge-success">{{ data.item.current_date }}</span>
@@ -108,6 +116,7 @@ export default {
     },
     data() {
       return {
+        checkAll: false,
         search: {
             current_date: ''
         },
@@ -190,7 +199,20 @@ export default {
         if (newVal) {
             this.loadData()
         }
-      }
+      },
+        checkAll: function (newVal, oldVal) {
+            if (newVal !== oldVal) {
+                if (newVal) {
+                    this.itemList.forEach(item => {
+                        item.select = true
+                    })
+                } else {
+                    this.itemList.forEach(item => {
+                        item.select = false
+                    })
+                }
+            }
+        }
     },
     methods: {
         edit (item) {
@@ -244,7 +266,48 @@ export default {
             this.pagination.currentPage = parseInt(data.current_page)
             this.pagination.total = parseInt(data.total)
             this.pagination.slOffset = this.pagination.perPage * this.pagination.currentPage - this.pagination.perPage + 1
-        }
+        },
+        deleteAll () {
+            this.$swal({
+                title: 'Are you sure to delete message ?',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+                focusConfirm: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                this.deleteallData()
+                }
+            })
+        },
+        deleteallData () {
+            if (this.itemList.length <= 0) {
+                iziToast.error({
+                    title: 'Error',
+                    message: "Please enter message and check customer."
+                })
+                return false
+            }
+            const itemList = this.itemList.filter(item => item.select === true).map(item => {
+                return item.id
+            })
+            this.$store.dispatch('mutedLoad', { loading: true })
+            RestApi.postData(baseUrl, `api/package/delete-all`, { data: itemList }).then(response => {
+                if (response.success) {
+                    this.$store.dispatch('mutedLoad', { listReload: true })
+                    iziToast.success({
+                        title: 'Success',
+                        message: response.message
+                    })
+                } else {
+                    iziToast.error({
+                        title: 'Error',
+                        message: response.message
+                    })
+                }
+                this.$store.dispatch('mutedLoad', { loading: false })
+            })
+        },
     },
     filters: {
         subStr: function(string) {
