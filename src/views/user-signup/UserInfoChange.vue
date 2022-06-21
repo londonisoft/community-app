@@ -229,6 +229,28 @@
                                         </b-form-group>
                                     </ValidationProvider>
                                 </div>
+                                <div class="col-md-6">
+                                    <ValidationProvider name="Channel Link" vid="channel_link" rules="required">
+                                        <b-form-group
+                                        class="row"
+                                        label-cols-sm="12"
+                                        label-for="formData"
+                                        slot-scope="{ valid, errors }"
+                                        >
+                                        <template v-slot:label>
+                                        Channel Link  <span class="text-danger">*</span>
+                                        </template>
+                                        <b-form-input
+                                            id="channel_link"
+                                            v-model="formData.channel_link"
+                                            :state="errors[0] ? false : (valid ? true : null)"
+                                            ></b-form-input>
+                                        <div class="invalid-feedback">
+                                            {{ errors[0] }}
+                                        </div>
+                                        </b-form-group>
+                                    </ValidationProvider>
+                                </div>
                                 <div class="col-md-6 text-right">
                                     <b-button type="submit" variant="primary" style="margin-top:40px" class="mr-2">{{ saveBtnName }}</b-button>
                                 </div>

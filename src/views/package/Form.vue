@@ -7,28 +7,6 @@
                 <b-overlay :show="loading">
                     <ValidationObserver ref="form"  v-slot="{ handleSubmit, reset }">
                         <b-form  @submit.prevent="handleSubmit(register)" @reset.prevent="reset" >
-                        <ValidationProvider name="Name" vid="name" rules="required">
-                            <b-form-group
-                            class="row"
-                            label-cols-sm="12"
-                            label-for="formData"
-                            slot-scope="{ valid, errors }"
-                            >
-                            <template v-slot:label>
-                            Select Date <span class="text-danger">*</span>
-                            </template>
-                                <b-form-select
-                                v-model="formData.current_date"
-                                :options="options"
-                                id="name"
-                                rows="6"
-                                :state="errors[0] ? false : (valid ? true : null)"
-                                ></b-form-select>
-                            <div class="invalid-feedback">
-                                {{ errors[0] }}
-                            </div>
-                            </b-form-group>
-                        </ValidationProvider>
                         <ValidationProvider name="Video URL" vid="video_url" rules="required">
                             <b-form-group
                             class="row"

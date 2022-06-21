@@ -21,6 +21,11 @@ import Permissions from './mixins/Permissions';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.css';
 import 'izitoast/dist/css/iziToast.min.css';
+import Vue2Editor from "vue2-editor";
+
+Vue.use(Vue2Editor);
+
+
 Vue.use(iziToast);
 
 Vue.mixin(Permissions);

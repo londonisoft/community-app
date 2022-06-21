@@ -44,6 +44,30 @@
                                                                 </b-form-group>
                                                             </ValidationProvider>
                                                         </div>
+                                                        <div class="col-md-12">
+                                                            <ValidationProvider name="Admin Notice" vid="main_notice" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="formData"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                App Notice
+                                                                </template>
+                                                                <VueEditor
+                                                                    type="text"
+                                                                    id="main_notice"
+                                                                    rows="6"
+                                                                    v-model="formData.main_notice"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></VueEditor>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
                                                         <div class="col-md-12 text-right">
                                                             <b-button type="submit" variant="primary" style="margin-top:40px" class="mr-2">{{ saveBtnName }}</b-button>
                                                         </div>
@@ -66,12 +90,14 @@
 import RestApi, { baseUrl } from '../../config/api_config'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import iziToast from 'izitoast';
+import { VueEditor } from "vue2-editor/dist/vue2-editor.core.js";
 
 export default {
   props: ['id'],
   components: {
     ValidationObserver,
-    ValidationProvider
+    ValidationProvider,
+    VueEditor
   },
   created () {
       this.getData()
@@ -118,3 +144,11 @@ export default {
   }
 }
 </script>
+<style lang="css">
+@import "~vue2-editor/dist/vue2-editor.css";
+
+/* Import the Quill styles you want */
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
+</style>

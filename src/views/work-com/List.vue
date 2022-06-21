@@ -47,52 +47,20 @@
                                     </b-form-group>
                                 </div>
                                 <div class="col-md-4">
-                                     <b-form-group
-                                        class="row"
-                                        label-cols-sm="12"
-                                        label-for="formData"
-                                        >
-                                        <template v-slot:label>
-                                        Select Year<span class="text-danger">*</span>
-                                        </template>
-                                            <b-form-select
-                                            v-model="search.year"
-                                            :options="years"
-                                            id="year"
-                                            ></b-form-select>
-                                    </b-form-group>     
-                                </div>
-                                <div class="col-md-4">
-                                     <b-form-group
-                                        class="row"
-                                        label-cols-sm="12"
-                                        label-for="formData"
-                                        >
-                                        <template v-slot:label>
-                                        Select Month <span class="text-danger">*</span>
-                                        </template>
-                                            <b-form-select
-                                            v-model="search.month"
-                                            :options="months"
-                                            id="month"
-                                            ></b-form-select>
-                                    </b-form-group>     
-                                </div>
-                                <div class="col-md-4">
-                                     <b-form-group
-                                        class="row"
-                                        label-cols-sm="12"
-                                        label-for="formData"
-                                        >
-                                        <template v-slot:label>
-                                        Select Date <span class="text-danger">*</span>
-                                        </template>
-                                            <b-form-select
-                                            v-model="search.current_date"
-                                            :options="dateList"
-                                            id="name"
-                                            ></b-form-select>
-                                    </b-form-group>     
+                                    <b-form-group
+                                    class="row"
+                                    label-cols-md="12"
+                                    label-for="formData"
+                                    >
+                                    <template v-slot:label>
+                                    Work Date
+                                    </template>
+                                    <b-form-input
+                                        id="date"
+                                        type='date'
+                                        v-model="search.work_date"
+                                        ></b-form-input>
+                                    </b-form-group>
                                 </div>
                                 <div class="col-md-4">
                                     <div style="height:40px">
@@ -104,6 +72,7 @@
                     </ValidationObserver>
                 </b-col>
             </b-row>
+            <p class="text-right">Total : <span class="badge badge-success">{{ itemList.length }}</span></p>
             <b-overlay :show='loading'>
                 <div class="overflow-auto">
                     <b-table thead-class="bg-light text-dark" emptyText="Data Not Found" small show-empty bordered hover :items="itemList" :fields="fields">
@@ -115,18 +84,24 @@
                                 {{ data.item.name }}
                             </router-link>
                         </template>
+                        <template v-slot:cell(channel_link)="data">
+                            <a target="_blank" :href="data.item.channel_link">Link</a>
+                        </template>
+                        <template v-slot:cell(date)>
+                            {{ search.work_date }}
+                        </template>
                         <template v-slot:cell(video_status)="data">
-                            <span class="badge badge-success" v-if="data.item.status == 1">Added</span>
+                            <span class="badge badge-success" v-if="parseInt(data.item.status) == 1">Added</span>
                             <span class="badge badge-danger" v-else>Not Added</span>
                         </template>
-                        <template v-slot:cell(status)="data">
+                        <!-- <template v-slot:cell(status)="data">
                             <span class="badge badge-success" v-if="data.item.status == 1">Active</span>
                             <span class="badge badge-danger" v-else>Block</span>
-                        </template>
+                        </template> -->
                         <template v-slot:cell(action)="data">
-                            <b-button v-if="data.item.status == 2" title="Active" class="btn btn-success ml-2 btn-sm" @click="changeStatus(data.item)"> <i class="ri-check-line"></i></b-button>
+                            <!-- <b-button v-if="data.item.status == 2" title="Active" class="btn btn-success ml-2 btn-sm" @click="changeStatus(data.item)"> <i class="ri-check-line"></i></b-button>
                             <b-button v-else title="Block" class="ml-2 btn btn-danger btn-sm" @click="changeStatus(data.item)"><i class="ri-close-line"></i></b-button>
-                            <!-- <b-button v-b-modal.modal-1 title="Block" class="ml-2 btn btn-warning btn-sm" @click="edit(data.item)"> <i class="ri-notification-line"></i></b-button> -->
+                            <b-button v-b-modal.modal-1 title="Block" class="ml-2 btn btn-warning btn-sm" @click="edit(data.item)"> <i class="ri-notification-line"></i></b-button> -->
                             <b-button title="Video Status" class="ml-2 btn btn-success btn-sm" @click="changeVStatus(data.item)"><i class="ri-notification-line"></i></b-button>
                         </template>
                     </b-table>
@@ -163,9 +138,7 @@ export default {
         search: {
             name: '',
             email: '',
-            year: 0,
-            month: 0,
-            current_date: 0
+            work_date: 0
         },
         pagination: {
             perPage: 10,
@@ -173,143 +146,22 @@ export default {
             total: 0,
             slOffset: 1
         },
-        editId: '',
-            years: [
-            {
-                value: 2022,
-                text: 2022
-            },
-            {
-                value: 2023,
-                text: 2023
-            },
-            {
-                value: 2024,
-                text: 2024
-            },
-            {
-                value: 2025,
-                text: 2025
-            },
-            {
-                value: 2026,
-                text: 2026
-            },
-            {
-                value: 2027,
-                text: 2027
-            },
-            {
-                value: 2028,
-                text: 2028
-            },
-            {
-                value: 2029,
-                text: 2029
-            },
-            {
-                value: 2030,
-                text: 2030
-            },
-        ],
-        months: [
-            {
-                value: 1,
-                text: 'January'
-            },
-            {
-                value: 2,
-                text: 'February'
-            },
-            {
-                value: 3,
-                text: 'March'
-            },
-            {
-                value: 4,
-                text: 'April'
-            },
-            {
-                value: 5,
-                text: 'May'
-            },
-            {
-                value: 6,
-                text: 'June'
-            },
-            {
-                value: 7,
-                text: 'July'
-            },
-            {
-                value: 8,
-                text: 'August'
-            },
-            {
-                value: 9,
-                text: 'September'
-            },
-            {
-                value: 10,
-                text: 'October'
-            },
-            {
-                value: 11,
-                text: 'November'
-            },
-            {
-                value: 12,
-                text: 'December'
-            }
-        ],
-        dateList: [
-          { value: 1, text: '1 Tarikh'},
-          { value: 2, text: '2 Tarikh'},
-          { value: 3, text: '3 Tarikh'},
-          { value: 4, text: '4 Tarikh'},
-          { value: 5, text: '5 Tarikh'},
-          { value: 6, text: '6 Tarikh'},
-          { value: 7, text: '7 Tarikh'},
-          { value: 8, text: '8 Tarikh'},
-          { value: 9, text: '9 Tarikh'},
-          { value: 10, text: '10 Tarikh'},
-          { value: 11, text: '11 Tarikh'},
-          { value: 12, text: '12 Tarikh'},
-          { value: 13, text: '13 Tarikh'},
-          { value: 14, text: '14 Tarikh'},
-          { value: 15, text: '15 Tarikh'},
-          { value: 16, text: '16 Tarikh'},
-          { value: 17, text: '17 Tarikh'},
-          { value: 18, text: '18 Tarikh'},
-          { value: 19, text: '19 Tarikh'},
-          { value: 20, text: '20 Tarikh'},
-          { value: 21, text: '21 Tarikh'},
-          { value: 22, text: '22 Tarikh'},
-          { value: 23, text: '23 Tarikh'},
-          { value: 24, text: '24 Tarikh'},
-          { value: 25, text: '25 Tarikh'},
-          { value: 26, text: '26 Tarikh'},
-          { value: 27, text: '27 Tarikh'},
-          { value: 28, text: '28 Tarikh'},
-          { value: 29, text: '29 Tarikh'},
-          { value: 30, text: '30 Tarikh'},
-          { value: 31, text: '31 Tarikh'}
-        ]
+        editId: ''
       }
     },
     computed: {
         itemList () {
-            return this.$store.state.list
+            return this.$store.state.list.sort((a, b) => { return b.view_count - a.view_count })
         },
        fields () {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
                 { label: 'Name', class: 'text-center' },
+                { label: 'Channel', class: 'text-center' },
                 { label: 'Email', class: 'text-center' },
-                { label: 'Point', class: 'text-center' },
-                { label: 'Join', class: 'text-center' },
+                { label: 'Views', class: 'text-center' },
                 { label: 'Video Status', class: 'text-center' },
-                { label: 'Status', class: 'text-center' },
+                { label: 'Date', class: 'text-center' },
                 { label: 'Action', class: 'text-center' }
             ]
 
@@ -317,11 +169,11 @@ export default {
             keys = [
             { key: 'id' },
             { key: 'name' },
+            { key: 'channel_link' },
             { key: 'email' },
-            { key: 'point' },
-            { key: 'total_refer' },
+            { key: 'view_count' },
             { key: 'video_status' },
-            { key: 'status' },
+            { key: 'date' },
             { key: 'action' }
             ]
             return labels.map((item, index) => {

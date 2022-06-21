@@ -16,44 +16,70 @@
             </div>
         </CCardHeader>
         <CCardBody>
-            <b-row>
+                        <b-row>
                 <b-col  class="ml-3">
                     <ValidationObserver ref="form"  v-slot="{ handleSubmit, reset }">
                         <b-form  @submit.prevent="handleSubmit(searchData)" @reset.prevent="reset" >
                             <div class="row">
                                 <div class="col-md-4">
-                                     <b-form-group
-                                        class="row"
-                                        label-cols-sm="12"
-                                        label-for="formData"
-                                        >
-                                        <template v-slot:label>
-                                        Select Date <span class="text-danger">*</span>
-                                        </template>
-                                            <b-form-select
-                                            v-model="search.current_date"
-                                            :options="options"
-                                            id="name"
-                                            rows="6"
-                                            ></b-form-select>
-                                    </b-form-group>     
+                                    <b-form-group
+                                    class="row"
+                                    label-cols-md="12"
+                                    >
+                                    <template v-slot:label>
+                                    Name
+                                    </template>
+                                    <b-form-input
+                                        id="name"
+                                        v-model="search.name"
+                                        ></b-form-input>
+                                    </b-form-group>
                                 </div>
                                 <div class="col-md-4">
+                                    <b-form-group
+                                    class="row"
+                                    label-cols-md="12"
+                                    >
+                                    <template v-slot:label>
+                                    Mobile
+                                    </template>
+                                    <b-form-input
+                                        id="email"
+                                        v-model="search.email"
+                                        ></b-form-input>
+                                    </b-form-group>
+                                </div>
+                                <div class="col-md-4">
+                                    <b-form-group
+                                    class="row"
+                                    label-cols-md="12"
+                                    >
+                                    <template v-slot:label>
+                                    Video Url
+                                    </template>
+                                    <b-form-input
+                                        id="video_url"
+                                        v-model="search.video_url"
+                                        ></b-form-input>
+                                    </b-form-group>
+                                </div>
+                                <div class="col-md-12 text-right">
                                     <div style="height:40px">
-                                        <b-button style='position:absolute;bottom:15px' type="submit" variant="primary">Search</b-button>
+                                        <b-button type="submit" variant="primary">Search</b-button>
                                     </div>
                                 </div>
                             </div>
                         </b-form>
                     </ValidationObserver>
                 </b-col>
-            </b-row><br>
+            </b-row>
             <div class="row">
                 <b-col md="2" xl="2" sm="2">
                     <b-form-checkbox v-model="checkAll">Check All</b-form-checkbox>
                 </b-col>
-                <b-col md="2" xl="2" sm="2">
-                    <b-button style='position:absolute; bottom:5px' class="btn-sm" type="button" @click="deleteAll()" variant="danger">Delete</b-button>
+                <b-col md="4" xl="4" sm="4">
+                    <b-button style='' class="btn-sm" type="button" @click="deleteAll()" variant="danger">Delete</b-button>
+                    <b-button style='margin:2px' class="btn-sm" type="button" @click="activeAll()" variant="success">Active</b-button>
                 </b-col>
             </div>
             <b-overlay :show='loading'>
@@ -65,7 +91,7 @@
                         <template v-slot:cell(current_date)="data">
                             <span class="badge badge-success">{{ data.item.current_date }}</span>
                         </template>
-                        <template v-slot:cell(video_url)="data">
+                        <template v-slot:cell(link)="data">
                             <a :href="data.item.video_url" target="_blank">Link</a>
                         </template>
                         <template v-slot:cell(status)="data">
@@ -118,7 +144,9 @@ export default {
       return {
         checkAll: false,
         search: {
-            current_date: ''
+            name: '',
+            email: '',
+            video_url: ''
         },
         pagination: {
             perPage: 10,
@@ -169,7 +197,9 @@ export default {
         fields () {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
-                { label: 'Date', class: 'text-center' },
+                { label: 'Name', class: 'text-center' },
+                { label: 'Mobile', class: 'text-center' },
+                { label: 'URL', class: 'text-center' },
                 { label: 'Link', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center' }
@@ -178,8 +208,10 @@ export default {
             let keys = []
             keys = [
             { key: 'index' },
-            { key: 'current_date' },
+            { key: 'name' },
+            { key: 'email' },
             { key: 'video_url' },
+            { key: 'link' },
             { key: 'status' },
             { key: 'action' }
             ]
@@ -293,6 +325,47 @@ export default {
             })
             this.$store.dispatch('mutedLoad', { loading: true })
             RestApi.postData(baseUrl, `api/package/delete-all`, { data: itemList }).then(response => {
+                if (response.success) {
+                    this.$store.dispatch('mutedLoad', { listReload: true })
+                    iziToast.success({
+                        title: 'Success',
+                        message: response.message
+                    })
+                } else {
+                    iziToast.error({
+                        title: 'Error',
+                        message: response.message
+                    })
+                }
+                this.$store.dispatch('mutedLoad', { loading: false })
+            })
+        },
+        activeAll () {
+            this.$swal({
+                title: 'Are you sure to active message ?',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+                focusConfirm: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                this.activeallData()
+                }
+            })
+        },
+        activeallData () {
+            if (this.itemList.length <= 0) {
+                iziToast.error({
+                    title: 'Error',
+                    message: "Please enter message and check customer."
+                })
+                return false
+            }
+            const itemList = this.itemList.filter(item => item.select === true).map(item => {
+                return item.id
+            })
+            this.$store.dispatch('mutedLoad', { loading: true })
+            RestApi.postData(baseUrl, `api/package/active-all`, { data: itemList }).then(response => {
                 if (response.success) {
                     this.$store.dispatch('mutedLoad', { listReload: true })
                     iziToast.success({

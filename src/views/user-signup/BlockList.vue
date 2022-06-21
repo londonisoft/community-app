@@ -65,6 +65,9 @@
                                 {{ data.item.name }}
                             </router-link>
                         </template>
+                        <template v-slot:cell(channel_link)="data">
+                            <a target="_blank" :href="data.item.channel_link">Link</a>
+                        </template>
                         <template v-slot:cell(status)="data">
                             <span class="badge badge-success" v-if="data.item.status == 1">Active</span>
                             <span class="badge badge-danger" v-else>Block</span>
@@ -137,19 +140,20 @@ export default {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
                 { label: 'Name', class: 'text-center' },
+                { label: 'Channel', class: 'text-center' },
                 { label: 'Email', class: 'text-center' },
                 { label: 'Point', class: 'text-center' },
-                { label: 'Join', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center' }
             ]
 
             let keys = []
             keys = [
-            { key: 'index' },
+            { key: 'id' },
             { key: 'name' },
+            { key: 'channel_link' },
             { key: 'email' },
-            { key: 'point' },
+            { key: 'total_refer' },
             { key: 'status' },
             { key: 'action' }
             ]
