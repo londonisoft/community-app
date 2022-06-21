@@ -200,6 +200,7 @@ export default {
                 { label: 'Name', class: 'text-center' },
                 { label: 'Mobile', class: 'text-center' },
                 { label: 'URL', class: 'text-center' },
+                { label: 'Views', class: 'text-center' },
                 { label: 'Link', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center' }
@@ -211,6 +212,7 @@ export default {
             { key: 'name' },
             { key: 'email' },
             { key: 'video_url' },
+            { key: 'views' },
             { key: 'link' },
             { key: 'status' },
             { key: 'action' }
