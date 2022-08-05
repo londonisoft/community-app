@@ -20,7 +20,7 @@
                           <b-form-group
                             class="row"
                             label-cols-sm="12"
-                            label="Email:"
+                            label="Mobile:"
                             label-for="email"
                             slot-scope="{ valid, errors }"
                           >

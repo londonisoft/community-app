@@ -54,6 +54,25 @@ export default [{
             ]
         },
         {
+            _name: 'CSidebarNavDropdown',
+            name: 'Account',
+            route: '/account',
+            icon: 'cil-user',
+            items: [{
+                    name: 'All Account',
+                    to: '/account/all'
+                },
+                {
+                    name: 'Active Account',
+                    to: '/account/active'
+                },
+                {
+                    name: 'Block Account',
+                    to: '/account/block'
+                }
+            ]
+        },
+        {
             _name: 'CSidebarNavItem',
             name: 'Add Video',
             to: '/other/package',

@@ -15,7 +15,7 @@
                   <template #prepend-content><CIcon name="cil-user"/></template>
                 </CInput>
                 <CInput
-                  placeholder="Email"
+                  placeholder="Mobile"
                   autocomplete="email"
                   prepend="@"
                 />

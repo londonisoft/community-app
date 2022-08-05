@@ -76,6 +76,50 @@
                                     </ValidationProvider>
                                 </div>
                                 <div class="col-md-6">
+                                    <ValidationProvider name="Point" vid="point" rules="required">
+                                        <b-form-group
+                                        class="row"
+                                        label-cols-sm="12"
+                                        label-for="formData"
+                                        slot-scope="{ valid, errors }"
+                                        >
+                                        <template v-slot:label>
+                                        User Point <span class="text-danger">*</span>
+                                        </template>
+                                        <b-form-input
+                                            id="point"
+                                            v-model="formData.point"
+                                            :state="errors[0] ? false : (valid ? true : null)"
+                                            ></b-form-input>
+                                        <div class="invalid-feedback">
+                                            {{ errors[0] }}
+                                        </div>
+                                        </b-form-group>
+                                    </ValidationProvider>
+                                </div>
+                                <div class="col-md-6">
+                                    <ValidationProvider name="User Join" vid="total_refer" rules="required">
+                                        <b-form-group
+                                        class="row"
+                                        label-cols-sm="12"
+                                        label-for="formData"
+                                        slot-scope="{ valid, errors }"
+                                        >
+                                        <template v-slot:label>
+                                        User join <span class="text-danger">*</span>
+                                        </template>
+                                        <b-form-input
+                                            id="total_refer"
+                                            v-model="formData.total_refer"
+                                            :state="errors[0] ? false : (valid ? true : null)"
+                                            ></b-form-input>
+                                        <div class="invalid-feedback">
+                                            {{ errors[0] }}
+                                        </div>
+                                        </b-form-group>
+                                    </ValidationProvider>
+                                </div>
+                                <div class="col-md-6">
                                     <ValidationProvider name="Status" vid="status" rules="required">
                                         <b-form-group
                                         class="row"
@@ -120,7 +164,73 @@
                                     </ValidationProvider>
                                 </div>
                                 <div class="col-md-6">
-                                    <ValidationProvider name="Channel Link" vid="channel_link" rules="">
+                                    <ValidationProvider name="Refed ID" vid="refer_id" rules="">
+                                        <b-form-group
+                                        class="row"
+                                        label-cols-sm="12"
+                                        label-for="formData"
+                                        slot-scope="{ valid, errors }"
+                                        >
+                                        <template v-slot:label>
+                                        User Refed ID Used  <span class="text-danger">*</span>
+                                        </template>
+                                        <b-form-input
+                                            id="refer_id"
+                                            v-model="formData.refer_id"
+                                            :state="errors[0] ? false : (valid ? true : null)"
+                                            ></b-form-input>
+                                        <div class="invalid-feedback">
+                                            {{ errors[0] }}
+                                        </div>
+                                        </b-form-group>
+                                    </ValidationProvider>
+                                </div>
+                                <div class="col-md-6">
+                                    <ValidationProvider name="User Own Refer ID" vid="own_refer_id" rules="required">
+                                        <b-form-group
+                                        class="row"
+                                        label-cols-sm="12"
+                                        label-for="formData"
+                                        slot-scope="{ valid, errors }"
+                                        >
+                                        <template v-slot:label>
+                                        User Own Refer ID  <span class="text-danger">*</span>
+                                        </template>
+                                        <b-form-input
+                                            id="own_refer_id"
+                                            v-model="formData.own_refer_id"
+                                            :state="errors[0] ? false : (valid ? true : null)"
+                                            ></b-form-input>
+                                        <div class="invalid-feedback">
+                                            {{ errors[0] }}
+                                        </div>
+                                        </b-form-group>
+                                    </ValidationProvider>
+                                </div>
+                                <div class="col-md-6">
+                                    <ValidationProvider name="Daily Limit" vid="limit" rules="required">
+                                        <b-form-group
+                                        class="row"
+                                        label-cols-sm="12"
+                                        label-for="formData"
+                                        slot-scope="{ valid, errors }"
+                                        >
+                                        <template v-slot:label>
+                                        Daily Limit  <span class="text-danger">*</span>
+                                        </template>
+                                        <b-form-input
+                                            id="limit"
+                                            v-model="formData.limit"
+                                            :state="errors[0] ? false : (valid ? true : null)"
+                                            ></b-form-input>
+                                        <div class="invalid-feedback">
+                                            {{ errors[0] }}
+                                        </div>
+                                        </b-form-group>
+                                    </ValidationProvider>
+                                </div>
+                                <div class="col-md-6">
+                                    <ValidationProvider name="Channel Link" vid="channel_link" rules="required">
                                         <b-form-group
                                         class="row"
                                         label-cols-sm="12"

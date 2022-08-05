@@ -6,7 +6,7 @@
         <CCardHeader>
             <div class="row">
                 <div class="col-md-6">
-                    <strong>All List</strong>
+                    <strong>All Block Account List</strong>
                 </div>
             </div>
         </CCardHeader>
@@ -18,10 +18,25 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <b-form-group
+                                    class="row"
                                     label-cols-md="12"
                                     >
                                     <template v-slot:label>
-                                    Sender Email
+                                    Name
+                                    </template>
+                                    <b-form-input
+                                        id="name"
+                                        v-model="search.name"
+                                        ></b-form-input>
+                                    </b-form-group>
+                                </div>
+                                <div class="col-md-4">
+                                    <b-form-group
+                                    class="row"
+                                    label-cols-md="12"
+                                    >
+                                    <template v-slot:label>
+                                    Mobile
                                     </template>
                                     <b-form-input
                                         id="email"
@@ -30,47 +45,6 @@
                                     </b-form-group>
                                 </div>
                                 <div class="col-md-4">
-                                    <b-form-group
-                                    label-cols-md="12"
-                                    >
-                                    <template v-slot:label>
-                                    Receiver Email
-                                    </template>
-                                    <b-form-input
-                                        id="re_email"
-                                        v-model="search.re_email"
-                                        ></b-form-input>
-                                    </b-form-group>
-                                </div>
-                                <div class="col-md-4">
-                                    <b-form-group
-                                    label-cols-md="12"
-                                    >
-                                    <template v-slot:label>
-                                    Form Date
-                                    </template>
-                                    <b-form-input
-                                        id="form_date"
-                                        type="date"
-                                        v-model="search.form_date"
-                                        ></b-form-input>
-                                    </b-form-group>
-                                </div>
-                                <div class="col-md-4">
-                                    <b-form-group
-                                    label-cols-md="12"
-                                    >
-                                    <template v-slot:label>
-                                    To Date
-                                    </template>
-                                    <b-form-input
-                                        id="to_date"
-                                        type="date"
-                                        v-model="search.to_date"
-                                        ></b-form-input>
-                                    </b-form-group>
-                                </div>
-                                <div class="col-md-4 mt-2">
                                     <div style="height:40px">
                                         <b-button style='position:absolute;bottom:15px' type="submit" variant="primary">Search</b-button>
                                     </div>
@@ -84,20 +58,24 @@
                 <div class="overflow-auto">
                     <b-table thead-class="bg-light text-dark" emptyText="Data Not Found" small show-empty bordered hover :items="itemList" :fields="fields">
                         <template v-slot:cell(index)="data">
-                            {{ $n(data.index + pagination.slOffset) }}
+                            {{ data.index + pagination.slOffset }}
                         </template>
-                        <template v-slot:cell(user_email)="data">
+                        <template v-slot:cell(name)="data">
                             <router-link :to='`/users/profile?id=` + data.item.user_id' >
-                                {{ data.item.user_email }}
+                                {{ data.item.name }}
                             </router-link>
                         </template>
-                        <template v-slot:cell(email)="data">
-                            <router-link :to='`/users/profile?id=` + data.item.user_id' >
-                                {{ data.item.email }}
-                            </router-link>
+                        <template v-slot:cell(account_name)="data">
+                            Account ({{ parseInt(data.item.id) + 100 }})
                         </template>
-                        <template v-slot:cell(created_at)="data">
-                            {{ data.item.created_at | dateFormat }}
+                        <template v-slot:cell(status)="data">
+                            <span class="badge badge-success" v-if="data.item.status == 1">Active</span>
+                            <span class="badge badge-danger" v-else>Block</span>
+                        </template>
+                        <template v-slot:cell(action)="data">
+                            <b-button v-if="data.item.status == 2" title="Active" class="btn btn-success ml-2 btn-sm" @click="changeStatus(data.item)"> <i class="ri-check-line"></i></b-button>
+                            <b-button v-else title="Block" class="ml-2 btn btn-danger btn-sm" @click="changeStatus(data.item)"><i class="ri-close-line"></i></b-button>
+                            <b-button class="btn btn-success btn-sm ml-1" v-b-modal.account @click="edit(data.item)"><i class="ri-ball-pen-fill m-0"></i></b-button>
                         </template>
                     </b-table>
                 </div>
@@ -110,6 +88,14 @@
             @input="searchData"
             ></b-pagination>
         </CCardBody>
+        <b-modal id="account"
+            header-bg-variant="primary"
+            header-text-variant="light"
+            title="Edit Account" hide-footer>
+            <div>
+                <Form :id='editId'/>
+            </div>
+        </b-modal>
       </CCard>
     </CCol>
   </CRow>
@@ -119,10 +105,12 @@
 import RestApi, { baseUrl } from '../../config/api_config'
 import { ValidationObserver } from 'vee-validate'
 import iziToast from 'izitoast';
+import Form from '../../componests/user/Form'
 
 export default {
     components: {
-        ValidationObserver
+        ValidationObserver,
+        Form
     },
     created () {
         this.loadData ()
@@ -130,14 +118,14 @@ export default {
     data() {
       return {
         search: {
-            form_date: '',
-            to_date: '',
+            name: '',
             email: ''
         },
         pagination: {
             perPage: 10,
             currentPage: 1,
-            total: 0
+            total: 0,
+            slOffset: 1
         },
         editId: ''
       }
@@ -149,19 +137,25 @@ export default {
         fields () {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
-                { label: 'User Id', class: 'text-center' },
-                { label: 'Amount', class: 'text-center' },
-                { label: 'Transfer To', class: 'text-center' },
-                { label: 'Date', class: 'text-center' }
+                { label: 'Username', class: 'text-center' },
+                { label: 'Name', class: 'text-center' },
+                { label: 'Mobile', class: 'text-center' },
+                { label: 'Account Name', class: 'text-center' },
+                { label: 'Point', class: 'text-center' },
+                { label: 'Status', class: 'text-center' },
+                { label: 'Action', class: 'text-center' }
             ]
 
             let keys = []
             keys = [
             { key: 'id' },
-            { key: 'user_email' },
-            { key: 'amount' },
+            { key: 'username' },
+            { key: 'name' },
             { key: 'email' },
-            { key: 'created_at' }
+            { key: 'account_name' },
+            { key: 'point' },
+            { key: 'status' },
+            { key: 'action' }
             ]
             return labels.map((item, index) => {
                 return Object.assign(item, keys[index])
@@ -185,21 +179,11 @@ export default {
         edit (item) {
             this.editId = item.id
         },
-        changeStatus (item, status) {
-            this.$swal({
-                title: 'Are you sure to change status ?',
-                showCancelButton: true,
-                confirmButtonText: 'Yes',
-                cancelButtonText: 'No',
-                focusConfirm: false
-            }).then((result) => {
-                if (result.isConfirmed) {
-                this.toggleStatus(item, status)
-                }
-            })
+        changeStatus (item) {
+            this.toggleStatus(item)
         },
-        toggleStatus (item, statusId) {
-            RestApi.putData(baseUrl, `api/transfer/status/${item.id}`, { status: statusId }).then(response => {
+        toggleStatus (item) {
+            RestApi.deleteData(baseUrl, `api/account/status/${item.id}`).then(response => {
                 if (response.success) {
                     this.$store.dispatch('mutedLoad', { listReload: true })
                     iziToast.success({
@@ -218,9 +202,9 @@ export default {
             this.loadData()
         },
         loadData () {
-            const params = Object.assign({}, this.search, { page: this.pagination.currentPage, per_page: this.pagination.perPage })
+            const params = Object.assign({}, this.search, { page: this.pagination.currentPage, per_page: this.pagination.perPage, status: 2 })
             this.$store.dispatch('mutedLoad', { loading: true})
-            RestApi.getData(baseUrl, 'api/transfer/list', params).then(response => {
+            RestApi.getData(baseUrl, 'api/account/list', params).then(response => {
                 if (response.success) {
                     this.$store.dispatch('setList', response.data.data)
                     this.paginationData(response.data)
@@ -228,10 +212,11 @@ export default {
                 this.$store.dispatch('mutedLoad', { loading: false })
             })
         },
-        paginationData (data) {
+       paginationData (data) {
             this.pagination.perPage = parseInt(data.per_page)
             this.pagination.currentPage = parseInt(data.current_page)
-            this.pagination.total = parseInt(data.total)
+            this.pagination.total = parseInt(data.total),
+            this.pagination.slOffset = this.pagination.perPage * this.pagination.currentPage - this.pagination.perPage + 1
         }
     },
     filters: {

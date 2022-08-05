@@ -21,7 +21,7 @@
                                     label-cols-md="12"
                                     >
                                     <template v-slot:label>
-                                    Email
+                                    Mobile
                                     </template>
                                     <b-form-input
                                         id="email"

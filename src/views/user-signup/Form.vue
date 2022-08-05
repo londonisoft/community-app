@@ -18,11 +18,7 @@
                                         <table class='table table-sm'>
                                             <tr>
                                                 <th>Total Point</th>
-                                                <td>: {{ formData.point }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Paid</th>
-                                                <td>: {{ 0 }}</td>
+                                                <td>: N/A</td>
                                             </tr>
                                             <tr>
                                                 <th>Member Since</th>
@@ -62,28 +58,12 @@
                                                 <td> : {{ formData.name }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Email</td>
+                                                <td>Mobile</td>
                                                 <td> : {{ formData.email }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Total Point</td>
-                                                <td> : {{ formData.point }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Join</td>
-                                                <td> : {{ formData.total_refer }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Register Date</td>
                                                 <td> : {{ formData.created_at | dateFormat }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Refer Code</td>
-                                                <td> : {{ formData.own_refer_id }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Daliy Limit</td>
-                                                <td> : {{ formData.limit }}</td>
                                             </tr>
                                         </table>
                                     </b-tab>
@@ -100,38 +80,27 @@
       </b-col>
       <b-col lg="12" sm="12" class="mb-2">
           <button @click="setBtn('task', 'TaskComplete')" :class="(btn === 'task') ? `btn btn-success ml-2` : `btn btn-secondary ml-2`">Task List</button>
-          <!-- <button @click="setBtn('refer', 'ReferUser')" :class="(btn === 'refer') ? `btn btn-success ml-2` : `btn btn-secondary ml-2`">Refer List</button> -->
+          <button @click="setBtn('refer', 'AccountList')" :class="(btn === 'refer') ? `btn btn-success ml-2` : `btn btn-secondary ml-2`">Account List</button>
       </b-col>
       <b-col v-if="formData.id" lg="12" sm="12">
           <component :is="comp" :user_id="formData.id" :own_refer_id="formData.own_refer_id" ></component>
       </b-col>
     </b-row>
-    <b-modal id="modal-1"
-    size="lg"
-	header-bg-variant="primary"
-	header-text-variant="light"
-    title="Notification" hide-footer>
-    <div>
-		<Notification :id='editId'/>
-  </div>
-  </b-modal>
   </b-container>
 </template>
 <script>
 import RestApi, { baseUrl } from '../../config/api_config'
 import iziToast from 'izitoast';
-import Notification from './Notification'
 import UserInfoChange from './UserInfoChange'
 import TaskComplete from './../../componests/user/task-complete'
-import ReferUser from './../../componests/user/refer-user'
+import AccountList from './../../componests/user/AccountList'
 
 export default {
   props: ['id'],
   components: {
-    Notification,
     UserInfoChange,
     TaskComplete,
-    ReferUser
+    AccountList
     },
   created () {
 	if (this.$route.query.id) {

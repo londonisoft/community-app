@@ -1,17 +1,12 @@
 <template>
 <div>
     <CRow>
-    <CCol col>
+    <CCol>
       <CCard>
         <CCardHeader>
             <div class="row">
                 <div class="col-md-6">
-                    <CIcon name="cil-justify-center"/><strong> Add Wallet List</strong>
-                </div>
-                <div class="col-md-6">
-                    <div class="text-right">
-                          <button class="btn btn-primary" @click="editId = ''" v-b-modal.modal-1>Add New</button>
-                    </div>
+                    <strong>All Active Account List</strong>
                 </div>
             </div>
         </CCardHeader>
@@ -27,7 +22,21 @@
                                     label-cols-md="12"
                                     >
                                     <template v-slot:label>
-                                    Email
+                                    Name
+                                    </template>
+                                    <b-form-input
+                                        id="name"
+                                        v-model="search.name"
+                                        ></b-form-input>
+                                    </b-form-group>
+                                </div>
+                                <div class="col-md-4">
+                                    <b-form-group
+                                    class="row"
+                                    label-cols-md="12"
+                                    >
+                                    <template v-slot:label>
+                                    Mobile
                                     </template>
                                     <b-form-input
                                         id="email"
@@ -47,21 +56,26 @@
             </b-row>
             <b-overlay :show='loading'>
                 <div class="overflow-auto">
-                    <b-table thead-class="bg-light text-dark" emptyText="Data Not Found" show-empty bordered hover :items="itemList" :fields="fields">
+                    <b-table thead-class="bg-light text-dark" emptyText="Data Not Found" small show-empty bordered hover :items="itemList" :fields="fields">
                         <template v-slot:cell(index)="data">
-                            {{ $n(data.index + pagination.slOffset) }}
+                            {{ data.index + pagination.slOffset }}
                         </template>
-                        <template v-slot:cell(user_email)="data">
+                        <template v-slot:cell(name)="data">
                             <router-link :to='`/users/profile?id=` + data.item.user_id' >
-                                {{ data.item.user_email }}
+                                {{ data.item.name }}
                             </router-link>
+                        </template>
+                        <template v-slot:cell(account_name)="data">
+                            Account ({{ parseInt(data.item.id) + 100 }})
                         </template>
                         <template v-slot:cell(status)="data">
                             <span class="badge badge-success" v-if="data.item.status == 1">Active</span>
-                            <span class="badge badge-danger" v-else>Inactive</span>
+                            <span class="badge badge-danger" v-else>Block</span>
                         </template>
                         <template v-slot:cell(action)="data">
-                            <b-button class="btn btn-success btn-sm" v-b-modal.modal-1 @click="edit(data.item)"><i class="ri-ball-pen-fill m-0"></i></b-button>
+                            <b-button v-if="data.item.status == 2" title="Active" class="btn btn-success ml-2 btn-sm" @click="changeStatus(data.item)"> <i class="ri-check-line"></i></b-button>
+                            <b-button v-else title="Block" class="ml-2 btn btn-danger btn-sm" @click="changeStatus(data.item)"><i class="ri-close-line"></i></b-button>
+                            <b-button class="btn btn-success btn-sm ml-1" v-b-modal.account @click="edit(data.item)"><i class="ri-ball-pen-fill m-0"></i></b-button>
                         </template>
                     </b-table>
                 </div>
@@ -75,24 +89,27 @@
             ></b-pagination>
         </CCardBody>
       </CCard>
+        <b-modal id="account"
+            header-bg-variant="primary"
+            header-text-variant="light"
+            title="Edit Account" hide-footer>
+            <div>
+                <Form :id='editId'/>
+            </div>
+        </b-modal>
     </CCol>
   </CRow>
-  <b-modal id="modal-1"
-      size="lg"
-    header-bg-variant="primary"
-    header-text-variant="light"
-      title="Method Entry" hide-footer>
-    <div>
-        <Form :id='editId'/>
-  </div>
-  </b-modal>
 </div>
 </template>
 <script>
 import RestApi, { baseUrl } from '../../config/api_config'
-import Form from './Form'
+import { ValidationObserver } from 'vee-validate'
+import iziToast from 'izitoast';
+import Form from '../../componests/user/Form'
+
 export default {
     components: {
+        ValidationObserver,
         Form
     },
     created () {
@@ -101,12 +118,14 @@ export default {
     data() {
       return {
         search: {
+            name: '',
             email: ''
         },
         pagination: {
             perPage: 10,
             currentPage: 1,
-            total: 0
+            total: 0,
+            slOffset: 1
         },
         editId: ''
       }
@@ -118,16 +137,23 @@ export default {
         fields () {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
-                { label: 'Email', class: 'text-center' },
-                { label: 'Amount', class: 'text-center' },
+                { label: 'Username', class: 'text-center' },
+                { label: 'Name', class: 'text-center' },
+                { label: 'Mobile', class: 'text-center' },
+                { label: 'Account Name', class: 'text-center' },
+                { label: 'Point', class: 'text-center' },
+                { label: 'Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center' }
             ]
-
             let keys = []
             keys = [
             { key: 'id' },
-            { key: 'user_email' },
-            { key: 'amount' },
+            { key: 'username' },
+            { key: 'name' },
+            { key: 'email' },
+            { key: 'account_name' },
+            { key: 'point' },
+            { key: 'status' },
             { key: 'action' }
             ]
             return labels.map((item, index) => {
@@ -152,13 +178,32 @@ export default {
         edit (item) {
             this.editId = item.id
         },
+        changeStatus (item) {
+            this.toggleStatus(item)
+        },
+        toggleStatus (item) {
+            RestApi.deleteData(baseUrl, `api/account/status/${item.id}`).then(response => {
+                if (response.success) {
+                    this.$store.dispatch('mutedLoad', { listReload: true })
+                    iziToast.success({
+                        title: 'Success',
+                        message: response.message
+                    })
+                } else {
+                    iziToast.error({
+                        title: 'Success',
+                        message: response.message
+                    })
+                }
+            })
+        },
         searchData () {
             this.loadData()
         },
         loadData () {
-            const params = Object.assign({}, this.search, { page: this.pagination.currentPage, per_page: this.pagination.perPage })
+            const params = Object.assign({}, this.search, { page: this.pagination.currentPage, per_page: this.pagination.perPage, status: 1 })
             this.$store.dispatch('mutedLoad', { loading: true})
-            RestApi.getData(baseUrl, 'api/wallet/list', params).then(response => {
+            RestApi.getData(baseUrl, 'api/account/list', params).then(response => {
                 if (response.success) {
                     this.$store.dispatch('setList', response.data.data)
                     this.paginationData(response.data)
@@ -166,10 +211,11 @@ export default {
                 this.$store.dispatch('mutedLoad', { loading: false })
             })
         },
-        paginationData (data) {
+       paginationData (data) {
             this.pagination.perPage = parseInt(data.per_page)
             this.pagination.currentPage = parseInt(data.current_page)
-            this.pagination.total = parseInt(data.total)
+            this.pagination.total = parseInt(data.total),
+            this.pagination.slOffset = this.pagination.perPage * this.pagination.currentPage - this.pagination.perPage + 1
         }
     },
     filters: {

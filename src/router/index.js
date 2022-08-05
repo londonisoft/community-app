@@ -10,14 +10,13 @@ const TheContainer = () =>
 const Dashboard = () =>
     import ('@/views/Dashboard')
 
-const allWithdraw = () =>
-    import ('@/views/withdraw/List')
-const pendinWithdraw = () =>
-    import ('@/views/withdraw/Pending')
-const approveWithdraw = () =>
-    import ('@/views/withdraw/Approve')
-const rejectWithdraw = () =>
-    import ('@/views/withdraw/Reject')
+const allaccount = () =>
+    import ('@/views/account/List')
+const blockAccount = () =>
+    import ('@/views/account/BlockList')
+const activeAccount = () =>
+    import ('@/views/account/ActiveList')
+
 
 const allUser = () =>
     import ('@/views/user-signup/List')
@@ -32,20 +31,8 @@ const profile = () =>
 
 const setting = () =>
     import ('@/views/setting/Form')
-const packageList = () =>
-    import ('@/views/package/List')
-const purchasePackageList = () =>
-    import ('@/views/purchase-package/List')
-const addMoney = () =>
-    import ('@/views/add-money/List')
 const update = () =>
     import ('@/views/update/Form')
-const paymentMethod = () =>
-    import ('@/views/pay-method/List')
-const transferList = () =>
-    import ('@/views/transfer/List')
-const addWallet = () =>
-    import ('@/views/wallet/List')
 const changePass = () =>
     import ('@/views/change-pass/Form')
 
@@ -75,56 +62,32 @@ const routes = [{
                 }
             },
             {
-                path: 'withdraw',
+                path: 'account',
                 redirect: '/base/cards',
-                name: 'Withdraw',
+                name: 'account',
                 component: {
                     render(c) { return c('router-view') }
                 },
                 children: [{
                         path: 'all',
                         name: 'Popovers',
-                        component: allWithdraw,
+                        component: allaccount,
                         meta: {
                             requiresAuth: true
                         }
                     },
                     {
-                        path: 'approve',
+                        path: 'active',
                         name: 'Popovers',
-                        component: approveWithdraw,
+                        component: activeAccount,
                         meta: {
                             requiresAuth: true
                         }
                     },
                     {
-                        path: 'pending',
+                        path: 'block',
                         name: 'Popovers',
-                        component: pendinWithdraw,
-                        meta: {
-                            requiresAuth: true
-                        }
-                    },
-                    {
-                        path: 'reject',
-                        name: 'Popovers',
-                        component: rejectWithdraw,
-                        meta: {
-                            requiresAuth: true
-                        }
-                    },
-                    {
-                        path: 'transfer-list',
-                        name: 'transferList',
-                        component: transferList,
-                        meta: {
-                            requiresAuth: true
-                        }
-                    },
-                    {
-                        path: 'add-wallet',
-                        name: 'addWallet',
-                        component: addWallet,
+                        component: blockAccount,
                         meta: {
                             requiresAuth: true
                         }
@@ -204,41 +167,9 @@ const routes = [{
                         }
                     },
                     {
-                        path: 'package',
-                        name: 'Popovers',
-                        component: packageList,
-                        meta: {
-                            requiresAuth: true
-                        }
-                    },
-                    {
-                        path: 'purchase-package',
-                        name: 'Popovers',
-                        component: purchasePackageList,
-                        meta: {
-                            requiresAuth: true
-                        }
-                    },
-                    {
-                        path: 'add-money',
-                        name: 'Popovers',
-                        component: addMoney,
-                        meta: {
-                            requiresAuth: true
-                        }
-                    },
-                    {
                         path: 'update',
                         name: 'Popovers',
                         component: update,
-                        meta: {
-                            requiresAuth: true
-                        }
-                    },
-                    {
-                        path: 'payment-method',
-                        name: 'PaymentMethod',
-                        component: paymentMethod,
                         meta: {
                             requiresAuth: true
                         }

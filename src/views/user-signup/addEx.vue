@@ -7,7 +7,7 @@
                 <b-overlay :show="loading">
                     <ValidationObserver ref="form"  v-slot="{ handleSubmit, reset }">
                         <b-form  @submit.prevent="handleSubmit(register)" @reset.prevent="reset" >
-                        <ValidationProvider name="Email" vid="email" rules="required">
+                        <ValidationProvider name="Mobile" vid="email" rules="required">
                             <b-form-group
                             class="row"
                             label-cols-sm="12"
@@ -15,7 +15,7 @@
                             slot-scope="{ valid, errors }"
                             >
                             <template v-slot:label>
-                            Email <span class="text-danger">*</span>
+                            Mobile <span class="text-danger">*</span>
                             </template>
                             <b-form-input
                                 id="email"

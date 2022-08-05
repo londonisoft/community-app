@@ -86,7 +86,7 @@ export default {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
                 { label: 'Name', class: 'text-center' },
-                { label: 'Email', class: 'text-center' },
+                { label: 'Mobile', class: 'text-center' },
                 { label: 'Point', class: 'text-center' },
                 { label: 'Date', class: 'text-center' },
                 { label: 'Status', class: 'text-center' }

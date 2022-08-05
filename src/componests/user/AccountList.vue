@@ -2,34 +2,33 @@
 <div>
     <CRow>
     <CCol col>
-      <CCard>
+      <CCard accent-color="success">
         <CCardHeader>
             <div class="row">
                 <div class="col-md-6">
-                    <CIcon name="cil-justify-center"/><strong> Method List</strong>
-                </div>
-                <div class="col-md-6">
-                    <div class="text-right">
-                          <button class="btn btn-primary" @click="editId = ''" v-b-modal.modal-1>Add New</button>
-                    </div>
+                      <strong> Account List</strong>
                 </div>
             </div>
         </CCardHeader>
         <CCardBody>
             <b-overlay :show='loading'>
                 <div class="overflow-auto">
-                    <b-table thead-class="bg-light text-dark" emptyText="Data Not Found" show-empty bordered hover :items="itemList" :fields="fields">
+                    <b-table thead-class="bg-light text-dark" emptyText="Data Not Found" small show-empty bordered hover :items="itemList" :fields="fields">
                         <template v-slot:cell(index)="data">
                             {{ $n(data.index + pagination.slOffset) }}
                         </template>
+                        <template v-slot:cell(name)="data">
+                            Account ({{ data.item.id + 100 }})
+                        </template>
+                        <template v-slot:cell(due_point)="data">
+                            {{ 150 - data.item.point }}
+                        </template>
                         <template v-slot:cell(status)="data">
-                            <span class="badge badge-success" v-if="data.item.status == 1">Active</span>
+                            <span class="badge badge-success" v-if="parseInt(data.item.status) === 1">Active</span>
                             <span class="badge badge-danger" v-else>Inactive</span>
                         </template>
                         <template v-slot:cell(action)="data">
-                            <b-button v-if="data.item.status == 2" title="Change Status" class="ml-2 btn btn-success btn-sm" @click="changeStatus(data.item, 1)"><i class="ri-check-line"></i></b-button>
-                            <b-button v-else title="Change Status" class="ml-2 btn btn-danger btn-sm" @click="changeStatus(data.item, 2)"><i class="ri-close-line"></i></b-button>
-                            <b-button class="btn btn-success btn-sm ml-2" v-b-modal.modal-1 @click="edit(data.item)"><i class="ri-ball-pen-fill m-0"></i></b-button>
+                            <b-button class="btn btn-success btn-sm" v-b-modal.account @click="edit(data.item)"><i class="ri-ball-pen-fill m-0"></i></b-button>
                         </template>
                     </b-table>
                 </div>
@@ -45,11 +44,10 @@
       </CCard>
     </CCol>
   </CRow>
-  <b-modal id="modal-1"
-      size="lg"
+  <b-modal id="account"
     header-bg-variant="primary"
     header-text-variant="light"
-      title="Method Entry" hide-footer>
+      title="Edit Account" hide-footer>
     <div>
         <Form :id='editId'/>
   </div>
@@ -59,9 +57,8 @@
 <script>
 import RestApi, { baseUrl } from '../../config/api_config'
 import Form from './Form'
-import iziToast from 'izitoast';
-
 export default {
+    props: ['user_id','own_refer_id'],
     components: {
         Form
     },
@@ -88,8 +85,10 @@ export default {
         fields () {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
+                { label: 'User ID', class: 'text-center' },
                 { label: 'Name', class: 'text-center' },
-                { label: 'Min Amount', class: 'text-center' },
+                { label: 'Earn Point', class: 'text-center' },
+                { label: 'Available Point', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center' }
             ]
@@ -97,8 +96,10 @@ export default {
             let keys = []
             keys = [
             { key: 'id' },
+            { key: 'username' },
             { key: 'name' },
-            { key: 'min_amount' },
+            { key: 'point' },
+            { key: 'due_point' },
             { key: 'status' },
             { key: 'action' }
             ]
@@ -121,35 +122,6 @@ export default {
       }
     },
     methods: {
-        changeStatus (item, status) {
-            this.$swal({
-                title: 'Are you sure to change status ?',
-                showCancelButton: true,
-                confirmButtonText: 'Yes',
-                cancelButtonText: 'No',
-                focusConfirm: false
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.toggleStatus(item, status)
-                }
-            })
-        },
-        toggleStatus (item, statusId) {
-            RestApi.putData(baseUrl, `api/payment-method/status/${item.id}`, { status: statusId }).then(response => {
-                if (response.success) {
-                    this.$store.dispatch('mutedLoad', { listReload: true })
-                    iziToast.success({
-                        title: 'Success',
-                        message: response.message
-                    })
-                } else {
-                    iziToast.error({
-                        title: 'Success',
-                        message: response.message
-                    })
-                }
-            })
-        },
         edit (item) {
             this.editId = item.id
         },
@@ -157,9 +129,9 @@ export default {
             this.loadData()
         },
         loadData () {
-            const params = Object.assign({}, this.search, { page: this.pagination.currentPage, per_page: this.pagination.perPage })
+            const params = Object.assign({}, this.search, { user_id: this.user_id, page: this.pagination.currentPage, per_page: this.pagination.perPage })
             this.$store.dispatch('mutedLoad', { loading: true})
-            RestApi.getData(baseUrl, 'api/payment-method/list', params).then(response => {
+            RestApi.getData(baseUrl, 'api/user-signup/account-list', params).then(response => {
                 if (response.success) {
                     this.$store.dispatch('setList', response.data.data)
                     this.paginationData(response.data)

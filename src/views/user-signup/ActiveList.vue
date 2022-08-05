@@ -36,7 +36,7 @@
                                     label-cols-md="12"
                                     >
                                     <template v-slot:label>
-                                    Email
+                                    Mobile
                                     </template>
                                     <b-form-input
                                         id="email"
@@ -65,9 +65,6 @@
                                 {{ data.item.name }}
                             </router-link>
                         </template>
-                        <template v-slot:cell(channel_link)="data">
-                            <a target="_blank" :href="data.item.channel_link">Link</a>
-                        </template>
                         <template v-slot:cell(status)="data">
                             <span class="badge badge-success" v-if="data.item.status == 1">Active</span>
                             <span class="badge badge-danger" v-else>Block</span>
@@ -75,8 +72,6 @@
                         <template v-slot:cell(action)="data">
                             <b-button v-if="data.item.status == 2" title="Active" class="btn btn-success ml-2 btn-sm" @click="changeStatus(data.item)"> <i class="ri-check-line"></i></b-button>
                             <b-button v-else title="Block" class="ml-2 btn btn-danger btn-sm" @click="changeStatus(data.item)"><i class="ri-close-line"></i></b-button>
-                                                        <!-- <b-button v-b-modal.modal-1 title="Block" class="ml-2 btn btn-warning btn-sm" @click="edit(data.item)"> <i class="ri-notification-line"></i></b-button> -->
-
                         </template>
                     </b-table>
                 </div>
@@ -92,27 +87,16 @@
       </CCard>
     </CCol>
   </CRow>
-  <b-modal id="modal-1"
-    size="lg"
-	header-bg-variant="primary"
-	header-text-variant="light"
-    title="Notification" hide-footer>
-    <div>
-		<Notification :id='editId'/>
-  </div>
-  </b-modal>
 </div>
 </template>
 <script>
 import RestApi, { baseUrl } from '../../config/api_config'
 import { ValidationObserver } from 'vee-validate'
 import iziToast from 'izitoast';
-import Notification from './Notification'
 
 export default {
     components: {
-        ValidationObserver,
-        Notification
+        ValidationObserver
     },
     created () {
         this.loadData ()
@@ -140,9 +124,7 @@ export default {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
                 { label: 'Name', class: 'text-center' },
-                { label: 'Channel', class: 'text-center' },
-                { label: 'Email', class: 'text-center' },
-                { label: 'Point', class: 'text-center' },
+                { label: 'Mobile', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center' }
             ]
@@ -151,9 +133,7 @@ export default {
             keys = [
             { key: 'id' },
             { key: 'name' },
-            { key: 'channel_link' },
             { key: 'email' },
-            { key: 'total_refer' },
             { key: 'status' },
             { key: 'action' }
             ]

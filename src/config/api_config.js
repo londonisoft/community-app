@@ -1,5 +1,5 @@
 import axios from 'axios'
-export const baseUrl = 'https://youtubehelpkaiyumvai.com/youtubeapp/public/'
+export const baseUrl = 'https://youtubehelpkaiyumvai.com/onlinefamily/public/'
 
 export default {
     async execute(baseUrl, method, uri, data, params = {}) {

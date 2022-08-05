@@ -7,7 +7,7 @@
                 <b-overlay :show="loading">
                     <ValidationObserver ref="form"  v-slot="{ handleSubmit, reset }">
                         <b-form  @submit.prevent="handleSubmit(register)" @reset.prevent="reset" >
-                        <ValidationProvider name="User Id" vid="user_id" rules="required">
+                        <ValidationProvider name="Point" vid="point" rules="required">
                             <b-form-group
                             class="row"
                             label-cols-sm="12"
@@ -15,12 +15,12 @@
                             slot-scope="{ valid, errors }"
                             >
                             <template v-slot:label>
-                            Email <span class="text-danger">*</span>
+                            Point <span class="text-danger">*</span>
                             </template>
                             <b-form-input
-                                id="email"
+                                id="point"
                                 rows="6"
-                                v-model="formData.email"
+                                v-model="formData.point"
                                 :state="errors[0] ? false : (valid ? true : null)"
                                 ></b-form-input>
                             <div class="invalid-feedback">
@@ -28,7 +28,7 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
-                        <ValidationProvider name="Amount" vid="amount" rules="required">
+                        <ValidationProvider name="Point" vid="point" rules="required">
                             <b-form-group
                             class="row"
                             label-cols-sm="12"
@@ -36,14 +36,16 @@
                             slot-scope="{ valid, errors }"
                             >
                             <template v-slot:label>
-                            Amount <span class="text-danger">*</span>
+                            Status <span class="text-danger">*</span>
                             </template>
-                            <b-form-input
-                                id="amount"
-                                rows="6"
-                                v-model="formData.amount"
+                            <b-form-radio-group
+                                id="radio-group-1"
+                                v-model="formData.status"
+                                :options="options"
+                                :aria-describedby="ariaDescribedby"
+                                name="radio-options"
                                 :state="errors[0] ? false : (valid ? true : null)"
-                                ></b-form-input>
+                            ></b-form-radio-group>
                             <div class="invalid-feedback">
                                 {{ errors[0] }}
                             </div>
@@ -54,7 +56,7 @@
                             <div class="col text-right">
                             <b-button type="submit" variant="primary" class="mr-2">{{ saveBtnName }}</b-button>
                             &nbsp;
-                            <b-button variant="danger" class="mr-1" @click="$bvModal.hide('modal-1')">Close</b-button>
+                            <b-button variant="danger" class="mr-1" @click="$bvModal.hide('account')">Close</b-button>
                             </div>
                         </div>
                         </b-form>
@@ -85,15 +87,16 @@ export default {
     return {
       saveBtnName: this.id ? 'Update' : 'Save',
       formData: {
-        email: '',
-        amount: ''
-      }
+        point: '',
+        status: ''
+      },
+       options: [
+          { text: 'Active', value: 1 },
+          { text: 'Inactive', value: 0 }
+        ]
     }
   },
   computed: {
-      categoryList () {
-        return this.$store.state.commonObj.categoryList
-      },
       loading () {
         return this.$store.state.static.loading
       }
@@ -106,11 +109,7 @@ export default {
     async register () {
           this.$store.dispatch('mutedLoad', { loading: true, listReload: false })
         let result = null
-        if (this.id) {
-            result = await RestApi.putData(baseUrl, `${'api/wallet/update'}/${this.id}`, this.formData)
-        } else {
-            result = await RestApi.postData(baseUrl,'api/wallet/store', this.formData)
-        }
+        result = await RestApi.putData(baseUrl, `${'api/user-signup/account-update'}/${this.id}`, this.formData)
         this.$store.dispatch('mutedLoad', { loading: false, listReload: true })
         this.$store.dispatch('dropdownLoad', { hasDropdownLoaded: false })
         if (result.success) {
@@ -121,7 +120,7 @@ export default {
                 title: 'Success',
                 message: result.message
             })
-             this.$bvModal.hide('modal-1')
+             this.$bvModal.hide('account')
         } else {
             this.$refs.form.setErrors(result.errors)
         }

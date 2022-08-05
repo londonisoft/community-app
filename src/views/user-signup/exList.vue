@@ -36,7 +36,7 @@
                                     label-cols-md="12"
                                     >
                                     <template v-slot:label>
-                                    Email
+                                    Mobile
                                     </template>
                                     <b-form-input
                                         id="email"
@@ -135,13 +135,11 @@ export default {
         itemList () {
             return this.$store.state.list
         },
-       fields () {
+        fields () {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
                 { label: 'Name', class: 'text-center' },
-                { label: 'Email', class: 'text-center' },
-                { label: 'Point', class: 'text-center' },
-                { label: 'Join', class: 'text-center' },
+                { label: 'Mobile', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center' }
             ]
@@ -151,8 +149,6 @@ export default {
             { key: 'id' },
             { key: 'name' },
             { key: 'email' },
-            { key: 'point' },
-            { key: 'total_refer' },
             { key: 'status' },
             { key: 'action' }
             ]
