@@ -7,29 +7,6 @@ export default [{
             icon: 'cil-speedometer',
             items: []
         },
-        // {
-        //     _name: 'CSidebarNavDropdown',
-        //     name: 'Withdraw',
-        //     route: '/withdraw',
-        //     icon: 'cil-dollar',
-        //     items: [{
-        //             name: 'Pending List',
-        //             to: '/withdraw/pending'
-        //         },
-        //         {
-        //             name: 'Approve List',
-        //             to: '/withdraw/approve'
-        //         },
-        //         {
-        //             name: 'Reject List',
-        //             to: '/withdraw/reject'
-        //         },
-        //         {
-        //             name: 'All List',
-        //             to: '/withdraw/all'
-        //         }
-        //     ]
-        // },
         {
             _name: 'CSidebarNavDropdown',
             name: 'Users',
@@ -76,6 +53,13 @@ export default [{
             _name: 'CSidebarNavItem',
             name: 'Add Video',
             to: '/other/package',
+            icon: 'cil-list',
+            items: []
+        },
+        {
+            _name: 'CSidebarNavItem',
+            name: 'Video Warehouse',
+            to: '/other/video-warehouse',
             icon: 'cil-list',
             items: []
         },

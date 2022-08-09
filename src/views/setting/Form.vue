@@ -20,52 +20,6 @@
                                             <ValidationObserver ref="form"  v-slot="{ handleSubmit, reset }">
                                                 <b-form  @submit.prevent="handleSubmit(register)" @reset.prevent="reset" >
                                                     <div class="row">
-                                                        <!-- <div class="col-md-6">
-                                                            <ValidationProvider name="Refer Bonus (Tk)" vid="refer_bonus" rules="">
-                                                                <b-form-group
-                                                                class="row"
-                                                                label-cols-sm="12"
-                                                                label-for="formData"
-                                                                slot-scope="{ valid, errors }"
-                                                                >
-                                                                <template v-slot:label>
-                                                                Refer Bonus (Point) <span class="text-danger">*</span>
-                                                                </template>
-                                                                <b-form-input
-                                                                    type="text"
-                                                                    id="refer_bonus"
-                                                                    v-model="formData.refer_bonus"
-                                                                    :state="errors[0] ? false : (valid ? true : null)"
-                                                                    ></b-form-input>
-                                                                <div class="invalid-feedback">
-                                                                    {{ errors[0] }}
-                                                                </div>
-                                                                </b-form-group>
-                                                            </ValidationProvider>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <ValidationProvider name="Add Code" vid="add_code" rules="">
-                                                                <b-form-group
-                                                                class="row"
-                                                                label-cols-sm="12"
-                                                                label-for="formData"
-                                                                slot-scope="{ valid, errors }"
-                                                                >
-                                                                <template v-slot:label>
-                                                                Add Code <span class="text-danger">*</span>
-                                                                </template>
-                                                                <b-form-input
-                                                                    type="text"
-                                                                    id="add_code"
-                                                                    v-model="formData.add_code"
-                                                                    :state="errors[0] ? false : (valid ? true : null)"
-                                                                    ></b-form-input>
-                                                                <div class="invalid-feedback">
-                                                                    {{ errors[0] }}
-                                                                </div>
-                                                                </b-form-group>
-                                                            </ValidationProvider>
-                                                        </div> -->
                                                         <div class="col-md-6">
                                                             <ValidationProvider name="Visit Point" vid="visit_point" rules="">
                                                                 <b-form-group
@@ -135,6 +89,158 @@
                                                                 </b-form-group>
                                                             </ValidationProvider>
                                                         </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Video Password" vid="video_password" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="formData"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Video Password <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="video_password"
+                                                                    v-model="formData.video_password"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Delete After Views" vid="delete_after_view" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="formData"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Delete After Views <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="delete_after_view"
+                                                                    v-model="formData.delete_after_view"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-12 text-right">
+                                                            <b-button type="submit" variant="primary" style="margin-top:40px" class="mr-2">{{ saveBtnName }}</b-button>
+                                                        </div>
+                                                    </div>
+                                                </b-form>
+                                            </ValidationObserver>
+                                        </b-overlay>
+                                    </b-col>
+                                </div>
+                            </CCardBody>
+                        </CCard>
+                    </b-col>
+                    <b-col lg="12" sm="12">
+                        <CCard>
+                            <CCardHeader>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <strong>Country Setting</strong>
+                                    </div>
+                                </div>
+                            </CCardHeader>
+                            <CCardBody>
+                                <div>
+                                    <b-col lg="12" sm="12">
+                                        <b-overlay :show="false">
+                                            <ValidationObserver ref="form"  v-slot="{ handleSubmit, reset }">
+                                                <b-form  @submit.prevent="handleSubmit(register)" @reset.prevent="reset" >
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="1 To 50 (Country)" vid="one_to_fifty" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="formData"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                1 To 50 (Country) <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-select
+                                                                id="one_to_fifty"
+                                                                v-model="formData.one_to_fifty"
+                                                                :options="options"
+                                                                :state="errors[0] ? false : (valid ? true : null)">
+                                                                </b-form-select>
+
+
+
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="51 To 100 (Country)" vid="fiftyone_to_hundred" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="formData"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                51 To 100 (Country) <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-select
+                                                                id="fiftyone_to_hundred"
+                                                                v-model="formData.fiftyone_to_hundred"
+                                                                :options="options"
+                                                                :state="errors[0] ? false : (valid ? true : null)">
+                                                                </b-form-select>
+
+
+
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="101 To 150 (Country)" vid="hundredone_to_hundredfifty" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="formData"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                101 To 150 (Country) <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-select
+                                                                id="hundredone_to_hundredfifty"
+                                                                v-model="formData.hundredone_to_hundredfifty"
+                                                                :options="options"
+                                                                :state="errors[0] ? false : (valid ? true : null)">
+                                                                </b-form-select>
+
+
+
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
                                                         <div class="col-md-12 text-right">
                                                             <b-button type="submit" variant="primary" style="margin-top:40px" class="mr-2">{{ saveBtnName }}</b-button>
                                                         </div>
@@ -173,9 +279,15 @@ export default {
       formData: {
         visit_point: '',
         start_duration: '',
-        end_duration: ''
+        end_duration: '',
+        one_to_fifty: 'CA'
       },
-      editId: ''
+      editId: '',
+      options: [
+          { value: 'CA', text: 'Canada' },
+          { value: 'CB', text: 'Uk' },
+          { value: 'US', text: 'US' },
+        ]
     }
   },
   computed: {

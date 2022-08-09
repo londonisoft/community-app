@@ -16,7 +16,9 @@ const blockAccount = () =>
     import ('@/views/account/BlockList')
 const activeAccount = () =>
     import ('@/views/account/ActiveList')
-
+    
+const videoWarehouse = () =>
+        import ('@/views/video-warehouse/List')
 
 const allUser = () =>
     import ('@/views/user-signup/List')
@@ -35,7 +37,8 @@ const update = () =>
     import ('@/views/update/Form')
 const changePass = () =>
     import ('@/views/change-pass/Form')
-
+const packageList = () =>
+    import ('@/views/package/List')
 // Views - Pages
 const Page404 = () =>
     import ('@/views/pages/Page404')
@@ -154,6 +157,22 @@ const routes = [{
                         path: 'setting',
                         name: 'Popovers',
                         component: setting,
+                        meta: {
+                            requiresAuth: true
+                        }
+                    },
+                    {
+                        path: 'package',
+                        name: 'Popovers',
+                        component: packageList,
+                        meta: {
+                            requiresAuth: true
+                        }
+                    },
+                    {
+                        path: 'video-warehouse',
+                        name: 'Popovers',
+                        component: videoWarehouse,
                         meta: {
                             requiresAuth: true
                         }

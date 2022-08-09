@@ -84,14 +84,11 @@
                                 {{ data.item.name }}
                             </router-link>
                         </template>
-                        <template v-slot:cell(channel_link)="data">
-                            <a target="_blank" :href="data.item.channel_link">Link</a>
-                        </template>
                         <template v-slot:cell(date)>
                             {{ search.work_date }}
                         </template>
-                        <template v-slot:cell(video_status)="data">
-                            <span class="badge badge-success" v-if="parseInt(data.item.status) == 1">Added</span>
+                        <template v-slot:cell(video_added_status)="data">
+                            <span class="badge badge-success" v-if="parseInt(data.item.video_added_status) == 1">Added</span>
                             <span class="badge badge-danger" v-else>Not Added</span>
                         </template>
                         <!-- <template v-slot:cell(status)="data">
@@ -156,24 +153,22 @@ export default {
        fields () {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
+                { label: 'Username', class: 'text-center' },
                 { label: 'Name', class: 'text-center' },
-                { label: 'Channel', class: 'text-center' },
                 { label: 'Mobile', class: 'text-center' },
                 { label: 'Views', class: 'text-center' },
-                { label: 'Video Status', class: 'text-center' },
-                { label: 'Date', class: 'text-center' },
+                { label: 'Video Added Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center' }
             ]
 
             let keys = []
             keys = [
             { key: 'id' },
+            { key: 'username' },
             { key: 'name' },
-            { key: 'channel_link' },
             { key: 'email' },
-            { key: 'view_count' },
-            { key: 'video_status' },
-            { key: 'date' },
+            { key: 'point' },
+            { key: 'video_added_status' },
             { key: 'action' }
             ]
             return labels.map((item, index) => {
