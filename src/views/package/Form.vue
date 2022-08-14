@@ -28,6 +28,27 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
+                        <ValidationProvider name="Video URL" vid="del_views" rules="required">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="formData"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                            Video URL <span class="text-danger">*</span>
+                            </template>
+                            <b-form-input
+                                id="del_views"
+                                rows="6"
+                                v-model="formData.del_views"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                                ></b-form-input>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
                         <div class="row">
                             <div class="col-sm-3"></div>
                             <div class="col text-right">

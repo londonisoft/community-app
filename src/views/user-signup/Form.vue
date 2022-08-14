@@ -18,7 +18,7 @@
                                         <table class='table table-sm'>
                                             <tr>
                                                 <th>Total Point</th>
-                                                <td>: N/A</td>
+                                                <td>: {{ total_point }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Member Since</th>
@@ -64,6 +64,10 @@
                                             <tr>
                                                 <td>Register Date</td>
                                                 <td> : {{ formData.created_at | dateFormat }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Total Point</th>
+                                                <td>: {{ total_point }}</td>
                                             </tr>
                                         </table>
                                     </b-tab>
@@ -114,6 +118,7 @@ export default {
 		type_id: 0,
         name: ''
       },
+      total_point: 0,
       editId: '',
       comp: 'TaskComplete',
       btn: 'task',
@@ -135,6 +140,7 @@ export default {
          RestApi.getData(baseUrl, `api/user-signup/show/${this.$route.query.id}`).then(response => {
                 if (response.success) {
                     this.formData = response.data
+                    this.total_point = response.total_point
                 }
                 this.loading = false
             })
