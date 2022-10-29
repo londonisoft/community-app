@@ -119,6 +119,14 @@ const routes = [{
                         }
                     },
                     {
+                        path: 'payment-due-report',
+                        name: 'PaymentMethod',
+                        component: () => import('../views/payment-report/List'),
+                        meta: {
+                            requiresAuth: true
+                        }
+                    },
+                    {
                         path: 'change-password',
                         name: 'PaymentMethod',
                         component: changePass,

@@ -35,23 +35,10 @@
                         </ValidationProvider>
                         <b-row>
                             <b-col md =6 lg =6 sm =6>
-                                <Input @return-value="setReturnData({ account_num: $event})" :input="{ cols: 12, type: 'text', name: 'account_num', rules: '', vmodel: formData.account_num }"/>
+                                <Input :key="key" @return-value="setReturnData({ pay_date: $event})" :input="{ cols: 12, type: 'date', name: 'pay_date', rules: 'required', vmodel: formData.pay_date, disabled: true }"/>
                             </b-col>
                             <b-col md =6 lg =6 sm =6>
                                 <Input :key="key" @return-value="setReturnData({ amount: $event})" :input="{ cols: 12, type: 'text', name: 'amount', rules: 'required', vmodel: formData.amount }"/>
-                            </b-col>
-                        </b-row>
-                        <b-row>
-                            <b-col md =6 lg =6 sm =6>
-                                <Select @return-value="setReturnData({ payment_method: $event})" :input="{ cols: 12, type: 'text', name: 'payment_method', rules: 'required', vmodel: formData.payment_method, options: methodList }"/>
-                            </b-col>
-                            <b-col md =6 lg =6 sm =6>
-                                <Input :key="key" @return-value="setReturnData({ pay_date: $event})" :input="{ cols: 12, type: 'date', name: 'pay_date', rules: 'required', vmodel: formData.pay_date, disabled: true }"/>
-                            </b-col>
-                        </b-row>
-                        <b-row>
-                            <b-col md =6 lg =6 sm =6>
-                                <Input @return-value="setReturnData({ transaction_no: $event})" :input="{ cols: 12, type: 'text', name: 'transaction_no', rules: '', vmodel: formData.payment_method }"/>
                             </b-col>
                         </b-row>
                         <div class="row">
@@ -103,11 +90,8 @@ export default {
       saveBtnName: this.id ? 'Update' : 'Save',
       formData: {
         customer_id: '',
-        payment_method: '',
-        account_num: '',
         amount: '',
-        pay_date: '',
-        transaction_no: ''
+        pay_date: ''
       },
       key: 1,
       methodList: [
@@ -130,7 +114,9 @@ export default {
   },
   watch: {
       'formData.customer_id' (n, o) {
-        this.getPayDate()
+        if (!this.id) {
+          this.getPayDate()
+        }
       }
   },
   methods: {

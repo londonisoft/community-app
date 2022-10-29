@@ -107,14 +107,14 @@ export default {
     computed: {
         fields () {
             const labels = [
-                { label: 'Sl No', class: 'text-center grid-sl' },
-                { label: 'Customer ID', class: 'text-center' },
-                { label: 'Name', class: 'text-center' },
-                { label: 'Mobile', class: 'text-center' },
-                { label: 'Load Amount', class: 'text-center' },
-                { label: 'Paying Amount', class: 'text-center' },
-                { label: 'Status', class: 'text-center' },
-                { label: 'Action', class: 'text-center grid-action' }
+                { label: 'ক্রমিক নং', class: 'text-left' },
+                { label: 'গ্রাহক আইডি', class: 'text-center' },
+                { label: 'গ্রাহকের নাম', class: 'text-center' },
+                { label: 'মোবাইল', class: 'text-center' },
+                { label: 'ঋণের পরিমাণ', class: 'text-center' },
+                { label: 'পেয়িং এমাউন্ট', class: 'text-center' },
+                { label: 'স্ট্যাটাস', class: 'text-center' },
+                { label: 'অ্যাকশন', class: 'text-center' }
             ]
 
             let keys = []

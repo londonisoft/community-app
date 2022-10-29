@@ -33,6 +33,14 @@ export default [{
             permission: 'due-report'
         },
         {
+            _name: 'CSidebarNavItem',
+            name: 'পেমেন্ট বকেয়া রিপোর্ট',
+            to: '/other/payment-due-report',
+            icon: 'cil-ban',
+            items: [],
+            permission: 'due-report'
+        },
+        {
             _name: 'CSidebarNavDropdown',
             name: 'সফ্টওয়্যার ব্যবহারকারী',
             route: '/app-users',
