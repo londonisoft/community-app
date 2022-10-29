@@ -12,9 +12,13 @@ function capitalize (string) {
 const formatForDate = 'DD/MM/YYYY'
 
 function dateFormat (value, format = formatForDate) {
+  if (value) {
     require('moment/min/locales.min.js')
     moment.locale(i18n.locale)
     return moment(value).format(format)
+  } else {
+    return '';
+  }
 }
 Vue.filter('dateFormat', function (value) {
     return dateFormat(value)

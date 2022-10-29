@@ -8,7 +8,7 @@
             slot-scope="{ valid, errors }"
             >
             <template v-slot:label>
-            {{ input.name | snakeToWords }} <span v-if="input.rules" class="text-danger">*</span>
+            {{  input.label ? input.label : input.name | snakeToWords }} <span v-if="input.rules" class="text-danger">*</span>
             </template>
             <b-form-input
                 :type="input.type"

@@ -1,4 +1,5 @@
 import axios from 'axios'
+// export const baseUrl = 'http://127.0.0.1:8000'
 export const baseUrl = 'https://appmakerit.com/accounts/public/'
 export default {
     async execute(baseUrl, method, uri, data, params = {}) {

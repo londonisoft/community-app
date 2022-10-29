@@ -37,10 +37,10 @@
                                         </ValidationProvider>                                    
                                     </b-col>
                                     <b-col md="6">
-                                        <Input @return-value="setReturnData({ cust_id: $event})" :input="{ cols: 3, type: 'text', name: 'cust_id', rules: '', vmodel: search.cust_id }"/>
+                                        <Input @return-value="setReturnData({ account_num: $event})" :input="{ cols: 3, type: 'text', name: 'account_num', rules: '', vmodel: search.account_num }"/>
                                     </b-col>
                                     <b-col md="6">
-                                        <Input @return-value="setReturnData({ account_num: $event})" :input="{ cols: 3, type: 'text', name: 'account_num', rules: '', vmodel: search.account_num }"/>
+                                        <Input @return-value="setReturnData({ mobile: $event})" :input="{ cols: 3, type: 'text', name: 'mobile', rules: '', vmodel: search.mobile }"/>
                                     </b-col>
                                     <div class="col-md-12 pt-0 mt-0">
                                         <div class="text-right">
@@ -58,7 +58,7 @@
         <CCardHeader>
             <div class="row">
                 <div class="col-md-6">
-                    <CIcon name="cil-justify-center"/><strong> Payment List</strong>
+                    <CIcon name="cil-justify-center"/><strong> পেমেন্ট গ্রহণ তালিকা</strong>
                 </div>
                 <div class="col-md-6">
                     <div class="text-right">
@@ -106,7 +106,7 @@
       size="lg"
     header-bg-variant="primary"
     header-text-variant="light"
-      title="Payment Entry" hide-footer>
+      title="পেমেন্ট যোগ করুন" hide-footer>
     <div>
         <Form :id='editId'/>
   </div>

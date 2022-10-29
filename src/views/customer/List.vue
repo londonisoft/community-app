@@ -15,9 +15,6 @@
                                     <b-col md="6">
                                         <Input @return-value="setReturnData({ mobile: $event})" :input="{ cols: 3, type: 'text', name: 'mobile', rules: '', vmodel: search.mobile }"/>
                                     </b-col>
-                                    <b-col md="6">
-                                        <Input @return-value="setReturnData({ nid: $event})" :input="{ cols: 3, type: 'text', name: 'nid', rules: '', vmodel: search.nid }"/>
-                                    </b-col>
                                     <div class="col-md-12 pt-0 mt-0">
                                         <div class="text-right">
                                             <b-button type="submit" class="btn-font" variant="primary"><i class="ri-search-line"></i> Search</b-button>
@@ -34,7 +31,7 @@
             <CCardHeader>
                 <div class="row">
                     <div class="col-md-6">
-                        <strong>Customer List</strong>
+                        <strong> গ্রাহকদের তালিকা </strong>
                     </div>
                     <div class="col-md-6 text-right">
                         <button v-if="$can('customer-create')" class="btn btn-primary btn-font" @click="editId = ''" v-b-modal.modal-1><i class="ri-add-line"></i> Add New</button>
@@ -75,7 +72,7 @@
       size="lg"
     header-bg-variant="primary"
     header-text-variant="light"
-      title="Customer Entry" hide-footer>
+      title="গ্রাহক যোগ করুন" hide-footer>
     <div>
         <Form :id='editId'/>
   </div>
@@ -114,7 +111,8 @@ export default {
                 { label: 'Customer ID', class: 'text-center' },
                 { label: 'Name', class: 'text-center' },
                 { label: 'Mobile', class: 'text-center' },
-                { label: 'National Id', class: 'text-center' },
+                { label: 'Load Amount', class: 'text-center' },
+                { label: 'Paying Amount', class: 'text-center' },
                 { label: 'Status', class: 'text-center' },
                 { label: 'Action', class: 'text-center grid-action' }
             ]
@@ -125,7 +123,8 @@ export default {
             { key: 'cust_id' },
             { key: 'name' },
             { key: 'mobile' },
-            { key: 'nid' },
+            { key: 'loan_amount' },
+            { key: 'paying_amount' },
             { key: 'status' },
             { key: 'action' }
             ]

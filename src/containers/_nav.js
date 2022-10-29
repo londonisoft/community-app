@@ -2,7 +2,7 @@ export default [{
     _name: 'CSidebarNav',
     _children: [{
             _name: 'CSidebarNavItem',
-            name: 'sidebar.dashboard',
+            name: 'ড্যাশবোর্ড',
             to: '/dashboard',
             icon: 'cil-speedometer',
             items: [],
@@ -10,7 +10,7 @@ export default [{
         },
         {
             _name: 'CSidebarNavItem',
-            name: 'Customers',
+            name: 'গ্রাহকদের তালিকা',
             to: '/other/customer-list',
             icon: 'cil-list',
             items: [],
@@ -18,7 +18,7 @@ export default [{
         },
         {
             _name: 'CSidebarNavItem',
-            name: 'Payments',
+            name: 'পেমেন্ট গ্রহণ',
             to: '/other/payment-list',
             icon: 'cil-ban',
             items: [],
@@ -26,7 +26,7 @@ export default [{
         },
         {
             _name: 'CSidebarNavItem',
-            name: 'Due Report',
+            name: 'পেমেন্ট রিপোর্ট',
             to: '/other/due-report',
             icon: 'cil-ban',
             items: [],
@@ -34,14 +34,14 @@ export default [{
         },
         {
             _name: 'CSidebarNavDropdown',
-            name: 'User Management',
+            name: 'সফ্টওয়্যার ব্যবহারকারী',
             route: '/app-users',
             icon: 'cil-user',
             permission: 'app-user-list',
             items: [
                 {
                     _name: 'CSidebarNavItem',
-                    name: 'Admin Users',
+                    name: 'অ্যাডমিন তালিকা',
                     to: '/app-management/admin-users',
                     icon: 'cil-people',
                     items: [],
@@ -49,7 +49,7 @@ export default [{
                   },
                   {
                     _name: 'CSidebarNavItem',
-                    name: 'Roles',
+                    name: 'রোল',
                     to: '/app-management/roles',
                     icon: 'cil-list',
                     items: [],
@@ -57,7 +57,7 @@ export default [{
                   },
                   {
                     _name: 'CSidebarNavItem',
-                    name: 'Permissions',
+                    name: 'অনুমতি তালিকা',
                     to: '/app-management/permissions',
                     icon: 'cil-list',
                     items: [],

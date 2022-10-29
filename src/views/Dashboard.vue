@@ -15,7 +15,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                <div class="text-muted text-uppercase font-weight-bold"> Total Customer </div>
+                                <div class="text-muted text-uppercase font-weight-bold"> মোট গ্রাহক </div>
                                 <div class="text-value text-gradient-primary">{{ parseFloat(formData.total_customer).toFixed(2) }}</div>
                                 </div>
                             </div>
@@ -31,7 +31,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                <div class="text-muted text-uppercase font-weight-bold"> Total Loan </div>
+                                <div class="text-muted text-uppercase font-weight-bold"> মোট ঋণ </div>
                                 <div class="text-value text-gradient-primary">{{ parseFloat(formData.total_loan).toFixed(2) }}</div>
                                 </div>
                             </div>
@@ -47,7 +47,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                <div class="text-muted text-uppercase font-weight-bold"> Total Paid </div>
+                                <div class="text-muted text-uppercase font-weight-bold"> মোট উত্তোলন </div>
                                 <div class="text-value text-gradient-primary">{{ parseFloat(formData.total_paid).toFixed(2) }}</div>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                <div class="text-muted text-uppercase font-weight-bold"> Total Due </div>
+                                <div class="text-muted text-uppercase font-weight-bold"> মোট উত্তোলন বাকি </div>
                                 <div class="text-value text-gradient-primary">
                                     {{ parseFloat(formData.total_due).toFixed(2) }}
                                 </div>
@@ -81,7 +81,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                <div class="text-muted text-uppercase font-weight-bold"> Today Loan </div>
+                                <div class="text-muted text-uppercase font-weight-bold"> আজ ঋণ </div>
                                 <div class="text-value text-gradient-primary">
                                     {{ parseFloat(formData.today_loan).toFixed(2) }}
                                 </div>
@@ -99,7 +99,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                <div class="text-muted text-uppercase font-weight-bold"> Today Paid </div>
+                                <div class="text-muted text-uppercase font-weight-bold"> আজ উত্তোলন </div>
                                 <div class="text-value text-gradient-primary">
                                     {{ parseFloat(formData.today_paid).toFixed(2) }}
                                 </div>

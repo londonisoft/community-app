@@ -7,7 +7,7 @@
                 <b-overlay :show="loading">
                     <ValidationObserver ref="form"  v-slot="{ handleSubmit, reset }">
                         <b-form  @submit.prevent="handleSubmit(register)" @reset.prevent="reset" >
-                        <ValidationProvider name="Category" vid="customer_id" rules="required">
+                        <ValidationProvider name="Customer" vid="customer_id" rules="required">
                             <b-form-group
                             class="row"
                             label-cols-sm="12"
@@ -15,7 +15,7 @@
                             slot-scope="{ valid, errors }"
                             >
                             <template v-slot:label>
-                            Category <span class="text-danger">*</span>
+                            Customer <span class="text-danger">*</span>
                             </template>
                             <v-select
                                 id="customer_id"
@@ -35,10 +35,10 @@
                         </ValidationProvider>
                         <b-row>
                             <b-col md =6 lg =6 sm =6>
-                                <Input @return-value="setReturnData({ account_num: $event})" :input="{ cols: 12, type: 'text', name: 'account_num', rules: 'required', vmodel: formData.account_num }"/>
+                                <Input @return-value="setReturnData({ account_num: $event})" :input="{ cols: 12, type: 'text', name: 'account_num', rules: '', vmodel: formData.account_num }"/>
                             </b-col>
                             <b-col md =6 lg =6 sm =6>
-                                <Input @return-value="setReturnData({ amount: $event})" :input="{ cols: 12, type: 'text', name: 'amount', rules: 'required', vmodel: formData.amount }"/>
+                                <Input :key="key" @return-value="setReturnData({ amount: $event})" :input="{ cols: 12, type: 'text', name: 'amount', rules: 'required', vmodel: formData.amount }"/>
                             </b-col>
                         </b-row>
                         <b-row>
@@ -46,7 +46,7 @@
                                 <Select @return-value="setReturnData({ payment_method: $event})" :input="{ cols: 12, type: 'text', name: 'payment_method', rules: 'required', vmodel: formData.payment_method, options: methodList }"/>
                             </b-col>
                             <b-col md =6 lg =6 sm =6>
-                                <Input @return-value="setReturnData({ pay_date: $event})" :input="{ cols: 12, type: 'date', name: 'pay_date', rules: 'required', vmodel: formData.pay_date }"/>
+                                <Input :key="key" @return-value="setReturnData({ pay_date: $event})" :input="{ cols: 12, type: 'date', name: 'pay_date', rules: 'required', vmodel: formData.pay_date, disabled: true }"/>
                             </b-col>
                         </b-row>
                         <b-row>
@@ -109,6 +109,7 @@ export default {
         pay_date: '',
         transaction_no: ''
       },
+      key: 1,
       methodList: [
           { value: "BKash", text: 'BKash' },
           { value: "Rocket", text: 'Rocket' },
@@ -125,6 +126,11 @@ export default {
       },
       loading () {
         return this.$store.state.static.loading
+      }
+  },
+  watch: {
+      'formData.customer_id' (n, o) {
+        this.getPayDate()
       }
   },
   methods: {
@@ -153,6 +159,16 @@ export default {
              this.$bvModal.hide('modal-1')
         } else {
             this.$refs.form.setErrors(result.errors)
+        }
+    },
+    async getPayDate () {
+        this.$store.dispatch('mutedLoad', { loading: true, listReload: false })
+        const result = await RestApi.getData(baseUrl, `${'api/payment/get-date'}/${this.formData.customer_id}`)
+        this.$store.dispatch('mutedLoad', { loading: false, listReload: false })
+        if (result.success) {
+          this.formData.amount = result.data.amount
+          this.formData.pay_date = result.data.pay_date
+          this.key = this.key + 1
         }
     }
   }

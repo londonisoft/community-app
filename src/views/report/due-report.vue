@@ -18,7 +18,7 @@
                                             slot-scope="{ valid, errors }"
                                             >
                                             <template v-slot:label>
-                                            Customer <span class="text-danger">*</span>
+                                            গ্রাহক <span class="text-danger">*</span>
                                             </template>
                                             <v-select
                                                 id="customer_id"
@@ -37,10 +37,7 @@
                                         </ValidationProvider>                                    
                                     </b-col>
                                     <b-col md="6">
-                                        <Input @return-value="setReturnData({ cust_id: $event})" :input="{ cols: 3, type: 'text', name: 'cust_id', rules: '', vmodel: search.cust_id }"/>
-                                    </b-col>
-                                    <b-col md="6">
-                                        <Input @return-value="setReturnData({ account_num: $event})" :input="{ cols: 3, type: 'text', name: 'account_num', rules: '', vmodel: search.account_num }"/>
+                                        <Input @return-value="setReturnData({ mobile: $event})" :input="{ cols: 3, type: 'text', name: 'mobile', rules: '', vmodel: search.mobile, label: 'মোবাইল' }"/>
                                     </b-col>
                                     <div class="col-md-12 pt-0 mt-0">
                                         <div class="text-right">
@@ -58,7 +55,7 @@
         <CCardHeader>
             <div class="row">
                 <div class="col-md-6">
-                    <CIcon name="cil-justify-center"/><strong> Due Report</strong>
+                    <CIcon name="cil-justify-center"/><strong>  পেমেন্ট রিপোর্ট </strong>
                 </div>
             </div>
         </CCardHeader>
@@ -67,48 +64,41 @@
                 <div class="overflow-auto">
                     <table class="table table-sm table-bordered">
                         <tr>
-                            <th rowspan="2" class="text-center">SL NO</th>
-                            <th rowspan="2" class="text-center">Customer Name</th>
-                            <th rowspan="2" class="text-center">Customer ID</th>
-                            <th colspan="2" class="text-center">Paid Detail</th>
-                            <th rowspan="2" class="text-center">Total Paid</th>
-                            <th rowspan="2" class="text-center">Loan Amount</th>
-                            <th rowspan="2" class="text-center">Due Amount</th>
+                            <th rowspan="2" class="text-center">ক্রমিক নং</th>
+                            <th rowspan="2" class="text-center">গ্রাহকের নাম</th>
+                            <th rowspan="2" class="text-center">গ্রাহক আইডি</th>
+                            <th colspan="3" class="text-center">পরিশোধিত বিবরণ</th>
+                            <th rowspan="2" class="text-center">মোট পরিশোধিত</th>
+                            <th rowspan="2" class="text-center">ঋণের পরিমাণ</th>
+                            <th rowspan="2" class="text-center">বাকির পরিমাণ</th>
                         </tr>
                         <tr>
-                            <th class="text-center">Pay Date</th>
-                            <th class="text-center">Amount</th>
+                            <th class="text-center">ক্রমিক নং</th>
+                            <th class="text-center">পরিশোধ তারিখ</th>
+                            <th class="text-center">টাকা</th>
                         </tr>
                         <slot v-for="(item, indx) in itemList">
-                            <tr v-if="item.payments.length == 0" :key="indx">
-                                <td>{{ indx+1 }}</td>
-                                <td>{{ item.name }}</td>
-                                <td>{{ item.cust_id }}</td>
-                                <td></td>
-                                <td>0</td>
-                                <td>{{ getTotal(item.payments) }}</td>
-                                <td>{{ item.loan_amount }}</td>
-                                <td>{{ item.loan_amount - getTotal(item.payments) }}</td>
-                            </tr>
-                            <slot v-for="(itm, index) in item.payments">
-                                <tr v-if="index == 0" :key="index">
-                                    <td :rowspan="item.payments.length">{{ indx+1 }}</td>
-                                    <td :rowspan="item.payments.length">{{ item.name }}</td>
-                                    <td :rowspan="item.payments.length">{{ item.cust_id }}</td>
-                                    <td>{{ itm.pay_date | dateFormat }}</td>
-                                    <td>{{ itm.amount }}</td>
-                                    <td :rowspan="item.payments.length">{{ getTotal(item.payments) }}</td>
-                                    <td :rowspan="item.payments.length">{{ item.loan_amount }}</td>
-                                    <td :rowspan="item.payments.length">{{ item.loan_amount - getTotal(item.payments) }}</td>
+                            <slot v-for="index in totalSlot(item)">
+                                <tr v-if="index == 1" :key="index">
+                                    <td :rowspan="totalSlot(item)">{{ indx+1 }}</td>
+                                    <td :rowspan="totalSlot(item)">{{ item.name }}</td>
+                                    <td :rowspan="totalSlot(item)">{{ item.cust_id }}</td>
+                                    <td>{{ index }}</td>
+                                    <td>{{ item.payments[index-1]?.pay_date | dateFormat }}</td>
+                                    <td>{{ item.payments[index-1]?.amount }}</td>
+                                    <td :rowspan="totalSlot(item)">{{ getTotal(item.payments) }}</td>
+                                    <td :rowspan="totalSlot(item)">{{ item.loan_amount }}</td>
+                                    <td :rowspan="totalSlot(item)">{{ item.loan_amount - getTotal(item.payments) }}</td>
                                 </tr>
                                 <tr v-else :key="index">
-                                    <td>{{ itm.pay_date | dateFormat }}</td>
-                                    <td>{{ itm.amount }}</td>
+                                    <td>{{ index }}</td>
+                                    <td>{{ item.payments[index-1]?.pay_date | dateFormat }}</td>
+                                    <td>{{ item.payments[index-1]?.amount }}</td>
                                 </tr>
                             </slot>
                         </slot>
                         <tr>
-                            <th colspan="5" class="text-right">Total : </th>
+                            <th colspan="6" class="text-right">Total : </th>
                             <th colspan="1" class="">{{ getTotalPaid(itemList) }}</th>
                             <th class="">{{ getTotalLoan(itemList) }}</th>
                             <th class="">{{ getTotalDue(itemList) }}</th>
@@ -154,27 +144,6 @@ export default {
     computed: {
         customerList () {
             return this.$store.state.commonObj.customerList
-        },
-        fields () {
-            const labels = [
-                { label: 'Sl No', class: 'text-left' },
-                { label: 'Customer', class: 'text-center' },
-                { label: 'Customer ID', class: 'text-center' },
-                { label: 'amount', class: 'text-center' },
-                { label: 'Date', class: 'text-center' }
-            ]
-
-            let keys = []
-            keys = [
-            { key: 'index' },
-            { key: 'name' },
-            { key: 'cust_id' },
-            { key: 'amount' },
-            { key: 'pay_date' }
-            ]
-            return labels.map((item, index) => {
-                return Object.assign(item, keys[index])
-            })
         }
     },
     methods: {
@@ -187,6 +156,14 @@ export default {
                 }
                 this.$store.dispatch('mutedLoad', { loading: false })
             })
+        },
+        totalSlot (item) {
+            const totalSlot = item.loan_amount / item.paying_amount
+            if (parseInt(totalSlot) > 0) {
+                return  totalSlot > parseInt(totalSlot) ? parseInt(totalSlot) + 1 : parseInt(totalSlot)
+            } else {
+                return 0
+            }
         },
         getTotal (arr) {
             return arr.reduce((amount, object) => {
