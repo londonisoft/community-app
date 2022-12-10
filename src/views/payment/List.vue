@@ -75,7 +75,7 @@
                 <div class="overflow-auto">
                     <b-table thead-class="bg-light text-dark" emptyText="Data Not Found" show-empty bordered hover :items="itemList" :fields="fields">
                         <template v-slot:cell(index)="data">
-                            {{ $n(data.index + pagination.slOffset) }}
+                            {{ parseInt(data.index) + parseInt(pagination.slOffset) }}
                         </template>
                         <template v-slot:cell(pay_date)="data">
                             {{ data.item.pay_date | dateFormat }}
@@ -95,12 +95,12 @@
                 </div>
             </b-overlay>
             <b-pagination
-            class="text-right"
-            v-model="pagination.currentPage"
-            :total-rows="pagination.total"
-            :per-page="pagination.perPage"
-            @input="searchData"
-            ></b-pagination>
+                class="text-right"
+                v-model="pagination.currentPage"
+                :total-rows="pagination.totalRows"
+                :per-page="pagination.perPage"
+                @input="searchData"
+                ></b-pagination>
         </CCardBody>
       </CCard>
     </CCol>
@@ -207,7 +207,7 @@ export default {
             })
         },
         loadData () {
-            const params = Object.assign({}, this.search, { page: this.pagination.currentPage, per_page: this.pagination.perPage })
+			const params = Object.assign({}, this.search, { page: this.pagination.currentPage, per_page: this.pagination.perPage })
             this.$store.dispatch('mutedLoad', { loading: true})
             RestApi.getData(baseUrl, 'api/payment/list', params).then(response => {
                 if (response.success) {

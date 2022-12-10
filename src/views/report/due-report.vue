@@ -98,9 +98,9 @@
                                 <td>{{ item.name }}</td>
                                 <td>{{ item.cust_id }}</td>
                                 <td></td>
-                                <td>0</td>
-                                <td>{{ getTotal(item.payments) }}</td>
-                                <td>{{ item.loan_amount }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td>{{ item.loan_amount - getTotal(item.payments) }}</td>
                             </tr>
                             <slot v-for="(itm, index) in item.payments">
@@ -113,9 +113,9 @@
                                     <td>{{ itm.amount }}</td>
                                     <td :rowspan="item.payments.length">{{ getTotal(item.payments) }}</td>
                                     <td :rowspan="item.payments.length">{{ item.loan_amount }}</td>
-                                    <td :rowspan="item.payments.length">{{ item.loan_amount - getTotal(item.payments) }}</td>
+                                    <td :rowspan="item.payments.length">{{ parseFloat(item.loan_amount - getTotal(item.payments)).toFixed(2) }}</td>
                                 </tr>
-                                <tr v-else :key="index">
+                                <tr v-else :key="index+1">
                                     <td class="text-center">{{ index+1 }}</td>
                                     <td>{{ itm.pay_date | dateFormat }}</td>
                                     <td>{{ itm.amount }}</td>
@@ -229,18 +229,18 @@ export default {
         },
         getTotal (arr) {
             return arr.reduce((amount, object) => {
-                return amount + object.amount;
+                return parseFloat(amount) + parseFloat(object.amount);
             }, 0)
         },
         getTotalLoan (arr) {
             return arr.reduce((loan_amount, object) => {
-                return loan_amount + object.loan_amount;
+                return parseFloat(loan_amount) + parseFloat(object.loan_amount);
             }, 0)
         },
         getTotalPaid (arr) {
             const tmparray = arr.map(item => {
                 const totalPay = item.payments.reduce((amount, object) => {
-                    return amount + object.amount;
+                    return parseFloat(amount )+ parseFloat(object.amount);
                 }, 0)
                 return Object.assign(item, { total_payment: totalPay })
             })
@@ -251,13 +251,14 @@ export default {
         getTotalDue (arr) {
             const tmparray = arr.map(item => {
                 const totalPay = item.payments.reduce((amount, object) => {
-                    return amount + object.amount;
+                    return parseFloat(amount) + parseFloat(object.amount);
                 }, 0)
-                return Object.assign(item, { total_due: item.loan_amount - totalPay })
+                return Object.assign(item, { total_due: parseFloat(item.loan_amount) - parseFloat(totalPay) })
             })
-            return tmparray.reduce((total_due, object) => {
-                return total_due + object.total_due;
+            const total = tmparray.reduce((total_due, object) => {
+                return parseFloat(total_due) + parseFloat(object.total_due);
             }, 0)
+            return parseFloat(total).toFixed(2)
         }
     }
 }

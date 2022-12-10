@@ -33,14 +33,66 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
-                        <b-row>
-                            <b-col md =6 lg =6 sm =6>
-                                <Input :key="key" @return-value="setReturnData({ pay_date: $event})" :input="{ cols: 12, type: 'date', name: 'pay_date', rules: 'required', vmodel: formData.pay_date, disabled: true }"/>
-                            </b-col>
-                            <b-col md =6 lg =6 sm =6>
-                                <Input :key="key" @return-value="setReturnData({ amount: $event})" :input="{ cols: 12, type: 'text', name: 'amount', rules: 'required', vmodel: formData.amount }"/>
-                            </b-col>
-                        </b-row>
+                        <div v-if="!id">
+                          <b-row>
+                              <b-col md =6 lg =6 sm =6>
+                                  <Input :key="key" @return-value="setReturnData({ pay_date: $event})" :input="{ cols: 12, type: 'date', name: 'pay_date', rules: 'required', vmodel: formData.pay_date, disabled: true }"/>
+                              </b-col>
+                              <b-col md =6 lg =6 sm =6>
+                                  <Input :key="key" @return-value="setReturnData({ amount: $event})" :input="{ cols: 12, type: 'text', name: 'amount', rules: 'required', vmodel: formData.amount }"/>
+                              </b-col>
+                          </b-row>
+                        </div>
+                        <div v-else>
+                          <table class="table table-sm table-bordered">
+                            <tr>
+                              <th class="text-center">SL No</th>
+                              <th class="text-center">Pay Date</th>
+                              <th class="text-center">Amount</th>
+                            </tr>
+                            <tr v-for="(item, index) in formData.paymentList" :key="index">
+                              <td class="text-center">{{ index + 1 }}</td>
+                              <td>
+                                <ValidationProvider name="Pay Date" vid="pay_date" rules="required">
+                                    <b-form-group
+                                    slot-scope="{ valid, errors }"
+                                    >
+                                    <b-input
+                                        id="pay_date"
+                                        type="date"
+                                        label="text"
+                                        v-model="item.pay_date"
+                                        :state="errors[0] ? false : (valid ? true : null)"
+                                        >
+                                        </b-input>
+                                    <div class="invalid-feedback">
+                                        {{ errors[0] }}
+                                    </div>
+                                    </b-form-group>
+                                </ValidationProvider>  
+                              </td>
+                              <td>
+                                <ValidationProvider name="Amount" vid="amount" rules="required">
+                                      <b-form-group
+                                        slot-scope="{ valid, errors }"
+                                      >
+                                      <b-input
+                                          id="amount"
+                                          type="text"
+                                          label="text"
+                                          v-model="item.amount"
+                                          :state="errors[0] ? false : (valid ? true : null)"
+                                          >
+                                          </b-input>
+                                      <div class="invalid-feedback">
+                                          {{ errors[0] }}
+                                      </div>
+                                      </b-form-group>
+                                  </ValidationProvider>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
                         <div class="row">
                             <div class="col-sm-3"></div>
                             <div class="col text-right">
@@ -122,11 +174,14 @@ export default {
   methods: {
     getItem () {
         const item = this.$store.state.list.find(item => item.id === parseInt(this.id))
-        return JSON.parse(JSON.stringify(item))
+        const tmpItem = JSON.parse(JSON.stringify(item))
+        const paymentList = this.$store.state.list.filter(item => parseInt(item.customer_id) === parseInt(tmpItem.customer_id))
+        return { ...tmpItem, paymentList: paymentList }
     },
     async register () {
           this.$store.dispatch('mutedLoad', { loading: true, listReload: false })
         let result = null
+
         if (this.id) {
             result = await RestApi.putData(baseUrl, `${'api/payment/update'}/${this.id}`, this.formData)
         } else {
