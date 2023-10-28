@@ -107,6 +107,90 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
+                        <ValidationProvider name="Title" vid="title" rules="required">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="title"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                            Title <span class="text-danger">*</span>
+                            </template>
+                            <b-form-input
+                                id="title"
+                                rows="6"
+                                v-model="formData.title"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                                ></b-form-input>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
+                        <ValidationProvider name="Short Title" vid="short_title" rules="required">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="short_title"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                            Short Title <span class="text-danger">*</span>
+                            </template>
+                            <b-form-input
+                                id="short_title"
+                                rows="6"
+                                v-model="formData.short_title"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                                ></b-form-input>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
+                        <ValidationProvider name="App Url" vid="app_url" rules="required">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="app_url"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                            App Url <span class="text-danger">*</span>
+                            </template>
+                            <b-form-input
+                                id="app_url"
+                                rows="6"
+                                v-model="formData.app_url"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                                ></b-form-input>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
+                        <ValidationProvider name="Icon Url" vid="icon_url" rules="required">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="icon_url"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                            Icon Url <span class="text-danger">*</span>
+                            </template>
+                            <b-form-input
+                                id="icon_url"
+                                rows="6"
+                                v-model="formData.icon_url"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                                ></b-form-input>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
                         <div class="row">
                             <div class="col-sm-3"></div>
                             <div class="col text-right">
