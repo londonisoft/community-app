@@ -1,0 +1,5 @@
+FROM node:14.17.3-alpine
+RUN npm install
+RUN npm run build
+FROM nginx:1.16.0-alpine
+CMD ["nginx", "-g", "daemon off;"]

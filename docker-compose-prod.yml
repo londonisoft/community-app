@@ -1,0 +1,33 @@
+version: "3.7"
+services:
+  bikrishop_app:
+    build:
+      args:
+        user: Mamunur
+        uid: 1000
+      context: ./
+      dockerfile: DockerfileProd
+    image: mladmin1
+    container_name: mladmin1-application
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+      - '/var/www/node_modules'
+    networks:
+      - mladmin1-network
+  mladmin1_nginx:
+    image: nginx:alpine
+    container_name: mladmin1-nginx
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    volumes:
+      - ./:/var/www
+      - ./.docker/nginx:/etc/nginx/conf.d/
+    networks:
+      - mladmin1-network
+
+networks:
+  mladmin1-network:
+    driver: bridge

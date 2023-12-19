@@ -1,5 +1,5 @@
 import axios from 'axios'
-export const baseUrl = 'http://193.203.167.89:8000/'
+export const baseUrl = process.env.VUE_APP_BASE_URL
 
 export default {
     async execute(baseUrl, method, uri, data, params = {}) {
