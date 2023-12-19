@@ -91,6 +91,27 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
+                        <ValidationProvider name="Invalid Amount" vid="invalid_amount" rules="required">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="formData"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                            Invalid Amount <span class="text-danger">*</span>
+                            </template>
+                            <b-form-input
+                                id="invalid_amount"
+                                rows="6"
+                                v-model="formData.invalid_amount"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                                ></b-form-input>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
                         <ValidationProvider name="Description" vid="description" rules="required">
                             <b-form-group
                             class="row"

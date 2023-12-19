@@ -46,10 +46,6 @@ export default [{
                 {
                     name: 'Block Users',
                     to: '/users/block'
-                },
-                {
-                    name: 'Exclusive Users',
-                    to: '/users/exclusive'
                 }
             ]
         },
@@ -60,13 +56,13 @@ export default [{
             icon: 'cil-list',
             items: []
         },
-        {
-            _name: 'CSidebarNavItem',
-            name: 'Purchase Package',
-            to: '/other/purchase-package',
-            icon: 'cil-list',
-            items: []
-        },
+        // {
+        //     _name: 'CSidebarNavItem',
+        //     name: 'Purchase Package',
+        //     to: '/other/purchase-package',
+        //     icon: 'cil-list',
+        //     items: []
+        // },
         {
             _name: 'CSidebarNavItem',
             name: 'Add Money',
@@ -95,19 +91,19 @@ export default [{
             icon: 'cil-ban',
             items: []
         },
-        {
-            _name: 'CSidebarNavItem',
-            name: 'Transfer List',
-            to: '/withdraw/transfer-list',
-            icon: 'cil-ban',
-            items: []
-        },
-        {
-            _name: 'CSidebarNavItem',
-            name: 'Add Wallet',
-            to: '/withdraw/add-wallet',
-            icon: 'cil-ban',
-            items: []
-        }
+        // {
+        //     _name: 'CSidebarNavItem',
+        //     name: 'Transfer List',
+        //     to: '/withdraw/transfer-list',
+        //     icon: 'cil-ban',
+        //     items: []
+        // },
+        // {
+        //     _name: 'CSidebarNavItem',
+        //     name: 'Add Wallet',
+        //     to: '/withdraw/add-wallet',
+        //     icon: 'cil-ban',
+        //     items: []
+        // }
     ]
 }]

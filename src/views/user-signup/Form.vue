@@ -97,6 +97,7 @@
       <b-col lg="12" sm="12" class="mb-2">
           <button @click="setBtn('widthdraw', 'Withdraw')" :class="(btn === 'widthdraw') ? `btn btn-success ml-2` : `btn btn-secondary ml-2`">Widthdraw List</button>
           <button @click="setBtn('refer', 'ReferUser')" :class="(btn === 'refer') ? `btn btn-success ml-2` : `btn btn-secondary ml-2`">Refer List</button>
+          <button @click="setBtn('task', 'WorkList')" :class="(btn === 'task') ? `btn btn-success ml-2` : `btn btn-secondary ml-2`">Work List</button>
       </b-col>
       <b-col v-if="formData.id" lg="12" sm="12">
           <component :is="comp" :user_id="formData.id" :own_refer_id="formData.own_refer_id" ></component>
@@ -120,6 +121,7 @@ import Notification from './Notification'
 import UserInfoChange from './UserInfoChange'
 import Withdraw from './../../componests/user/withdraw'
 import ReferUser from './../../componests/user/refer-user'
+import WorkList from './../../componests/user/task-complete'
 
 export default {
   props: ['id'],
@@ -127,7 +129,8 @@ export default {
     Notification,
     UserInfoChange,
     Withdraw,
-    ReferUser
+    ReferUser,
+    WorkList
     },
   created () {
 	if (this.$route.query.id) {

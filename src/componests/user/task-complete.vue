@@ -17,18 +17,11 @@
                         <template v-slot:cell(index)="data">
                             {{ $n(data.index + pagination.slOffset) }}
                         </template>
-                        <template v-slot:cell(task_type)="data">
-                            <span v-if="data.item.task_type === 1" >Spin One</span>
-                            <span v-if="data.item.task_type === 2">Spin Two</span>
-                            <span v-if="data.item.task_type === 3">Math Quiz One</span>
-                            <span v-if="data.item.task_type === 4">Math Quiz Two</span>
-                            <span v-if="data.item.task_type === 5">Watch Video One</span>
-                            <span v-if="data.item.task_type === 6">Watch Video Two</span>
-                            <span v-if="data.item.task_type === 7">Scratch card One</span>
-                            <span v-if="data.item.task_type === 8">Scratch card Two</span>
+                        <template v-slot:cell(type)="data">
+                            <span>{{ data.item.type }}</span>
                         </template>
                         <template v-slot:cell(status)="data">
-                            <span class="badge badge-success" v-if="data.item.status === 1">Active</span>
+                            <span class="badge badge-success" v-if="data.item.status == 1">Active</span>
                             <span class="badge badge-danger" v-else>Inactive</span>
                         </template>
                         <template v-slot:cell(action)="data">
@@ -88,7 +81,8 @@ export default {
                 { label: 'Name', class: 'text-center' },
                 { label: 'Email', class: 'text-center' },
                 { label: 'Task Type', class: 'text-center' },
-                { label: 'Point', class: 'text-center' },
+                { label: 'Date Time', class: 'text-center' },
+                { label: 'Amount', class: 'text-center' },
                 { label: 'Status', class: 'text-center' }
             ]
 
@@ -97,8 +91,9 @@ export default {
             { key: 'id' },
             { key: 'name' },
             { key: 'email' },
-            { key: 'task_type' },
-            { key: 'point' },
+            { key: 'type' },
+            { key: 'date_at' },
+            { key: 'amount' },
             { key: 'status' }
             ]
             return labels.map((item, index) => {

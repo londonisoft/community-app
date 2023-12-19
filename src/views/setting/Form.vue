@@ -66,6 +66,52 @@
                                                                 </b-form-group>
                                                             </ValidationProvider>
                                                         </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Click Break Time" vid="click_break_time" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="formData"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Click Break Time <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="click_break_time"
+                                                                    v-model="formData.click_break_time"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ValidationProvider name="Invalid Click For Block" vid="invalid_click_block" rules="">
+                                                                <b-form-group
+                                                                class="row"
+                                                                label-cols-sm="12"
+                                                                label-for="formData"
+                                                                slot-scope="{ valid, errors }"
+                                                                >
+                                                                <template v-slot:label>
+                                                                Invalid Click For Block <span class="text-danger">*</span>
+                                                                </template>
+                                                                <b-form-input
+                                                                    type="text"
+                                                                    id="invalid_click_block"
+                                                                    v-model="formData.invalid_click_block"
+                                                                    :state="errors[0] ? false : (valid ? true : null)"
+                                                                    ></b-form-input>
+                                                                <div class="invalid-feedback">
+                                                                    {{ errors[0] }}
+                                                                </div>
+                                                                </b-form-group>
+                                                            </ValidationProvider>
+                                                        </div>
                                                         <div class="col-md-12 text-right">
                                                             <b-button type="submit" variant="primary" style="margin-top:40px" class="mr-2">{{ saveBtnName }}</b-button>
                                                         </div>
@@ -103,7 +149,7 @@
                                                             </ValidationProvider>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Pakage Message" vid="pakage_message" rules="">
+                                                            <ValidationProvider name="VPN ON/OFF" vid="pakage_message" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
@@ -111,7 +157,7 @@
                                                                 slot-scope="{ valid, errors }"
                                                                 >
                                                                 <template v-slot:label>
-                                                                Pakage Message <span class="text-danger">*</span>
+                                                                VPN ON/OFF <span class="text-danger">*</span>
                                                                 </template>
                                                                 <b-form-textarea
                                                                     type="text"
@@ -126,7 +172,7 @@
                                                             </ValidationProvider>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Recharge Message" vid="recharge_message" rules="">
+                                                            <ValidationProvider name="Country Code" vid="recharge_message" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
@@ -134,7 +180,7 @@
                                                                 slot-scope="{ valid, errors }"
                                                                 >
                                                                 <template v-slot:label>
-                                                                Recharge Message <span class="text-danger">*</span>
+                                                                Country Code <span class="text-danger">*</span>
                                                                 </template>
                                                                 <b-form-textarea
                                                                     type="text"
@@ -248,7 +294,7 @@
                                             </ValidationObserver>
                                         </b-overlay>
                                     </b-col>
-                                    <b-col lg="12" sm="12">
+                                    <!-- <b-col lg="12" sm="12">
                                         <b-overlay :show="false">
                                             <ValidationObserver ref="form2"  v-slot="{ handleSubmit, reset }">
                                                 <b-form  @submit.prevent="handleSubmit(image)" @reset.prevent="reset" >
@@ -754,7 +800,7 @@
                                                 </b-form>
                                             </ValidationObserver>
                                         </b-overlay>
-                                    </b-col>
+                                    </b-col> -->
                                 </div>
                             </CCardBody>
                         </CCard>
