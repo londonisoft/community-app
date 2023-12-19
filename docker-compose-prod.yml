@@ -19,7 +19,7 @@ services:
   mladmin1_nginx:
     image: nginx:alpine
     container_name: mladmin1-nginx
-    restart: unless-stopped
+    restart: unless-stoppedada
     ports:
       - "8081:80"
     volumes:
