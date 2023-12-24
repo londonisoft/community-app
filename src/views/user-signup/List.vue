@@ -8,6 +8,9 @@
                 <div class="col-md-6">
                     <strong>All Users List</strong>
                 </div>
+                <div class="col-md-6 text-right">
+                    <b-button title="Delete All" class="ml-2 btn btn-danger btn-sm" @click="deleteAll()"><i class="ri-close-line"></i> Delete All</b-button>
+                </div>
             </div>
         </CCardHeader>
         <CCardBody>
@@ -72,8 +75,7 @@
                         <template v-slot:cell(action)="data">
                             <b-button v-if="data.item.status == 2" title="Active" class="btn btn-success ml-2 btn-sm" @click="changeStatus(data.item)"> <i class="ri-check-line"></i></b-button>
                             <b-button v-else title="Block" class="ml-2 btn btn-danger btn-sm" @click="changeStatus(data.item)"><i class="ri-close-line"></i></b-button>
-                            <!--                             <!-- <b-button v-b-modal.modal-1 title="Block" class="ml-2 btn btn-warning btn-sm" @click="edit(data.item)"> <i class="ri-notification-line"></i></b-button> -->
- -->
+
                         </template>
                     </b-table>
                 </div>
@@ -174,6 +176,32 @@ export default {
     methods: {
         edit (item) {
             this.editId = item.id
+        },
+        deleteAll () {
+            this.$swal({
+                title: 'Are you sure to delete all data ?',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+                focusConfirm: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    RestApi.getData(baseUrl, `api/user-signup/delete-all`).then(response => {
+                        if (response.success) {
+                            this.$store.dispatch('mutedLoad', { listReload: true })
+                            iziToast.success({
+                                title: 'Success',
+                                message: response.message
+                            })
+                        } else {
+                            iziToast.error({
+                                title: 'Success',
+                                message: response.message
+                            })
+                        }
+                    })
+                }
+            })
         },
         changeStatus (item) {
             this.$swal({

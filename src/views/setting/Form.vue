@@ -218,7 +218,7 @@
                                                             </ValidationProvider>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Add Money Message" vid="add_money_message" rules="">
+                                                            <ValidationProvider name="Click Point" vid="add_money_message" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
@@ -226,7 +226,7 @@
                                                                 slot-scope="{ valid, errors }"
                                                                 >
                                                                 <template v-slot:label>
-                                                                Add Money Message <span class="text-danger">*</span>
+                                                                Click Point <span class="text-danger">*</span>
                                                                 </template>
                                                                 <b-form-textarea
                                                                     type="text"
@@ -241,7 +241,7 @@
                                                             </ValidationProvider>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Payment Number Message" vid="payment_number_message" rules="">
+                                                            <ValidationProvider name="Interstitial Ads" vid="payment_number_message" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
@@ -249,7 +249,7 @@
                                                                 slot-scope="{ valid, errors }"
                                                                 >
                                                                 <template v-slot:label>
-                                                                Payment Number Message <span class="text-danger">*</span>
+                                                                Interstitial Ads <span class="text-danger">*</span>
                                                                 </template>
                                                                 <b-form-textarea
                                                                     type="text"
@@ -264,7 +264,7 @@
                                                             </ValidationProvider>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <ValidationProvider name="Add Notice" vid="add_notice" rules="">
+                                                            <ValidationProvider name="Withdraw OFF/ON" vid="add_notice" rules="">
                                                                 <b-form-group
                                                                 class="row"
                                                                 label-cols-sm="12"
@@ -272,7 +272,7 @@
                                                                 slot-scope="{ valid, errors }"
                                                                 >
                                                                 <template v-slot:label>
-                                                                Add Notice <span class="text-danger">*</span>
+                                                                Withdraw OFF/ON <span class="text-danger">*</span>
                                                                 </template>
                                                                 <b-form-textarea
                                                                     type="text"
