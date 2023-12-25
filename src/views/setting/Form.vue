@@ -125,6 +125,43 @@
                                             <ValidationObserver ref="form1"  v-slot="{ handleSubmit, reset }">
                                                 <b-form  @submit.prevent="handleSubmit(message)" @reset.prevent="reset" >
                                                     <div class="row">
+                                                        <div class="col-md-3">
+                                                            <div>
+                                                                <p class="m-0 mb-2" style="font-weight: bold"> Maintance Mode </p>
+                                                                <b-form-checkbox v-model="messages.maintance_on_off" size="md" name="check-button" switch>
+                                                                    <span v-if="messages.maintance_on_off">ON</span>
+                                                                    <span v-else>OF</span>
+                                                                </b-form-checkbox>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div>
+                                                                <p class="m-0 mb-2" style="font-weight: bold">  Task ON OFF  </p>
+                                                                <b-form-checkbox v-model="messages.task_on_off" size="md" name="check-button" switch>
+                                                                    <span v-if="messages.task_on_off">ON</span>
+                                                                    <span v-else>OF</span>
+                                                                </b-form-checkbox>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div>
+                                                                <p class="m-0 mb-2" style="font-weight: bold">  VPN ON OFF  </p>
+                                                                <b-form-checkbox v-model="messages.vpn_on_off" size="md" name="check-button" switch>
+                                                                    <span v-if="messages.vpn_on_off">ON</span>
+                                                                    <span v-else>OF</span>
+                                                                </b-form-checkbox>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div>
+                                                                <p class="m-0 mb-2" style="font-weight: bold">  Withdraw ON OFF  </p>
+                                                                <b-form-checkbox v-model="messages.withdraw_on_off" size="md" name="check-button" switch>
+                                                                    <span v-if="messages.withdraw_on_off">ON</span>
+                                                                    <span v-else>OF</span>
+                                                                </b-form-checkbox>
+                                                            </div>
+                                                        </div>
+
                                                         <div class="col-md-6">
                                                             <ValidationProvider name="Admin Notice" vid="admin_notice" rules="">
                                                                 <b-form-group
@@ -877,7 +914,12 @@ export default {
         this.$store.dispatch('mutedLoad', { loading: true})
         RestApi.getData(baseUrl, 'api/message/show').then(response => {
             if (response.success) {
-                this.messages = response.data
+                this.messages = {...response.data,
+                    maintance_on_off: response.data.maintance_on_off == '1' ? true : false,
+                    task_on_off: response.data.task_on_off == '1' ? true : false,
+                    vpn_on_off: response.data.vpn_on_off == '1' ? true : false,
+                    withdraw_on_off: response.data.withdraw_on_off == '1' ? true : false,
+                }
             }
             this.$store.dispatch('mutedLoad', { loading: false })
         })
