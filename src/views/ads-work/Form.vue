@@ -7,7 +7,7 @@
                 <b-overlay :show="loading">
                     <ValidationObserver ref="form"  v-slot="{ handleSubmit, reset }">
                         <b-form  @submit.prevent="handleSubmit(register)" @reset.prevent="reset" >
-                        <ValidationProvider name="Name" vid="name" rules="required">
+                        <ValidationProvider name="Title" vid="title" rules="required">
                             <b-form-group
                             class="row"
                             label-cols-sm="12"
@@ -15,12 +15,12 @@
                             slot-scope="{ valid, errors }"
                             >
                             <template v-slot:label>
-                            Name <span class="text-danger">*</span>
+                            Title <span class="text-danger">*</span>
                             </template>
                             <b-form-input
-                                id="name"
+                                id="title"
                                 rows="6"
-                                v-model="formData.name"
+                                v-model="formData.title"
                                 :state="errors[0] ? false : (valid ? true : null)"
                                 ></b-form-input>
                             <div class="invalid-feedback">
@@ -28,7 +28,7 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
-                        <ValidationProvider name="Name" vid="min_amount" rules="required">
+                        <ValidationProvider name="Description" vid="description" rules="required">
                             <b-form-group
                             class="row"
                             label-cols-sm="12"
@@ -36,12 +36,12 @@
                             slot-scope="{ valid, errors }"
                             >
                             <template v-slot:label>
-                            Min Amount <span class="text-danger">*</span>
+                              Description <span class="text-danger">*</span>
                             </template>
                             <b-form-input
-                                id="min_amount"
+                                id="description"
                                 rows="6"
-                                v-model="formData.min_amount"
+                                v-model="formData.description"
                                 :state="errors[0] ? false : (valid ? true : null)"
                                 ></b-form-input>
                             <div class="invalid-feedback">
@@ -49,7 +49,7 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
-                        <ValidationProvider name="Name" vid="icon_url" rules="required">
+                        <ValidationProvider name="Icon" vid="icon" rules="required">
                             <b-form-group
                             class="row"
                             label-cols-sm="12"
@@ -57,14 +57,59 @@
                             slot-scope="{ valid, errors }"
                             >
                             <template v-slot:label>
-                            Icon Url <span class="text-danger">*</span>
+                            Icon <span class="text-danger">*</span>
                             </template>
                             <b-form-input
-                                id="icon_url"
+                                id="icon"
                                 rows="6"
-                                v-model="formData.icon_url"
+                                v-model="formData.icon"
                                 :state="errors[0] ? false : (valid ? true : null)"
                                 ></b-form-input>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
+
+                        <ValidationProvider name="Ads Network" vid="ads_network_id" rules="required">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="formData"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                              Ads Network <span class="text-danger">*</span>
+                            </template>
+                            <b-form-select
+                                id="ads_network_id"
+                                rows="6"
+                                :options="adsNetWorkList"
+                                v-model="formData.ads_network_id"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                                ></b-form-select>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
+                        <ValidationProvider name="Select VPN" vid="vpn_id" rules="required">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="formData"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                            Select VPN <span class="text-danger">*</span>
+                            </template>
+                            <b-form-select
+                            :options="vpnList"
+                                id="vpn_id"
+                                rows="6"
+                                v-model="formData.vpn_id"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                                ></b-form-select>
                             <div class="invalid-feedback">
                                 {{ errors[0] }}
                             </div>
@@ -106,8 +151,8 @@ export default {
     return {
       saveBtnName: this.id ? 'Update' : 'Save',
       formData: {
-        name: '',
-        min_amount: ''
+        title: '',
+        vpn_id: ''
       }
     }
   },
@@ -117,6 +162,12 @@ export default {
       },
       loading () {
         return this.$store.state.static.loading
+      },
+      adsNetWorkList () {
+        return this.$store.state.commonObj.adsNetWorkList
+      },
+      vpnList () {
+        return this.$store.state.commonObj.vpnList
       }
   },
   methods: {
@@ -128,9 +179,9 @@ export default {
           this.$store.dispatch('mutedLoad', { loading: true, listReload: false })
         let result = null
         if (this.id) {
-            result = await RestApi.putData(baseUrl, `${'api/payment-method/update'}/${this.id}`, this.formData)
+            result = await RestApi.putData(baseUrl, `${'api/ads-works/update'}/${this.id}`, this.formData)
         } else {
-            result = await RestApi.postData(baseUrl,'api/payment-method/store', this.formData)
+            result = await RestApi.postData(baseUrl,'api/ads-works/store', this.formData)
         }
         this.$store.dispatch('mutedLoad', { loading: false, listReload: true })
         this.$store.dispatch('dropdownLoad', { hasDropdownLoaded: false })

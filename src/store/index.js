@@ -1,10 +1,9 @@
 const state = {
 	commonObj: {
 		hasDropdownLoaded: true,
-		categoryList: [],
-		subCategoryList: [],
-		contentList: [],
-		subContentList: []
+		withdrawMethodList: [],
+		adsNetWorkList: [],
+		withdrawMethodList: []
 	},
 	token: localStorage.getItem('access_token') || '',
 	user: '',

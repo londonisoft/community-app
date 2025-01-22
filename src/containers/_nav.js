@@ -62,6 +62,13 @@ export default [{
         },
         {
             _name: 'CSidebarNavItem',
+            name: 'Ads Works',
+            to: '/other/ads-works',
+            icon: 'cil-list',
+            items: []
+        },
+        {
+            _name: 'CSidebarNavItem',
             name: 'Purchase Package',
             to: '/other/purchase-package',
             icon: 'cil-list',
@@ -81,13 +88,13 @@ export default [{
             icon: 'cil-settings',
             items: []
         },
-        // {
-        //     _name: 'CSidebarNavItem',
-        //     name: 'App Update',
-        //     to: '/other/update',
-        //     icon: 'cil-ban',
-        //     items: []
-        // },
+        {
+            _name: 'CSidebarNavItem',
+            name: 'App Update',
+            to: '/other/update',
+            icon: 'cil-ban',
+            items: []
+        },
         {
             _name: 'CSidebarNavItem',
             name: 'Payment Method',
@@ -99,6 +106,20 @@ export default [{
             _name: 'CSidebarNavItem',
             name: 'Transfer List',
             to: '/withdraw/transfer-list',
+            icon: 'cil-ban',
+            items: []
+        },
+        {
+            _name: 'CSidebarNavItem',
+            name: ' - VPN List',
+            to: '/other/vpn-list',
+            icon: 'cil-ban',
+            items: []
+        },
+        {
+            _name: 'CSidebarNavItem',
+            name: ' - Ads Networks',
+            to: '/other/ads-networks',
             icon: 'cil-ban',
             items: []
         },

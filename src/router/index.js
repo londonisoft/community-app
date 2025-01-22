@@ -204,6 +204,30 @@ const routes = [{
                         }
                     },
                     {
+                        path: 'ads-works',
+                        name: 'Popovers',
+                        component: () => import ('@/views/ads-work/List'),
+                        meta: {
+                            requiresAuth: true
+                        }
+                    },
+                    {
+                        path: 'vpn-list',
+                        name: 'Popovers',
+                        component: () => import ('@/views/vpn/List'),
+                        meta: {
+                            requiresAuth: true
+                        }
+                    },
+                    {
+                        path: 'ads-networks',
+                        name: 'Popovers',
+                        component: () => import ('@/views/ads-networks/List'),
+                        meta: {
+                            requiresAuth: true
+                        }
+                    },
+                    {
                         path: 'purchase-package',
                         name: 'Popovers',
                         component: purchasePackageList,

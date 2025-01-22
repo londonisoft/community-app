@@ -7,7 +7,7 @@
                 <b-overlay :show="loading">
                     <ValidationObserver ref="form"  v-slot="{ handleSubmit, reset }">
                         <b-form  @submit.prevent="handleSubmit(register)" @reset.prevent="reset" >
-                        <ValidationProvider name="Name" vid="name" rules="required">
+                        <ValidationProvider name="Country Name" vid="country_name" rules="required">
                             <b-form-group
                             class="row"
                             label-cols-sm="12"
@@ -15,12 +15,12 @@
                             slot-scope="{ valid, errors }"
                             >
                             <template v-slot:label>
-                            Name <span class="text-danger">*</span>
+                              Country Name <span class="text-danger">*</span>
                             </template>
                             <b-form-input
-                                id="name"
+                                id="country_name"
                                 rows="6"
-                                v-model="formData.name"
+                                v-model="formData.country_name"
                                 :state="errors[0] ? false : (valid ? true : null)"
                                 ></b-form-input>
                             <div class="invalid-feedback">
@@ -28,7 +28,7 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
-                        <ValidationProvider name="Name" vid="min_amount" rules="required">
+                        <ValidationProvider name="Country Code" vid="country_code" rules="required">
                             <b-form-group
                             class="row"
                             label-cols-sm="12"
@@ -36,33 +36,12 @@
                             slot-scope="{ valid, errors }"
                             >
                             <template v-slot:label>
-                            Min Amount <span class="text-danger">*</span>
+                              Country Code<span class="text-danger">*</span>
                             </template>
                             <b-form-input
-                                id="min_amount"
+                                id="country_code"
                                 rows="6"
-                                v-model="formData.min_amount"
-                                :state="errors[0] ? false : (valid ? true : null)"
-                                ></b-form-input>
-                            <div class="invalid-feedback">
-                                {{ errors[0] }}
-                            </div>
-                            </b-form-group>
-                        </ValidationProvider>
-                        <ValidationProvider name="Name" vid="icon_url" rules="required">
-                            <b-form-group
-                            class="row"
-                            label-cols-sm="12"
-                            label-for="formData"
-                            slot-scope="{ valid, errors }"
-                            >
-                            <template v-slot:label>
-                            Icon Url <span class="text-danger">*</span>
-                            </template>
-                            <b-form-input
-                                id="icon_url"
-                                rows="6"
-                                v-model="formData.icon_url"
+                                v-model="formData.country_code"
                                 :state="errors[0] ? false : (valid ? true : null)"
                                 ></b-form-input>
                             <div class="invalid-feedback">
@@ -106,15 +85,13 @@ export default {
     return {
       saveBtnName: this.id ? 'Update' : 'Save',
       formData: {
-        name: '',
-        min_amount: ''
+        title: '',
+        thumbnail: null,
+        vpn_on: true
       }
     }
   },
   computed: {
-      categoryList () {
-        return this.$store.state.commonObj.categoryList
-      },
       loading () {
         return this.$store.state.static.loading
       }
@@ -122,15 +99,15 @@ export default {
   methods: {
     getItem () {
         const item = this.$store.state.list.find(item => item.id === parseInt(this.id))
-        return JSON.parse(JSON.stringify(item))
+        return JSON.parse(JSON.stringify({...item, vpn_on: item.vpn_on == 1 ? true : false}))
     },
     async register () {
           this.$store.dispatch('mutedLoad', { loading: true, listReload: false })
         let result = null
         if (this.id) {
-            result = await RestApi.putData(baseUrl, `${'api/payment-method/update'}/${this.id}`, this.formData)
+            result = await RestApi.putData(baseUrl, `${'api/vpns/update'}/${this.id}`, this.formData)
         } else {
-            result = await RestApi.postData(baseUrl,'api/payment-method/store', this.formData)
+            result = await RestApi.postData(baseUrl,'api/vpns/store', this.formData)
         }
         this.$store.dispatch('mutedLoad', { loading: false, listReload: true })
         this.$store.dispatch('dropdownLoad', { hasDropdownLoaded: false })

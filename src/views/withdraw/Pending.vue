@@ -16,7 +16,7 @@
                     <ValidationObserver ref="form"  v-slot="{ handleSubmit, reset }">
                         <b-form  @submit.prevent="handleSubmit(searchData)" @reset.prevent="reset" >
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <b-form-group
                                     label-cols-md="12"
                                     >
@@ -29,7 +29,7 @@
                                         ></b-form-input>
                                     </b-form-group>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <b-form-group
                                     label-cols-md="12"
                                     >
@@ -42,7 +42,7 @@
                                         ></b-form-input>
                                     </b-form-group>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <b-form-group
                                     label-cols-md="12"
                                     >
@@ -55,7 +55,25 @@
                                         ></b-form-input>
                                     </b-form-group>
                                 </div>
-                                <div class="col-md-4 mt-2">
+                                <div class="col-md-3">
+                                    <b-form-group
+                                        class="row"
+                                        label-cols-sm="12"
+                                        label-for="formData"
+                                        >
+                                        <template v-slot:label>
+                                        Select Package <span class="text-danger">*</span>
+                                        </template>
+                                        <b-form-select
+                                        :options="packageList"
+                                            id="package_id"
+                                            rows="6"
+                                            v-model="search.package_id"
+                                            ></b-form-select>
+                                        </b-form-group>
+                                </div>
+
+                                <div class="col-md-3 mt-2">
                                     <div style="height:40px">
                                         <b-button style='position:absolute;bottom:15px' type="submit" variant="primary">Search</b-button>
                                     </div>
@@ -135,6 +153,9 @@ export default {
     computed: {
         itemList () {
             return this.$store.state.list
+        },
+        packageList () {
+            return this.$store.state.commonObj.packageList
         },
         fields () {
             const labels = [

@@ -6,7 +6,7 @@
         <CCardHeader>
             <div class="row">
                 <div class="col-md-6">
-                      <strong> Task Completed</strong>
+                      <strong> Refer Income History</strong>
                 </div>
             </div>
         </CCardHeader>
@@ -18,18 +18,10 @@
                             {{ $n(data.index + pagination.slOffset) }}
                         </template>
                         <template v-slot:cell(task_type)="data">
-                            <span v-if="data.item.task_type === 1" >Spin One</span>
-                            <span v-if="data.item.task_type === 2">Spin Two</span>
-                            <span v-if="data.item.task_type === 3">Math Quiz One</span>
-                            <span v-if="data.item.task_type === 4">Math Quiz Two</span>
-                            <span v-if="data.item.task_type === 5">Watch Video One</span>
-                            <span v-if="data.item.task_type === 6">Watch Video Two</span>
-                            <span v-if="data.item.task_type === 7">Scratch card One</span>
-                            <span v-if="data.item.task_type === 8">Scratch card Two</span>
+                            {{ data.item.ads_work.title }}
                         </template>
-                        <template v-slot:cell(status)="data">
-                            <span class="badge badge-success" v-if="data.item.status === 1">Active</span>
-                            <span class="badge badge-danger" v-else>Inactive</span>
+                        <template v-slot:cell(created_at)="data">
+                           {{  data.item.created_at | dateFormat }}
                         </template>
                         <template v-slot:cell(action)="data">
                             <b-button class="btn btn-success btn-sm" v-b-modal.modal-1 @click="edit(data.item)"><i class="ri-ball-pen-fill m-0"></i></b-button>
@@ -85,11 +77,11 @@ export default {
         fields () {
             const labels = [
                 { label: 'Sl No', class: 'text-left' },
-                { label: 'Name', class: 'text-center' },
-                { label: 'Email', class: 'text-center' },
-                { label: 'Task Type', class: 'text-center' },
-                { label: 'Point', class: 'text-center' },
-                { label: 'Status', class: 'text-center' }
+                { label: 'Refer Name', class: 'text-center' },
+                { label: 'Refer Email', class: 'text-center' },
+                { label: 'Work Name', class: 'text-center' },
+                { label: 'Amount', class: 'text-center' },
+                { label: 'Date', class: 'text-center' },
             ]
 
             let keys = []
@@ -98,8 +90,8 @@ export default {
             { key: 'name' },
             { key: 'email' },
             { key: 'task_type' },
-            { key: 'point' },
-            { key: 'status' }
+            { key: 'amount' },
+            { key: 'created_at' },
             ]
             return labels.map((item, index) => {
                 return Object.assign(item, keys[index])
