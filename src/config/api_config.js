@@ -1,5 +1,5 @@
 import axios from 'axios'
-export const baseUrl = 'https://earnapp.collectpdf.com/public/'
+export const baseUrl = 'http://68.183.232.147:8000/'
 
 export default {
     async execute(baseUrl, method, uri, data, params = {}) {
