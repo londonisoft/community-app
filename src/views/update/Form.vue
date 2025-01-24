@@ -293,6 +293,29 @@
                                                               </b-form-group>
                                                           </ValidationProvider>
                                                       </b-col>
+                                                      <b-col lg="6" sm="6">
+                                                          <ValidationProvider name="Invalid Point Deduct" vid="invalid_point_deduct" rules="required">
+                                                              <b-form-group
+                                                              class="row"
+                                                              label-cols-sm="12"
+                                                              label-for="formData"
+                                                              slot-scope="{ valid, errors }"
+                                                              >
+                                                              <template v-slot:label>
+                                                               Invalid Point Deduct
+                                                              </template>
+                                                              <b-form-input
+                                                                  type="text"
+                                                                  id="invalid_point_deduct"
+                                                                  v-model="update.invalid_point_deduct"
+                                                                  :state="errors[0] ? false : (valid ? true : null)"
+                                                                  ></b-form-input>
+                                                              <div class="invalid-feedback">
+                                                                  {{ errors[0] }}
+                                                              </div>
+                                                              </b-form-group>
+                                                          </ValidationProvider>
+                                                      </b-col>
 
                                                       
 
@@ -582,7 +605,13 @@
                       admin_version: response.data.admin_version,
                       dlink: response.data.dlink,
                       admin_dlink: response.data.admin_dlink,
-                      withdraw_limit: response.data.withdraw_limit
+                      withdraw_limit: response.data.withdraw_limit,
+                      package_name: response.data.package_name,
+                      how_to_work: response.data.how_to_work,
+                      old_app_notice: response.data.old_app_notice,
+                      old_app_url: response.data.old_app_url,
+                      invalid_block_count: response.data.invalid_block_count,
+                      invalid_point_deduct: response.data.invalid_point_deduct,
                   }
                   this.setting = {
                       notice: response.data.notice,

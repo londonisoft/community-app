@@ -248,7 +248,7 @@
                                             </ValidationObserver>
                                         </b-overlay>
                                     </b-col>
-                                    <b-col lg="12" sm="12">
+                                    <!-- <b-col lg="12" sm="12">
                                         <b-overlay :show="false">
                                             <ValidationObserver ref="form2"  v-slot="{ handleSubmit, reset }">
                                                 <b-form  @submit.prevent="handleSubmit(image)" @reset.prevent="reset" >
@@ -754,7 +754,7 @@
                                                 </b-form>
                                             </ValidationObserver>
                                         </b-overlay>
-                                    </b-col>
+                                    </b-col> -->
                                 </div>
                             </CCardBody>
                         </CCard>
