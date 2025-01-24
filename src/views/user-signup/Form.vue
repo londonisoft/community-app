@@ -70,6 +70,10 @@
                                                 <td> : {{ formData.amount }}</td>
                                             </tr>
                                             <tr>
+                                                <td>Total Invalid Count</td>
+                                                <td> : {{ formData.invalid_count }}</td>
+                                            </tr>
+                                            <tr>
                                                 <td>Join</td>
                                                 <td> : {{ formData.total_refer }}</td>
                                             </tr>

@@ -153,6 +153,8 @@
                                                               </b-form-group>
                                                           </ValidationProvider>
                                                       </b-col>
+
+
                                                       <b-col lg="6" sm="6">
                                                           <ValidationProvider name="Withdraw Limit" vid="withdraw_limit" rules="required">
                                                               <b-form-group
@@ -176,6 +178,128 @@
                                                               </b-form-group>
                                                           </ValidationProvider>
                                                       </b-col>
+                                                      <b-col lg="6" sm="6">
+                                                          <ValidationProvider name="Package Name" vid="package_name" rules="required">
+                                                              <b-form-group
+                                                              class="row"
+                                                              label-cols-sm="12"
+                                                              label-for="formData"
+                                                              slot-scope="{ valid, errors }"
+                                                              >
+                                                              <template v-slot:label>
+                                                               Package Name
+                                                              </template>
+                                                              <b-form-input
+                                                                  type="text"
+                                                                  id="package_name"
+                                                                  v-model="update.package_name"
+                                                                  :state="errors[0] ? false : (valid ? true : null)"
+                                                                  ></b-form-input>
+                                                              <div class="invalid-feedback">
+                                                                  {{ errors[0] }}
+                                                              </div>
+                                                              </b-form-group>
+                                                          </ValidationProvider>
+                                                      </b-col>
+                                                      <b-col lg="6" sm="6">
+                                                          <ValidationProvider name="How To Work" vid="how_to_work" rules="required">
+                                                              <b-form-group
+                                                              class="row"
+                                                              label-cols-sm="12"
+                                                              label-for="formData"
+                                                              slot-scope="{ valid, errors }"
+                                                              >
+                                                              <template v-slot:label>
+                                                               How To Work
+                                                              </template>
+                                                              <b-form-input
+                                                                  type="text"
+                                                                  id="how_to_work"
+                                                                  v-model="update.how_to_work"
+                                                                  :state="errors[0] ? false : (valid ? true : null)"
+                                                                  ></b-form-input>
+                                                              <div class="invalid-feedback">
+                                                                  {{ errors[0] }}
+                                                              </div>
+                                                              </b-form-group>
+                                                          </ValidationProvider>
+                                                      </b-col>
+                                                      <b-col lg="6" sm="6">
+                                                          <ValidationProvider name="Old App Notice" vid="old_app_notice" rules="required">
+                                                              <b-form-group
+                                                              class="row"
+                                                              label-cols-sm="12"
+                                                              label-for="formData"
+                                                              slot-scope="{ valid, errors }"
+                                                              >
+                                                              <template v-slot:label>
+                                                               Old App Notice
+                                                              </template>
+                                                              <b-form-input
+                                                                  type="text"
+                                                                  id="old_app_notice"
+                                                                  v-model="update.old_app_notice"
+                                                                  :state="errors[0] ? false : (valid ? true : null)"
+                                                                  ></b-form-input>
+                                                              <div class="invalid-feedback">
+                                                                  {{ errors[0] }}
+                                                              </div>
+                                                              </b-form-group>
+                                                          </ValidationProvider>
+                                                      </b-col>
+                                                      <b-col lg="6" sm="6">
+                                                          <ValidationProvider name="Old App URL" vid="old_app_url" rules="required">
+                                                              <b-form-group
+                                                              class="row"
+                                                              label-cols-sm="12"
+                                                              label-for="formData"
+                                                              slot-scope="{ valid, errors }"
+                                                              >
+                                                              <template v-slot:label>
+                                                               Old App URL
+                                                              </template>
+                                                              <b-form-input
+                                                                  type="text"
+                                                                  id="old_app_url"
+                                                                  v-model="update.old_app_url"
+                                                                  :state="errors[0] ? false : (valid ? true : null)"
+                                                                  ></b-form-input>
+                                                              <div class="invalid-feedback">
+                                                                  {{ errors[0] }}
+                                                              </div>
+                                                              </b-form-group>
+                                                          </ValidationProvider>
+                                                      </b-col>
+                                                      <b-col lg="6" sm="6">
+                                                          <ValidationProvider name="Invalid Block Count" vid="invalid_block_count" rules="required">
+                                                              <b-form-group
+                                                              class="row"
+                                                              label-cols-sm="12"
+                                                              label-for="formData"
+                                                              slot-scope="{ valid, errors }"
+                                                              >
+                                                              <template v-slot:label>
+                                                               Invalid Block Count
+                                                              </template>
+                                                              <b-form-input
+                                                                  type="text"
+                                                                  id="invalid_block_count"
+                                                                  v-model="update.invalid_block_count"
+                                                                  :state="errors[0] ? false : (valid ? true : null)"
+                                                                  ></b-form-input>
+                                                              <div class="invalid-feedback">
+                                                                  {{ errors[0] }}
+                                                              </div>
+                                                              </b-form-group>
+                                                          </ValidationProvider>
+                                                      </b-col>
+
+                                                      
+
+
+
+
+
                                                       <b-col lg="6" sm="6">
                                                           <ValidationProvider name="App Download link" vid="dlink" rules="required">
                                                               <b-form-group
