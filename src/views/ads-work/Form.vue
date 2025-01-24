@@ -107,6 +107,7 @@
                             :options="vpnList"
                                 id="vpn_id"
                                 rows="6"
+                                :multiple="true"
                                 v-model="formData.vpn_id"
                                 :state="errors[0] ? false : (valid ? true : null)"
                                 ></b-form-select>
@@ -145,6 +146,7 @@ export default {
   created () {
       if (this.id) {
           this.formData = this.getItem()
+          this.formData.vpn_id = JSON.parse(this.formData.vpn_id)
       }
   },
   data () {
@@ -152,7 +154,7 @@ export default {
       saveBtnName: this.id ? 'Update' : 'Save',
       formData: {
         title: '',
-        vpn_id: ''
+        vpn_id: []
       }
     }
   },
