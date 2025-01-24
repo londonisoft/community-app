@@ -66,6 +66,10 @@
                                                 <td> : {{ formData.email }}</td>
                                             </tr>
                                             <tr>
+                                                <td>Device ID</td>
+                                                <td> : {{ formData.device_id }}</td>
+                                            </tr>
+                                            <tr>
                                                 <td>Total Amount</td>
                                                 <td> : {{ formData.amount }}</td>
                                             </tr>
