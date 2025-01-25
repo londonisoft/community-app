@@ -186,7 +186,7 @@
                                     </ValidationProvider>
                                 </div>
                                 <div class="col-md-6">
-                                    <ValidationProvider name="Own refer Id" vid="own_refer_id" rules="required">
+                                    <ValidationProvider name="Own refer Id" vid="own_refer_id" rules="">
                                         <b-form-group
                                         class="row"
                                         label-cols-sm="12"
@@ -208,7 +208,7 @@
                                     </ValidationProvider>
                                 </div>
                                 <div class="col-md-6">
-                                    <ValidationProvider name="Country" vid="country" rules="required">
+                                    <ValidationProvider name="Country" vid="Device ID" rules="required">
                                         <b-form-group
                                         class="row"
                                         label-cols-sm="12"
@@ -216,11 +216,11 @@
                                         slot-scope="{ valid, errors }"
                                         >
                                         <template v-slot:label>
-                                        Country  <span class="text-danger">*</span>
+                                            Device ID  <span class="text-danger">*</span>
                                         </template>
                                         <b-form-input
-                                            id="country"
-                                            v-model="formData.country"
+                                            id="device ID"
+                                            v-model="formData.device_id"
                                             :state="errors[0] ? false : (valid ? true : null)"
                                             ></b-form-input>
                                         <div class="invalid-feedback">

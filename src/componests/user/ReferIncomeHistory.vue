@@ -17,9 +17,6 @@
                         <template v-slot:cell(index)="data">
                             {{ $n(data.index + pagination.slOffset) }}
                         </template>
-                        <template v-slot:cell(task_type)="data">
-                            {{ data.item.ads_work.title }}
-                        </template>
                         <template v-slot:cell(created_at)="data">
                            {{  data.item.created_at | dateFormat }}
                         </template>
@@ -79,7 +76,6 @@ export default {
                 { label: 'Sl No', class: 'text-left' },
                 { label: 'Refer Name', class: 'text-center' },
                 { label: 'Refer Email', class: 'text-center' },
-                { label: 'Work Name', class: 'text-center' },
                 { label: 'Amount', class: 'text-center' },
                 { label: 'Date', class: 'text-center' },
             ]
@@ -89,7 +85,6 @@ export default {
             { key: 'id' },
             { key: 'name' },
             { key: 'email' },
-            { key: 'task_type' },
             { key: 'amount' },
             { key: 'created_at' },
             ]

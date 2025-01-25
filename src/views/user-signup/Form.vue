@@ -78,7 +78,7 @@
                                                 <td> : {{ formData.invalid_count }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Join</td>
+                                                <td>Total Refer</td>
                                                 <td> : {{ formData.total_refer }}</td>
                                             </tr>
                                             <tr>
