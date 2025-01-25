@@ -122,7 +122,7 @@
                                                       </b-col>
                                                       <b-col lg="3" sm="3">
                                                           <div>
-                                                              <p class="m-0 mb-2" style="font-weight: bold">  Admin App ON OFF  </p>
+                                                              <p class="m-0 mb-2" style="font-weight: bold">  Withdraw ON OFF  </p>
                                                               <b-form-checkbox v-model="update.admin_app_on_off" size="md" name="check-button" switch>
                                                                   <span v-if="update.admin_app_on_off">ON</span>
                                                                   <span v-else>OF</span>
