@@ -239,6 +239,71 @@
     <CRow>
       <CCol sm="12" md="12">
         <CCard accent-color="success">
+          <CCardHeader><b> Point Summary</b></CCardHeader>
+            <CCardBody>
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body d-flex align-items-center p-0">
+                                <div class="mr-3 text-white bg-gradient-primary p-4">
+                                    <svg height="40px" width="40px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17.84 17.84" xml:space="preserve" fill="#ffffff" transform="matrix(1, 0, 0, 1, 0, 0)" stroke="#ffffff" stroke-width="0.00017837000000000002"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#ffffff;" d="M16.145,2.571c-0.272-0.273-0.718-0.273-0.99,0L6.92,10.804l-4.241-4.27 c-0.272-0.274-0.715-0.274-0.989,0L0.204,8.019c-0.272,0.271-0.272,0.717,0,0.99l6.217,6.258c0.272,0.271,0.715,0.271,0.99,0 L17.63,5.047c0.276-0.273,0.276-0.72,0-0.994L16.145,2.571z"></path> </g> </g></svg>                                
+                                </div>
+                                <div>
+                                    <div class="text-muted text-uppercase font-weight-bold"> Today </div>
+                                    <div class="text-value text-gradient-primary">{{ parseFloat(formData.today_point).toFixed(2) }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body d-flex align-items-center p-0">
+                                <div class="mr-3 text-white bg-gradient-info p-4">
+                                    <svg height="40px" width="40px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17.84 17.84" xml:space="preserve" fill="#ffffff" transform="matrix(1, 0, 0, 1, 0, 0)" stroke="#ffffff" stroke-width="0.00017837000000000002"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#ffffff;" d="M16.145,2.571c-0.272-0.273-0.718-0.273-0.99,0L6.92,10.804l-4.241-4.27 c-0.272-0.274-0.715-0.274-0.989,0L0.204,8.019c-0.272,0.271-0.272,0.717,0,0.99l6.217,6.258c0.272,0.271,0.715,0.271,0.99,0 L17.63,5.047c0.276-0.273,0.276-0.72,0-0.994L16.145,2.571z"></path> </g> </g></svg>                                
+                                </div>
+                                <div>
+                                <div class="text-muted text-uppercase font-weight-bold"> PREV. Day </div>
+                                <div class="text-value text-gradient-primary">{{ parseFloat(formData.previous_day_point).toFixed(2) }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body d-flex align-items-center p-0">
+                                <div class="mr-3 text-white bg-gradient-warning p-4">
+                                    <svg height="40px" width="40px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17.84 17.84" xml:space="preserve" fill="#ffffff" transform="matrix(1, 0, 0, 1, 0, 0)" stroke="#ffffff" stroke-width="0.00017837000000000002"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#ffffff;" d="M16.145,2.571c-0.272-0.273-0.718-0.273-0.99,0L6.92,10.804l-4.241-4.27 c-0.272-0.274-0.715-0.274-0.989,0L0.204,8.019c-0.272,0.271-0.272,0.717,0,0.99l6.217,6.258c0.272,0.271,0.715,0.271,0.99,0 L17.63,5.047c0.276-0.273,0.276-0.72,0-0.994L16.145,2.571z"></path> </g> </g></svg>                                
+
+                                </div>
+                                <div>
+                                <div class="text-muted text-uppercase font-weight-bold"> Last 7 Day </div>
+                                <div class="text-value text-gradient-primary">{{ parseFloat(formData.last_seven_day_point).toFixed(2) }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body d-flex align-items-center p-0">
+                                <div class="mr-3 text-white bg-gradient-danger p-4">
+                                                                        <svg height="40px" width="40px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17.84 17.84" xml:space="preserve" fill="#ffffff" transform="matrix(1, 0, 0, 1, 0, 0)" stroke="#ffffff" stroke-width="0.00017837000000000002"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#ffffff;" d="M16.145,2.571c-0.272-0.273-0.718-0.273-0.99,0L6.92,10.804l-4.241-4.27 c-0.272-0.274-0.715-0.274-0.989,0L0.204,8.019c-0.272,0.271-0.272,0.717,0,0.99l6.217,6.258c0.272,0.271,0.715,0.271,0.99,0 L17.63,5.047c0.276-0.273,0.276-0.72,0-0.994L16.145,2.571z"></path> </g> </g></svg>                                
+
+                                </div>
+                                <div>
+                                <div class="text-muted text-uppercase font-weight-bold"> This Month </div>
+                                <div class="text-value text-gradient-primary">{{ parseFloat(formData.this_month_point).toFixed(2) }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </CCardBody>
+        </CCard>
+      </CCol>
+    </CRow>
+    <CRow>
+      <CCol sm="12" md="12">
+        <CCard accent-color="success">
           <CCardHeader><b> Payment Summary</b></CCardHeader>
             <CCardBody>
                 <div class="row">
