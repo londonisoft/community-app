@@ -103,6 +103,7 @@
           </b-overlay>
       </b-col>
       <b-col lg="12" sm="12" class="mb-2">
+          <button @click="setBtn('task_com', 'TaskComplete')" :class="(btn === 'task_com') ? `btn btn-success ml-2` : `btn btn-secondary ml-2`">Task Complete</button>
           <button @click="setBtn('widthdraw', 'Withdraw')" :class="(btn === 'widthdraw') ? `btn btn-success ml-2` : `btn btn-secondary ml-2`">Widthdraw List</button>
           <button @click="setBtn('refer', 'ReferUser')" :class="(btn === 'refer') ? `btn btn-success ml-2` : `btn btn-secondary ml-2`">Refer List</button>
           <button @click="setBtn('refer_income', 'ReferIncomeHistory')" :class="(btn === 'refer') ? `btn btn-success ml-2` : `btn btn-secondary ml-2`">Refer Income History</button>
@@ -130,6 +131,7 @@ import UserInfoChange from './UserInfoChange'
 import Withdraw from './../../componests/user/withdraw'
 import ReferUser from './../../componests/user/refer-user'
 import ReferIncomeHistory from './../../componests/user/ReferIncomeHistory'
+import TaskComplete from './../../componests/user//task-complete.vue'
 
 export default {
   props: ['id'],
@@ -138,7 +140,8 @@ export default {
     UserInfoChange,
     Withdraw,
     ReferUser,
-    ReferIncomeHistory
+    ReferIncomeHistory,
+    TaskComplete
     },
   created () {
 	if (this.$route.query.id) {
@@ -153,8 +156,8 @@ export default {
         name: ''
       },
       editId: '',
-      comp: 'Withdraw',
-      btn: 'task',
+      comp: 'TaskComplete',
+      btn: 'task_com',
       loading: false
     }
   },
