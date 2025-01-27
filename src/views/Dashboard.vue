@@ -308,7 +308,7 @@
             <CCardBody>
                 <div class="row">
                     <div class="col-12 col-sm-6 col-lg-3">
-                        <router-link to="/withdraws/pending" style="text-decoration: none;">
+                        <router-link to="/withdraw/pending" style="text-decoration: none;">
                             <div class="card bg-primary">
                                 <div class="card-body d-flex align-items-center p-3">
                                     <div class=" text-light text-uppercase font-weight-bold"> Pen. Withdraws ({{ formData.pending_withdraw }}) </div>
@@ -317,7 +317,7 @@
                         </router-link>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3">
-                        <router-link to="/withdraws/approve"   style="text-decoration: none;">
+                        <router-link to="/withdraw/approve"   style="text-decoration: none;">
                             <div class="card bg-success">
                                 <div class="card-body d-flex align-items-center p-3">
                                     <div class=" text-light text-uppercase font-weight-bold"> Com. Withdraws ({{ formData.com_withdraw }}) </div>
@@ -326,7 +326,7 @@
                         </router-link>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3">
-                        <router-link to="/withdraws/reject"   style="text-decoration: none;">
+                        <router-link to="/withdraw/reject"   style="text-decoration: none;">
                         <div class="card bg-info">
                             <div class="card-body d-flex align-items-center p-3">
                                 <div class=" text-light text-uppercase font-weight-bold"> Rej. Withdraws ({{ formData.reject_withdraw }}) </div>
@@ -335,7 +335,7 @@
                         </router-link>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3">
-                        <router-link to="/withdraws/all"  style="text-decoration: none;">
+                        <router-link to="/withdraw/all"  style="text-decoration: none;">
 
                         <div class="card bg-danger">
                             <div class="card-body d-flex align-items-center p-3">
