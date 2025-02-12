@@ -70,6 +70,27 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
+                        <ValidationProvider name="Banner Point" vid="banner_point" rules="">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="formData"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                              Banner Point
+                            </template>
+                            <b-form-input
+                                id="banner_point"
+                                rows="6"
+                                v-model="formData.banner_point"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                                ></b-form-input>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
                         <ValidationProvider name="Interstitial" vid="interstitial" rules="">
                             <b-form-group
                             class="row"
@@ -84,6 +105,27 @@
                                 id="interstitial"
                                 rows="6"
                                 v-model="formData.interstitial"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                                ></b-form-input>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
+                        <ValidationProvider name="Interstitial Point" vid="interstitial_point" rules="">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="formData"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                              Interstitial Point
+                            </template>
+                            <b-form-input
+                                id="interstitial_point"
+                                rows="6"
+                                v-model="formData.interstitial_point"
                                 :state="errors[0] ? false : (valid ? true : null)"
                                 ></b-form-input>
                             <div class="invalid-feedback">
@@ -112,6 +154,27 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
+                        <ValidationProvider name="Rewared Point" vid="rewared_point" rules="">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="formData"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                              Rewared Point
+                            </template>
+                            <b-form-input
+                                id="rewared_point"
+                                rows="6"
+                                v-model="formData.rewared_point"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                                ></b-form-input>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
                         <ValidationProvider name="Native" vid="native_ads" rules="">
                             <b-form-group
                             class="row"
@@ -126,6 +189,27 @@
                                 id="native_ads"
                                 rows="6"
                                 v-model="formData.native_ads"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                                ></b-form-input>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
+                        <ValidationProvider name="Native Point" vid="native_ads_point" rules="">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="formData"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                              Native Point
+                            </template>
+                            <b-form-input
+                                id="native_ads_point"
+                                rows="6"
+                                v-model="formData.native_ads_point"
                                 :state="errors[0] ? false : (valid ? true : null)"
                                 ></b-form-input>
                             <div class="invalid-feedback">

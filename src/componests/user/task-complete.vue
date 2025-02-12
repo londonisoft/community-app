@@ -83,6 +83,7 @@ export default {
                 { label: 'Sl No', class: 'text-center' },
                 { label: 'Name', class: 'text-left' },
                 { label: 'Email', class: 'text-left' },
+                { label: 'Package Name', class: 'text-center' },
                 { label: 'Task Type', class: 'text-center' },
                 { label: 'Date Time', class: 'text-center' },
                 { label: 'Amount', class: 'text-center' }
@@ -94,6 +95,7 @@ export default {
             { key: 'name' },
             { key: 'email' },
             { key: 'work_name' },
+            { key: 'type' },
             { key: 'date_at' },
             { key: 'amount' }
             ]
