@@ -316,6 +316,29 @@
                                                               </b-form-group>
                                                           </ValidationProvider>
                                                       </b-col>
+                                                      <b-col lg="6" sm="6">
+                                                          <ValidationProvider name="Total Click" vid="total_click" rules="required">
+                                                              <b-form-group
+                                                              class="row"
+                                                              label-cols-sm="12"
+                                                              label-for="formData"
+                                                              slot-scope="{ valid, errors }"
+                                                              >
+                                                              <template v-slot:label>
+                                                               Total Click
+                                                              </template>
+                                                              <b-form-input
+                                                                  type="text"
+                                                                  id="total_click"
+                                                                  v-model="update.total_click"
+                                                                  :state="errors[0] ? false : (valid ? true : null)"
+                                                                  ></b-form-input>
+                                                              <div class="invalid-feedback">
+                                                                  {{ errors[0] }}
+                                                              </div>
+                                                              </b-form-group>
+                                                          </ValidationProvider>
+                                                      </b-col>
 
                                                       
 
@@ -528,6 +551,52 @@
                                                           </b-form-group>
                                                       </ValidationProvider>
                                                   </b-col>
+                                                  <b-col lg="6" sm="6">
+                                                      <ValidationProvider name="Task off Message" vid="task_of_message" rules="required">
+                                                          <b-form-group
+                                                          class="row"
+                                                          label-cols-sm="12"
+                                                          label-for="formData"
+                                                          slot-scope="{ valid, errors }"
+                                                          >
+                                                          <template v-slot:label>
+                                                            Task off Message
+                                                          </template>
+                                                          <b-form-textarea
+                                                              type="number"
+                                                              id="task_of_message"
+                                                              v-model="setting.task_of_message"
+                                                              :state="errors[0] ? false : (valid ? true : null)"
+                                                              ></b-form-textarea>
+                                                          <div class="invalid-feedback">
+                                                              {{ errors[0] }}
+                                                          </div>
+                                                          </b-form-group>
+                                                      </ValidationProvider>
+                                                  </b-col>
+                                                  <b-col lg="6" sm="6">
+                                                      <ValidationProvider name="Telegram Message" vid="telegram_message" rules="required">
+                                                          <b-form-group
+                                                          class="row"
+                                                          label-cols-sm="12"
+                                                          label-for="formData"
+                                                          slot-scope="{ valid, errors }"
+                                                          >
+                                                          <template v-slot:label>
+                                                            Telegram Message
+                                                          </template>
+                                                          <b-form-textarea
+                                                              type="number"
+                                                              id="telegram_message"
+                                                              v-model="setting.telegram_message"
+                                                              :state="errors[0] ? false : (valid ? true : null)"
+                                                              ></b-form-textarea>
+                                                          <div class="invalid-feedback">
+                                                              {{ errors[0] }}
+                                                          </div>
+                                                          </b-form-group>
+                                                      </ValidationProvider>
+                                                  </b-col>
                                               </div>
                                               <div class="text-right">
                                                   <b-button type="submit" variant="primary" style="margin-top:40px" class="mr-2">Update</b-button>
@@ -612,11 +681,14 @@
                       old_app_url: response.data.old_app_url,
                       invalid_block_count: response.data.invalid_block_count,
                       invalid_point_deduct: response.data.invalid_point_deduct,
+                      total_click: response.data.total_click,
                   }
                   this.setting = {
                       notice: response.data.notice,
                       convert_notice: response.data.convert_notice,
-                      payment_notich: response.data.payment_notich
+                      payment_notich: response.data.payment_notich,
+                      task_of_message: response.data.task_of_message,
+                      telegram_message: response.data.telegram_message
                   }
               }
               this.$store.dispatch('mutedLoad', { loading: false })
