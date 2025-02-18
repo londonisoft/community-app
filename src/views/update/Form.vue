@@ -129,7 +129,42 @@
                                                               </b-form-checkbox>
                                                           </div>
                                                       </b-col>
+                                                      <b-col lg="3" sm="3">
+                                                          <div>
+                                                              <p class="m-0 mb-2" style="font-weight: bold">  User Register ON OFF  </p>
+                                                              <b-form-checkbox v-model="update.account_create" size="md" name="check-button" switch>
+                                                                  <span v-if="update.account_create">ON</span>
+                                                                  <span v-else>OF</span>
+                                                              </b-form-checkbox>
+                                                          </div>
+                                                      </b-col>
+                                                      <b-col lg="9" sm="3">
+                                                         
+                                                      </b-col>
                                                       
+                                                      <b-col lg="6" sm="6">
+                                                          <ValidationProvider name="Click Break Time" vid="click_break_time" rules="required">
+                                                              <b-form-group
+                                                              class="row"
+                                                              label-cols-sm="12"
+                                                              label-for="formData"
+                                                              slot-scope="{ valid, errors }"
+                                                              >
+                                                              <template v-slot:label>
+                                                                Click Break Time
+                                                              </template>
+                                                              <b-form-input
+                                                                  type="text"
+                                                                  id="click_break_time"
+                                                                  v-model="update.click_break_time"
+                                                                  :state="errors[0] ? false : (valid ? true : null)"
+                                                                  ></b-form-input>
+                                                              <div class="invalid-feedback">
+                                                                  {{ errors[0] }}
+                                                              </div>
+                                                              </b-form-group>
+                                                          </ValidationProvider>
+                                                      </b-col>
                                                       <b-col lg="6" sm="6">
                                                           <ValidationProvider name="Max Account Same IP Address" vid="max_account_same_ip" rules="required">
                                                               <b-form-group
@@ -575,6 +610,29 @@
                                                       </ValidationProvider>
                                                   </b-col>
                                                   <b-col lg="6" sm="6">
+                                                      <ValidationProvider name="App off Message" vid="app_off_message" rules="required">
+                                                          <b-form-group
+                                                          class="row"
+                                                          label-cols-sm="12"
+                                                          label-for="formData"
+                                                          slot-scope="{ valid, errors }"
+                                                          >
+                                                          <template v-slot:label>
+                                                            App off Message
+                                                          </template>
+                                                          <b-form-textarea
+                                                              type="number"
+                                                              id="app_off_message"
+                                                              v-model="setting.app_off_message"
+                                                              :state="errors[0] ? false : (valid ? true : null)"
+                                                              ></b-form-textarea>
+                                                          <div class="invalid-feedback">
+                                                              {{ errors[0] }}
+                                                          </div>
+                                                          </b-form-group>
+                                                      </ValidationProvider>
+                                                  </b-col>
+                                                  <b-col lg="6" sm="6">
                                                       <ValidationProvider name="Telegram Message" vid="telegram_message" rules="required">
                                                           <b-form-group
                                                           class="row"
@@ -667,9 +725,11 @@
                       developer_mode_prevent: response.data.developer_mode_prevent == '1' ? true : false,
                       main_app_on_off: response.data.main_app_on_off == '1' ? true : false,
                       admin_app_on_off: response.data.admin_app_on_off == '1' ? true : false,
+                      account_create: response.data.account_create == '1' ? true : false,
                       telegram: response.data.telegram ,
                       maintance_notice: response.data.telegram ,
                       max_account_same_ip: response.data.max_account_same_ip,
+                      click_break_time: response.data.click_break_time,
                       version: response.data.version,
                       admin_version: response.data.admin_version,
                       dlink: response.data.dlink,
@@ -688,6 +748,7 @@
                       convert_notice: response.data.convert_notice,
                       payment_notich: response.data.payment_notich,
                       task_of_message: response.data.task_of_message,
+                      app_off_message: response.data.app_off_message,
                       telegram_message: response.data.telegram_message
                   }
               }
