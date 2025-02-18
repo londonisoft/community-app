@@ -70,7 +70,7 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
-                        <ValidationProvider name="Banner Point" vid="banner_point" rules="">
+                        <ValidationProvider name="Banner Impression Point" vid="banner_impression_point" rules="">
                             <b-form-group
                             class="row"
                             label-cols-sm="12"
@@ -78,7 +78,28 @@
                             slot-scope="{ valid, errors }"
                             >
                             <template v-slot:label>
-                              Banner Point
+                              Banner Impression Point
+                            </template>
+                            <b-form-input
+                                id="banner_impression_point"
+                                rows="6"
+                                v-model="formData.banner_impression_point"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                                ></b-form-input>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
+                        <ValidationProvider name="Banner click Point" vid="banner_point" rules="">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="formData"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                              Banner click Point
                             </template>
                             <b-form-input
                                 id="banner_point"
@@ -91,6 +112,7 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
+
                         <ValidationProvider name="Interstitial" vid="interstitial" rules="">
                             <b-form-group
                             class="row"
@@ -112,7 +134,7 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
-                        <ValidationProvider name="Interstitial Point" vid="interstitial_point" rules="">
+                        <ValidationProvider name="Interstitial Impression Point" vid="interstitial_impression_point" rules="">
                             <b-form-group
                             class="row"
                             label-cols-sm="12"
@@ -120,7 +142,28 @@
                             slot-scope="{ valid, errors }"
                             >
                             <template v-slot:label>
-                              Interstitial Point
+                              Interstitial Impression Point
+                            </template>
+                            <b-form-input
+                                id="interstitial_impression_point"
+                                rows="6"
+                                v-model="formData.interstitial_impression_point"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                                ></b-form-input>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
+                        <ValidationProvider name="Interstitial Click Point" vid="interstitial_point" rules="">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="formData"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                              Interstitial Click Point
                             </template>
                             <b-form-input
                                 id="interstitial_point"
@@ -154,7 +197,7 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
-                        <ValidationProvider name="Rewared Point" vid="rewared_point" rules="">
+                        <ValidationProvider name="Rewared Impression Point" vid="rewared_impression_point" rules="">
                             <b-form-group
                             class="row"
                             label-cols-sm="12"
@@ -162,7 +205,28 @@
                             slot-scope="{ valid, errors }"
                             >
                             <template v-slot:label>
-                              Rewared Point
+                              Rewared Impression Point
+                            </template>
+                            <b-form-input
+                                id="rewared_impression_point"
+                                rows="6"
+                                v-model="formData.rewared_impression_point"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                                ></b-form-input>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
+                        <ValidationProvider name="Rewared Click Point" vid="rewared_point" rules="">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="formData"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                              Rewared Click Point
                             </template>
                             <b-form-input
                                 id="rewared_point"
@@ -196,7 +260,7 @@
                             </div>
                             </b-form-group>
                         </ValidationProvider>
-                        <ValidationProvider name="Native Point" vid="native_ads_point" rules="">
+                        <ValidationProvider name="Native Impression Point" vid="native_ads_impression_point" rules="">
                             <b-form-group
                             class="row"
                             label-cols-sm="12"
@@ -204,7 +268,28 @@
                             slot-scope="{ valid, errors }"
                             >
                             <template v-slot:label>
-                              Native Point
+                              Native Impression Point
+                            </template>
+                            <b-form-input
+                                id="native_ads_impression_point"
+                                rows="6"
+                                v-model="formData.native_ads_impression_point"
+                                :state="errors[0] ? false : (valid ? true : null)"
+                                ></b-form-input>
+                            <div class="invalid-feedback">
+                                {{ errors[0] }}
+                            </div>
+                            </b-form-group>
+                        </ValidationProvider>
+                        <ValidationProvider name="Native Click Point" vid="native_ads_point" rules="">
+                            <b-form-group
+                            class="row"
+                            label-cols-sm="12"
+                            label-for="formData"
+                            slot-scope="{ valid, errors }"
+                            >
+                            <template v-slot:label>
+                              Native Click Point
                             </template>
                             <b-form-input
                                 id="native_ads_point"

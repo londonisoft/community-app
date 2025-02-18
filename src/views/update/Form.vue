@@ -633,6 +633,29 @@
                                                       </ValidationProvider>
                                                   </b-col>
                                                   <b-col lg="6" sm="6">
+                                                      <ValidationProvider name="Click Message" vid="click_message" rules="required">
+                                                          <b-form-group
+                                                          class="row"
+                                                          label-cols-sm="12"
+                                                          label-for="formData"
+                                                          slot-scope="{ valid, errors }"
+                                                          >
+                                                          <template v-slot:label>
+                                                            Click Message
+                                                          </template>
+                                                          <b-form-textarea
+                                                              type="number"
+                                                              id="click_message"
+                                                              v-model="setting.click_message"
+                                                              :state="errors[0] ? false : (valid ? true : null)"
+                                                              ></b-form-textarea>
+                                                          <div class="invalid-feedback">
+                                                              {{ errors[0] }}
+                                                          </div>
+                                                          </b-form-group>
+                                                      </ValidationProvider>
+                                                  </b-col>
+                                                  <b-col lg="6" sm="6">
                                                       <ValidationProvider name="Telegram Message" vid="telegram_message" rules="required">
                                                           <b-form-group
                                                           class="row"
@@ -749,7 +772,8 @@
                       payment_notich: response.data.payment_notich,
                       task_of_message: response.data.task_of_message,
                       app_off_message: response.data.app_off_message,
-                      telegram_message: response.data.telegram_message
+                      telegram_message: response.data.telegram_message,
+                      click_message: response.data.click_message
                   }
               }
               this.$store.dispatch('mutedLoad', { loading: false })
