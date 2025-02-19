@@ -1,5 +1,5 @@
 import axios from 'axios'
-export const baseUrl = 'http://68.183.232.147:8000/'
+export const baseUrl = 'http://68.183.232.147:8001/'
 
 export default {
     async execute(baseUrl, method, uri, data, params = {}) {
